@@ -1,12 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      name="description"
+      content="Heleen Evers - Digital Designer Portfolio"
+    />
+    <title>Heleen Evers | Homepage</title>
+
+    <!-- Adobe Fonts - Replace with kit ID -->
+    <!-- <link rel="stylesheet" href="https://use.typekit.net/[your-kit-id].css"> -->
+
+    <!-- Fallback Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Remix Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
-  <body></body>
+
+  <body class="homepage">
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+      <div class="centralize full-width">
+        <div class="vertical-center">
+          <div class="pre-inner">
+            <span class="typed-load">loading...</span
+            ><span class="typed-cursor">|</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+      <!-- Header -->
+      <div id="header-container"></div>
+
+      <!-- Wrapper -->
+      <div class="wrapper">
+        <!-- Started Section -->
+        <div class="section started">
+          <div class="started-content">
+            <div class="h-title glitch-effect" data-text="HELEEN EVERS">
+              HELEEN EVERS
+            </div>
+
+            <div class="h-subtitle">
+              <span class="typed-subtitle"
+                >Digital Designer for Web & Video.</span
+              ><span class="typed-cursor">|</span>
+              <br />
+              <span class="typed-subtitle">Based in Hasselt, Belgium.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div id="footer-container"></div>
+
+      <!-- Border Lines -->
+      <div class="line top"></div>
+      <div class="line bottom"></div>
+      <div class="line left"></div>
+      <div class="line right"></div>
+    </div>
+
+    <!-- Load Components -->
+    <script src="assets/js/header-footer.js"></script>
+    <script src="assets/js/menu.js"></script>
+
+    <!-- Main JavaScript Files -->
+    <script src="assets/js/typewriter.js"></script>
+  </body>
 </html>
