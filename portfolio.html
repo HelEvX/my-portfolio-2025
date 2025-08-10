@@ -57,26 +57,287 @@
             <div class="h-title glitch-effect" data-text="PORTFOLIO">
               PORTFOLIO
             </div>
-
-            <div class="h-subtitle">
-              <span class="typed-subtitle">A brief overview of my work.</span
-              ><span class="typed-cursor">|</span>
+            <div class="h-subtitle typing-bread">
+              <p>
+                <a href="index.html">Home</a> /
+                <a href="portfolio.html">Portfolio</a>
+              </p>
             </div>
           </div>
+          <a href="#" class="mouse_btn"><i class="ri-mouse-fill"></i></a>
         </div>
 
-        <div class="scroll-indicator">
-          <div class="scroll-mouse"></div>
-          <div class="scroll-text">Scroll</div>
-        </div>
-      </div>
+        <!-- Works -->
+        <div class="section works">
+          <div class="content">
+            <div class="filter-menu">
+              <div class="filters">
+                <div class="btn-group">
+                  <label data-text="All" class="glitch-effect">
+                    <input type="radio" name="fl_radio" value=".box-item" />All
+                  </label>
+                </div>
 
-      <!-- Content -->
-      <div class="content-section">
-        <div class="section-content">
-          <h2>Section Title</h2>
-          <div class="content-block">
-            <p>Your content here...</p>
+                <div class="btn-group">
+                  <label data-text="Video">
+                    <input type="radio" name="fl_radio" value=".f-video" />Video
+                  </label>
+                </div>
+
+                <div class="btn-group">
+                  <label data-text="Music">
+                    <input type="radio" name="fl_radio" value=".f-music" />Music
+                  </label>
+                </div>
+
+                <div class="btn-group">
+                  <label data-text="Links">
+                    <input type="radio" name="fl_radio" value=".f-link" />Links
+                  </label>
+                </div>
+
+                <div class="btn-group">
+                  <label data-text="Image">
+                    <input type="radio" name="fl_radio" value=".f-image" />Image
+                  </label>
+                </div>
+
+                <div class="btn-group">
+                  <label data-text="Gallery">
+                    <input
+                      type="radio"
+                      name="fl_radio"
+                      value=".f-gallery"
+                    />Gallery
+                  </label>
+                </div>
+
+                <div class="btn-group">
+                  <label data-text="Content">
+                    <input
+                      type="radio"
+                      name="fl_radio"
+                      value=".f-content"
+                    />Content
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="box-items portfolio-items">
+              <!-- Gallery Item 1 -->
+              <div class="box-item f-gallery">
+                <div class="image">
+                  <a
+                    href="#gallery--works-amore-mio-three-cups"
+                    class="has-popup-gallery"
+                  >
+                    <img
+                      src="assets/img/works/work1.jpg"
+                      alt="Amore Mio Three Cups"
+                    />
+                    <span class="info">
+                      <i class="ri-image-line icon"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Gallery</div>
+                  <a href="#gallery-1" class="name has-popup-gallery"
+                    >Amore Mio Three Cups</a
+                  >
+                </div>
+              </div>
+
+              <!-- Gallery Item 2 -->
+              <div class="box-item f-gallery">
+                <div class="image">
+                  <a
+                    href="#gallery--works-canvas-tote-bag-mockup"
+                    class="has-popup-gallery"
+                  >
+                    <img
+                      src="assets/img/works/work2.jpg"
+                      alt="Canvas Tote Bag MockUp"
+                    />
+                    <span class="info">
+                      <i class="ri-image-line icon"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Gallery</div>
+                  <a href="#gallery-1" class="name has-popup-gallery"
+                    >Canvas Tote Bag MockUp</a
+                  >
+                </div>
+              </div>
+
+              <!-- Content Item 1 -->
+              <div class="box-item f-content">
+                <div class="image">
+                  <a href="#popup--works-cardboard-box" class="has-popup-media">
+                    <img src="assets/img/works/work3.jpg" alt="Cardboard Box" />
+                    <span class="info">
+                      <i class="ri-add-line icon"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Content</div>
+                  <a
+                    href="#popup--works-cardboard-box"
+                    class="name has-popup-media"
+                    >Cardboard Box</a
+                  >
+                </div>
+              </div>
+
+              <!-- Video Item -->
+              <div class="box-item f-video">
+                <div class="image">
+                  <a
+                    href="https://youtu.be/S4L8T2kFFck"
+                    class="has-popup-video"
+                  >
+                    <img
+                      src="assets/img/works/work4.jpg"
+                      alt="Coffee Cup In Hand"
+                    />
+                    <span class="info">
+                      <i class="ri-play-circle-line icon"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Video</div>
+                  <a
+                    href="https://youtu.be/S4L8T2kFFck"
+                    class="name has-popup-video"
+                    >Coffee Cup In Hand</a
+                  >
+                </div>
+              </div>
+
+              <!-- Link Item -->
+              <div class="box-item f-link">
+                <div class="image">
+                  <a
+                    href="https://example.com"
+                    class="has-popup-link"
+                    target="_blank"
+                  >
+                    <img
+                      src="assets/img/works/work5.jpg"
+                      alt="Love & Care Ceramic Bottles"
+                    />
+                    <span class="info">
+                      <i class="ri-external-link-line icon"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Link</div>
+                  <a
+                    target="_blank"
+                    href="https://example.com"
+                    class="name has-popup-link"
+                    >Love & Care Ceramic Bottles</a
+                  >
+                </div>
+              </div>
+
+              <!-- Music Item -->
+              <div class="box-item f-music">
+                <div class="image">
+                  <a href="#music-player" class="has-popup-music">
+                    <img
+                      src="assets/img/works/work6.jpg"
+                      alt="Marta Veludo Beautiful Poster"
+                    />
+                    <span class="info">
+                      <i class="ri-music-line icon"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Music</div>
+                  <a href="#music-player" class="name has-popup-music"
+                    >Marta Veludo Beautiful Poster</a
+                  >
+                </div>
+              </div>
+
+              <!-- Image Item 1 -->
+              <div class="box-item f-image">
+                <div class="image">
+                  <a href="#image-popup" class="has-popup-image">
+                    <img
+                      src="assets/img/works/work7.jpg"
+                      alt="Minimal Poster Frame"
+                    />
+                    <span class="info">
+                      <i class="ri-image-line icon"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Image</div>
+                  <a href="#image-popup" class="name has-popup-image"
+                    >Minimal Poster Frame</a
+                  >
+                </div>
+              </div>
+
+              <!-- Image Item 2 -->
+              <div class="box-item f-image">
+                <div class="image">
+                  <a href="#image-popup-2" class="has-popup-image">
+                    <img
+                      src="assets/img/works/work8.jpg"
+                      alt="Shopping Gift Bag"
+                    />
+                    <span class="info">
+                      <i class="ri-image-line icon"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Image</div>
+                  <a href="#image-popup-2" class="name has-popup-image"
+                    >Shopping Gift Bag</a
+                  >
+                </div>
+              </div>
+
+              <!-- Content Item 2 -->
+              <div class="box-item f-content">
+                <div class="image">
+                  <a
+                    href="#popup--works-social-website"
+                    class="has-popup-media"
+                  >
+                    <img
+                      src="assets/img/works/work9.jpg"
+                      alt="Social Website"
+                    />
+                    <span class="info">
+                      <i class="ri-add-line icon"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Content</div>
+                  <a
+                    href="#popup--works-social-website"
+                    class="name has-popup-media"
+                    >Social Website</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="clear"></div>
           </div>
         </div>
       </div>
@@ -92,10 +353,10 @@
     </div>
 
     <!-- Load Components -->
-    <script src="assets/js/header-footer.js"></script>
     <script src="assets/js/menu.js"></script>
 
     <!-- Main JavaScript Files -->
+    <script src="assets/js/main.js"></script>
     <script src="assets/js/typewriter.js"></script>
   </body>
 </html>

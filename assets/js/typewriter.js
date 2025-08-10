@@ -101,7 +101,7 @@ function initializeTypewriters() {
   // Homepage typewriter effect
   const typedSubtitle = document.querySelector(".typed-subtitle");
   if (typedSubtitle && typedSubtitle.textContent.trim() === "") {
-    typeWriter(typedSubtitle, "Digital Designer and Creative Director.", 80);
+    typeWriter(typedSubtitle, "Digital Designer for Web & Video", 80);
   }
 
   // Multi-text typewriter for other pages (example)

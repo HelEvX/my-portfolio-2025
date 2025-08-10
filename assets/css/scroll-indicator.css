@@ -1,0 +1,93 @@
+/* Mouse scroll indicator - only show on non-homepage */
+.scroll-indicator {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  opacity: 0;
+  animation: fadeInUp 2s ease-out 3s forwards;
+}
+
+body:not(.homepage) .scroll-indicator {
+  display: block;
+  opacity: 1;
+  animation: mouseFloat 2s ease-in-out infinite;
+}
+
+body.homepage .scroll-indicator {
+  display: none;
+}
+
+.scroll-mouse {
+  width: 20px;
+  height: 32px;
+  border: 2px solid var(--color-primary);
+  border-radius: 12px;
+  position: relative;
+  display: block;
+  margin: 0 auto 8px;
+}
+
+.scroll-mouse::before {
+  content: "";
+  width: 2px;
+  height: 6px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  transform: translateX(-50%);
+  animation: mouseScroll 2s ease-in-out infinite;
+}
+
+.scroll-text {
+  font-size: 10px;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes mouseFloat {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+@keyframes mouseScroll {
+  0% {
+    opacity: 1;
+    top: 6px;
+  }
+  50% {
+    opacity: 0.5;
+    top: 12px;
+  }
+  100% {
+    opacity: 0;
+    top: 18px;
+  }
+}
+
+@media (max-width: 840px) {
+  .scroll-indicator {
+    bottom: 60px;
+  }
+}
