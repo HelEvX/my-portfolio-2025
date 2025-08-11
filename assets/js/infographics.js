@@ -1,6 +1,19 @@
 class SkillsInitializer {
   constructor() {
+    this.skillLevels = {
+      90: "Expert - Extensive professional experience, can mentor others",
+      80: "Advanced - Highly proficient, can handle complex projects independently",
+      70: "Proficient - Strong working knowledge, comfortable with most tasks",
+      60: "Intermediate - Good understanding, can complete standard tasks",
+      50: "Developing - Basic competency, learning and improving",
+      40: "Beginner - Some experience, requires guidance",
+      30: "Novice - Limited experience, still learning fundamentals",
+      20: "Basic - Minimal experience, requires significant support",
+      10: "Awareness - Familiar with concepts but limited practical experience",
+    };
+
     this.initializeAllSkills();
+    this.addSkillTooltips();
     window.addEventListener("resize", () => this.handleResize());
   }
 
@@ -13,6 +26,135 @@ class SkillsInitializer {
         this.initializeCircleSkills(skillsContainer);
       } else if (!skillsContainer.classList.contains("list")) {
         this.initializeLineSkills(skillsContainer);
+      }
+    });
+  }
+
+  getSkillDescription(percentage) {
+    // Find the closest match in our skill levels
+    const levels = Object.keys(this.skillLevels)
+      .map(Number)
+      .sort((a, b) => b - a);
+    const closestLevel =
+      levels.find((level) => percentage >= level) || levels[levels.length - 1];
+    return this.skillLevels[closestLevel];
+  }
+
+  addSkillTooltips() {
+    // Debug: Check if we can find the elements
+    const dottedSkills = document.querySelectorAll(".skills.dotted");
+    const skillItems = document.querySelectorAll(".skills.dotted li");
+
+    console.log("Found dotted skills containers:", dottedSkills.length);
+    console.log("Found skill items:", skillItems.length);
+
+    // Add instruction text
+    dottedSkills.forEach((container) => {
+      if (!container.querySelector(".skill-instruction")) {
+        const instruction = document.createElement("div");
+        instruction.className = "skill-instruction";
+        instruction.style.cssText =
+          "font-size: 12px; color: #999; margin-bottom: 10px; margin-top: -20px; font-family: ivystyle-sans; font-style: italic; text-align: right;";
+        instruction.textContent = "Hover over skills for detailed explanations";
+
+        const ul = container.querySelector("ul");
+        if (ul) {
+          container.insertBefore(instruction, ul);
+        } else {
+          container.appendChild(instruction);
+        }
+      }
+    });
+
+    // Add tooltips to skill items
+    skillItems.forEach((li, index) => {
+      const percentage = parseInt(li.getAttribute("data-percentage"));
+      console.log(`Processing skill ${index}: ${percentage}%`);
+
+      if (isNaN(percentage)) {
+        console.warn("Invalid percentage for skill item:", li);
+        return;
+      }
+
+      const description = this.getSkillDescription(percentage);
+      console.log(`Description for ${percentage}%:`, description);
+
+      // Create tooltip element
+      if (!li.querySelector(".skill-tooltip")) {
+        const tooltip = document.createElement("div");
+        tooltip.className = "skill-tooltip";
+        tooltip.textContent = description;
+        tooltip.style.cssText = `
+          position: absolute;
+          background: #363636;
+          font-family: 'ivystyle-sans', sans-serif;
+          color: white;
+          padding: 8px 12px;
+          border-radius: 4px;
+          font-size: 12px;
+          font-weight: 300;
+          letter-spacing: 0.05em;
+          max-width: 250px;
+          z-index: 1000;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s, visibility 0.3s;
+          pointer-events: none;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        `;
+
+        // Make sure li has relative positioning
+        li.style.position = "relative";
+        li.appendChild(tooltip);
+
+        console.log("Tooltip added to skill item:", li);
+      }
+
+      const tooltip = li.querySelector(".skill-tooltip");
+
+      // Desktop hover events
+      li.addEventListener("mouseenter", (e) => {
+        tooltip.style.opacity = "1";
+        tooltip.style.visibility = "visible";
+        tooltip.style.bottom = "100%";
+        tooltip.style.right = "30px";
+        tooltip.style.marginBottom = "-20px";
+      });
+
+      li.addEventListener("mouseleave", (e) => {
+        tooltip.style.opacity = "0";
+        tooltip.style.visibility = "hidden";
+      });
+
+      // Mobile/tablet touch events
+      li.addEventListener("touchstart", (e) => {
+        e.preventDefault(); // Prevent mouse events on touch
+
+        // Hide other tooltips first
+        document.querySelectorAll(".skill-tooltip").forEach((t) => {
+          if (t !== tooltip) {
+            t.style.opacity = "0";
+            t.style.visibility = "hidden";
+          }
+        });
+
+        // Toggle this tooltip
+        const isVisible = tooltip.style.opacity === "1";
+        tooltip.style.opacity = isVisible ? "0" : "1";
+        tooltip.style.visibility = isVisible ? "hidden" : "visible";
+        tooltip.style.bottom = "100%";
+        tooltip.style.left = "0";
+        tooltip.style.marginBottom = "8px";
+      });
+    });
+
+    // Hide tooltips when tapping elsewhere on mobile
+    document.addEventListener("touchstart", (e) => {
+      if (!e.target.closest(".skills.dotted li")) {
+        document.querySelectorAll(".skill-tooltip").forEach((tooltip) => {
+          tooltip.style.opacity = "0";
+          tooltip.style.visibility = "hidden";
+        });
       }
     });
   }
