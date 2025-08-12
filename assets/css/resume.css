@@ -1,0 +1,1519 @@
+/* RESUME PAGE STYLES */
+
+/* About Section */
+.section.about .content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.section.about .content .title {
+  margin-bottom: 10px;
+}
+
+.section.about .about-content {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.section.about .image {
+  flex: 0 0 auto;
+  margin-top: 28px;
+}
+
+.section.about .image img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.section.about .desc {
+  flex: 1;
+  min-width: 300px;
+}
+
+@media (max-width: 840px) {
+  .section.about .image {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section.about .about-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    gap: 20px;
+  }
+
+  .section.about .about-content .desc {
+    padding: 0 20px;
+  }
+
+  .section.about .about-content .desc .bts {
+    text-align: center;
+  }
+
+  .section.about .image img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 400px) {
+  .section.about .content {
+    justify-content: center;
+  }
+
+  .section.about .image {
+    margin-top: 30px;
+  }
+
+  .section.about .image img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* Info List */
+.info-list {
+  margin-top: 30px;
+  margin-bottom: 42px;
+}
+
+.info-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 2%;
+}
+
+.info-list ul li {
+  flex: 0 1 calc(32% - 1%);
+  min-width: 200px;
+}
+
+@media (max-width: 840px) {
+  .info-list ul li {
+    flex: 0 1 calc(48% - 1%);
+  }
+}
+
+@media (max-width: 580px) {
+  .info-list ul li {
+    flex: 0 1 100%;
+  }
+}
+
+.info-list ul li strong {
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+/* Two Column Layout for Experience/Education */
+.cols {
+  display: flex;
+  gap: 60px;
+  margin-top: 60px;
+}
+
+.cols .col {
+  flex: 1;
+}
+
+@media (max-width: 840px) {
+  .cols {
+    flex-direction: column;
+    gap: 80px;
+  }
+}
+
+/* Resume Items */
+.resume-items {
+  position: relative;
+}
+
+.resume-items .resume-item {
+  position: relative;
+  padding: 0 0 40px 5px;
+  margin-left: 15px;
+}
+
+.resume-items .resume-item:before {
+  content: "";
+  position: absolute;
+  left: -15px;
+  top: 6px;
+  width: 1px;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+.resume-items .resume-item:last-child {
+  padding-bottom: 0;
+}
+
+.resume-items .resume-item:last-child:before {
+  display: none;
+}
+
+.resume-items .resume-item .date {
+  position: relative;
+  top: -5px;
+  margin: 0 0 10px 0;
+  display: inline-block;
+  padding: 2px 8px;
+  height: auto;
+  line-height: 1.4;
+  font-weight: 500;
+  font-size: 11px;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  background: var(--color-white);
+}
+
+.resume-items .resume-item .date:before {
+  content: "";
+  width: 20px;
+  height: 1px;
+  position: absolute;
+  left: -21px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-primary);
+}
+
+.resume-items .resume-item .name {
+  font-weight: 600;
+  color: var(--color-dark);
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+.resume-items .resume-item p {
+  margin: 0;
+  color: var(--color-light-text);
+  line-height: 1.6;
+}
+
+.clients.list,
+.courses.list {
+  position: relative;
+  margin-top: 20px;
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  line-height: 2em;
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+.clients.list {
+  text-transform: uppercase;
+}
+
+.clients.list ul li .client,
+.courses.list ul li .course {
+  padding-left: 23px;
+  letter-spacing: 0.05em;
+}
+
+.clients.list ul li .client a,
+.courses.list ul li .course a {
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+.clients.list ul li .client:before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.courses.list ul li .course:before {
+  content: "◇";
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ==Infographs Sections== */
+.skills ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0;
+}
+
+.skills ul li {
+  position: relative;
+  padding: 0 0 30px 0;
+}
+
+.skills.circles ul {
+  margin: -30px 0 0 0;
+}
+
+.skills.dotted ul {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.skills.dotted ul li {
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.skills.circles ul li {
+  margin-top: 30px;
+  padding-bottom: 40px;
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+}
+
+.skills ul li:last-child {
+  padding-bottom: 0;
+}
+
+.skills.circles ul li:last-child {
+  padding-bottom: 40px;
+}
+
+.skills ul li:after {
+  display: none;
+}
+
+.skills ul li .name {
+  font-size: 13px;
+  font-weight: 400;
+  position: relative;
+  margin: 0 0 9px 0;
+}
+
+.skills.circles ul li .name {
+  position: absolute;
+  top: 115px;
+  left: 0;
+  width: 90px;
+  text-align: center;
+}
+
+.skills.list ul li .name {
+  padding-left: 23px;
+}
+
+.skills.list ul li .name:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.skills ul li .context {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-light-text);
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 9px;
+  line-height: 1.6;
+}
+
+.skills ul li .icons {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-dark);
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.skills ul li .icons object {
+  width: 24px;
+  height: 24px;
+}
+
+.skills ul li .progress {
+  display: block;
+  height: 3px;
+  position: relative;
+  width: 100%;
+  background: var(--color-border);
+}
+
+.skills.dotted ul li .progress {
+  height: 14px;
+  background: transparent !important;
+}
+
+.skills.list ul li .progress {
+  display: none;
+}
+
+.skills ul li .progress .percentage {
+  left: 0;
+  top: 0;
+  position: absolute;
+  height: 3px;
+  width: 0%;
+  background: var(--color-primary);
+  transition: var(--transition-fast);
+  -moz-transition: var(--transition-fast);
+  -webkit-transition: var(--transition-fast);
+  -o-transition: var(--transition-fast);
+}
+
+.skills ul li .progress .percentage .percent {
+  position: absolute;
+  top: -27px;
+  right: 0;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.skills.dotted ul li .progress .percentage {
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  height: 14px;
+  background: transparent !important;
+  z-index: 2;
+}
+
+.skills.dotted ul li .progress .dg,
+.skills.dotted ul li .progress .da {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 14px;
+}
+
+.skills.dotted ul li .progress .da {
+  top: 0;
+}
+
+.skills.dotted ul li .progress .dg span,
+.skills.dotted ul li .progress .da span {
+  display: block;
+  width: 14px;
+  height: 14px;
+  background: var(--color-border);
+  -webkit-border-radius: 14px;
+  border-radius: 14px;
+}
+
+.skills.dotted ul li .progress .da span {
+  background: var(--color-primary);
+}
+
+.skills.circles .progress.p51 .slice,
+.skills.circles .progress.p52 .slice,
+.skills.circles .progress.p53 .slice,
+.skills.circles .progress.p54 .slice,
+.skills.circles .progress.p55 .slice,
+.skills.circles .progress.p56 .slice,
+.skills.circles .progress.p57 .slice,
+.skills.circles .progress.p58 .slice,
+.skills.circles .progress.p59 .slice,
+.skills.circles .progress.p60 .slice,
+.skills.circles .progress.p61 .slice,
+.skills.circles .progress.p62 .slice,
+.skills.circles .progress.p63 .slice,
+.skills.circles .progress.p64 .slice,
+.skills.circles .progress.p65 .slice,
+.skills.circles .progress.p66 .slice,
+.skills.circles .progress.p67 .slice,
+.skills.circles .progress.p68 .slice,
+.skills.circles .progress.p69 .slice,
+.skills.circles .progress.p70 .slice,
+.skills.circles .progress.p71 .slice,
+.skills.circles .progress.p72 .slice,
+.skills.circles .progress.p73 .slice,
+.skills.circles .progress.p74 .slice,
+.skills.circles .progress.p75 .slice,
+.skills.circles .progress.p76 .slice,
+.skills.circles .progress.p77 .slice,
+.skills.circles .progress.p78 .slice,
+.skills.circles .progress.p79 .slice,
+.skills.circles .progress.p80 .slice,
+.skills.circles .progress.p81 .slice,
+.skills.circles .progress.p82 .slice,
+.skills.circles .progress.p83 .slice,
+.skills.circles .progress.p84 .slice,
+.skills.circles .progress.p85 .slice,
+.skills.circles .progress.p86 .slice,
+.skills.circles .progress.p87 .slice,
+.skills.circles .progress.p88 .slice,
+.skills.circles .progress.p89 .slice,
+.skills.circles .progress.p90 .slice,
+.skills.circles .progress.p91 .slice,
+.skills.circles .progress.p92 .slice,
+.skills.circles .progress.p93 .slice,
+.skills.circles .progress.p94 .slice,
+.skills.circles .progress.p95 .slice,
+.skills.circles .progress.p96 .slice,
+.skills.circles .progress.p97 .slice,
+.skills.circles .progress.p98 .slice,
+.skills.circles .progress.p99 .slice,
+.skills.circles .progress.p100 .slice {
+  clip: rect(auto, auto, auto, auto);
+}
+
+.skills.circles .progress .bar,
+.skills.circles .progress.p51 .fill,
+.skills.circles .progress.p52 .fill,
+.skills.circles .progress.p53 .fill,
+.skills.circles .progress.p54 .fill,
+.skills.circles .progress.p55 .fill,
+.skills.circles .progress.p56 .fill,
+.skills.circles .progress.p57 .fill,
+.skills.circles .progress.p58 .fill,
+.skills.circles .progress.p59 .fill,
+.skills.circles .progress.p60 .fill,
+.skills.circles .progress.p61 .fill,
+.skills.circles .progress.p62 .fill,
+.skills.circles .progress.p63 .fill,
+.skills.circles .progress.p64 .fill,
+.skills.circles .progress.p65 .fill,
+.skills.circles .progress.p66 .fill,
+.skills.circles .progress.p67 .fill,
+.skills.circles .progress.p68 .fill,
+.skills.circles .progress.p69 .fill,
+.skills.circles .progress.p70 .fill,
+.skills.circles .progress.p71 .fill,
+.skills.circles .progress.p72 .fill,
+.skills.circles .progress.p73 .fill,
+.skills.circles .progress.p74 .fill,
+.skills.circles .progress.p75 .fill,
+.skills.circles .progress.p76 .fill,
+.skills.circles .progress.p77 .fill,
+.skills.circles .progress.p78 .fill,
+.skills.circles .progress.p79 .fill,
+.skills.circles .progress.p80 .fill,
+.skills.circles .progress.p81 .fill,
+.skills.circles .progress.p82 .fill,
+.skills.circles .progress.p83 .fill,
+.skills.circles .progress.p84 .fill,
+.skills.circles .progress.p85 .fill,
+.skills.circles .progress.p86 .fill,
+.skills.circles .progress.p87 .fill,
+.skills.circles .progress.p88 .fill,
+.skills.circles .progress.p89 .fill,
+.skills.circles .progress.p90 .fill,
+.skills.circles .progress.p91 .fill,
+.skills.circles .progress.p92 .fill,
+.skills.circles .progress.p93 .fill,
+.skills.circles .progress.p94 .fill,
+.skills.circles .progress.p95 .fill,
+.skills.circles .progress.p96 .fill,
+.skills.circles .progress.p97 .fill,
+.skills.circles .progress.p98 .fill,
+.skills.circles .progress.p99 .fill,
+.skills.circles .progress.p100 .fill {
+  position: absolute;
+  width: 0.82em;
+  height: 0.82em;
+  clip: rect(0em, 0.5em, 1em, 0em);
+  border: 0.09em solid var(--color-primary);
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.skills.circles .progress.p51 .bar:after,
+.skills.circles .progress.p51 .fill,
+.skills.circles .progress.p52 .bar:after,
+.skills.circles .progress.p52 .fill,
+.skills.circles .progress.p53 .bar:after,
+.skills.circles .progress.p53 .fill,
+.skills.circles .progress.p54 .bar:after,
+.skills.circles .progress.p54 .fill,
+.skills.circles .progress.p55 .bar:after,
+.skills.circles .progress.p55 .fill,
+.skills.circles .progress.p56 .bar:after,
+.skills.circles .progress.p56 .fill,
+.skills.circles .progress.p57 .bar:after,
+.skills.circles .progress.p57 .fill,
+.skills.circles .progress.p58 .bar:after,
+.skills.circles .progress.p58 .fill,
+.skills.circles .progress.p59 .bar:after,
+.skills.circles .progress.p59 .fill,
+.skills.circles .progress.p60 .bar:after,
+.skills.circles .progress.p60 .fill,
+.skills.circles .progress.p61 .bar:after,
+.skills.circles .progress.p61 .fill,
+.skills.circles .progress.p62 .bar:after,
+.skills.circles .progress.p62 .fill,
+.skills.circles .progress.p63 .bar:after,
+.skills.circles .progress.p63 .fill,
+.skills.circles .progress.p64 .bar:after,
+.skills.circles .progress.p64 .fill,
+.skills.circles .progress.p65 .bar:after,
+.skills.circles .progress.p65 .fill,
+.skills.circles .progress.p66 .bar:after,
+.skills.circles .progress.p66 .fill,
+.skills.circles .progress.p67 .bar:after,
+.skills.circles .progress.p67 .fill,
+.skills.circles .progress.p68 .bar:after,
+.skills.circles .progress.p68 .fill,
+.skills.circles .progress.p69 .bar:after,
+.skills.circles .progress.p69 .fill,
+.skills.circles .progress.p70 .bar:after,
+.skills.circles .progress.p70 .fill,
+.skills.circles .progress.p71 .bar:after,
+.skills.circles .progress.p71 .fill,
+.skills.circles .progress.p72 .bar:after,
+.skills.circles .progress.p72 .fill,
+.skills.circles .progress.p73 .bar:after,
+.skills.circles .progress.p73 .fill,
+.skills.circles .progress.p74 .bar:after,
+.skills.circles .progress.p74 .fill,
+.skills.circles .progress.p75 .bar:after,
+.skills.circles .progress.p75 .fill,
+.skills.circles .progress.p76 .bar:after,
+.skills.circles .progress.p76 .fill,
+.skills.circles .progress.p77 .bar:after,
+.skills.circles .progress.p77 .fill,
+.skills.circles .progress.p78 .bar:after,
+.skills.circles .progress.p78 .fill,
+.skills.circles .progress.p79 .bar:after,
+.skills.circles .progress.p79 .fill,
+.skills.circles .progress.p80 .bar:after,
+.skills.circles .progress.p80 .fill,
+.skills.circles .progress.p81 .bar:after,
+.skills.circles .progress.p81 .fill,
+.skills.circles .progress.p82 .bar:after,
+.skills.circles .progress.p82 .fill,
+.skills.circles .progress.p83 .bar:after,
+.skills.circles .progress.p83 .fill,
+.skills.circles .progress.p84 .bar:after,
+.skills.circles .progress.p84 .fill,
+.skills.circles .progress.p85 .bar:after,
+.skills.circles .progress.p85 .fill,
+.skills.circles .progress.p86 .bar:after,
+.skills.circles .progress.p86 .fill,
+.skills.circles .progress.p87 .bar:after,
+.skills.circles .progress.p87 .fill,
+.skills.circles .progress.p88 .bar:after,
+.skills.circles .progress.p88 .fill,
+.skills.circles .progress.p89 .bar:after,
+.skills.circles .progress.p89 .fill,
+.skills.circles .progress.p90 .bar:after,
+.skills.circles .progress.p90 .fill,
+.skills.circles .progress.p91 .bar:after,
+.skills.circles .progress.p91 .fill,
+.skills.circles .progress.p92 .bar:after,
+.skills.circles .progress.p92 .fill,
+.skills.circles .progress.p93 .bar:after,
+.skills.circles .progress.p93 .fill,
+.skills.circles .progress.p94 .bar:after,
+.skills.circles .progress.p94 .fill,
+.skills.circles .progress.p95 .bar:after,
+.skills.circles .progress.p95 .fill,
+.skills.circles .progress.p96 .bar:after,
+.skills.circles .progress.p96 .fill,
+.skills.circles .progress.p97 .bar:after,
+.skills.circles .progress.p97 .fill,
+.skills.circles .progress.p98 .bar:after,
+.skills.circles .progress.p98 .fill,
+.skills.circles .progress.p99 .bar:after,
+.skills.circles .progress.p99 .fill,
+.skills.circles .progress.p100 .bar:after,
+.skills.circles .progress.p100 .fill {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.skills.circles .progress {
+  margin: 0;
+  position: relative;
+  font-size: 90px;
+  width: 90px;
+  height: 90px;
+  border-radius: 90px;
+  background: var(--color-border);
+}
+
+.skills.circles .progress *,
+.skills.circles .progress *:before,
+.skills.circles .progress *:after {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.skills.circles .progress span {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  line-height: 90px;
+  font-size: 17px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.skills.circles .progress:after {
+  position: absolute;
+  top: 0.09em;
+  left: 0.09em;
+  display: block;
+  content: " ";
+  border-radius: 50%;
+  background-color: var(--color-white);
+  width: 0.82em;
+  height: 0.82em;
+}
+
+.skills.circles ul li .progress .percentage {
+  display: none;
+}
+
+.skills.circles .progress .slice {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  clip: rect(0em, 1em, 1em, 0.5em);
+}
+
+.skills.circles .progress.p1 .bar {
+  -moz-transform: rotate(3.6deg);
+  -ms-transform: rotate(3.6deg);
+  -webkit-transform: rotate(3.6deg);
+  transform: rotate(3.6deg);
+}
+
+.skills.circles .progress.p2 .bar {
+  -moz-transform: rotate(7.2deg);
+  -ms-transform: rotate(7.2deg);
+  -webkit-transform: rotate(7.2deg);
+  transform: rotate(7.2deg);
+}
+
+.skills.circles .progress.p3 .bar {
+  -moz-transform: rotate(10.8deg);
+  -ms-transform: rotate(10.8deg);
+  -webkit-transform: rotate(10.8deg);
+  transform: rotate(10.8deg);
+}
+
+.skills.circles .progress.p4 .bar {
+  -moz-transform: rotate(14.4deg);
+  -ms-transform: rotate(14.4deg);
+  -webkit-transform: rotate(14.4deg);
+  transform: rotate(14.4deg);
+}
+
+.skills.circles .progress.p5 .bar {
+  -moz-transform: rotate(18deg);
+  -ms-transform: rotate(18deg);
+  -webkit-transform: rotate(18deg);
+  transform: rotate(18deg);
+}
+
+.skills.circles .progress.p6 .bar {
+  -moz-transform: rotate(21.6deg);
+  -ms-transform: rotate(21.6deg);
+  -webkit-transform: rotate(21.6deg);
+  transform: rotate(21.6deg);
+}
+
+.skills.circles .progress.p7 .bar {
+  -moz-transform: rotate(25.2deg);
+  -ms-transform: rotate(25.2deg);
+  -webkit-transform: rotate(25.2deg);
+  transform: rotate(25.2deg);
+}
+
+.skills.circles .progress.p8 .bar {
+  -moz-transform: rotate(28.8deg);
+  -ms-transform: rotate(28.8deg);
+  -webkit-transform: rotate(28.8deg);
+  transform: rotate(28.8deg);
+}
+
+.skills.circles .progress.p9 .bar {
+  -moz-transform: rotate(32.4deg);
+  -ms-transform: rotate(32.4deg);
+  -webkit-transform: rotate(32.4deg);
+  transform: rotate(32.4deg);
+}
+
+.skills.circles .progress.p10 .bar {
+  -moz-transform: rotate(36deg);
+  -ms-transform: rotate(36deg);
+  -webkit-transform: rotate(36deg);
+  transform: rotate(36deg);
+}
+
+.skills.circles .progress.p11 .bar {
+  -moz-transform: rotate(39.6deg);
+  -ms-transform: rotate(39.6deg);
+  -webkit-transform: rotate(39.6deg);
+  transform: rotate(39.6deg);
+}
+
+.skills.circles .progress.p12 .bar {
+  -moz-transform: rotate(43.2deg);
+  -ms-transform: rotate(43.2deg);
+  -webkit-transform: rotate(43.2deg);
+  transform: rotate(43.2deg);
+}
+
+.skills.circles .progress.p13 .bar {
+  -moz-transform: rotate(46.8deg);
+  -ms-transform: rotate(46.8deg);
+  -webkit-transform: rotate(46.8deg);
+  transform: rotate(46.8deg);
+}
+
+.skills.circles .progress.p14 .bar {
+  -moz-transform: rotate(50.4deg);
+  -ms-transform: rotate(50.4deg);
+  -webkit-transform: rotate(50.4deg);
+  transform: rotate(50.4deg);
+}
+
+.skills.circles .progress.p15 .bar {
+  -moz-transform: rotate(54deg);
+  -ms-transform: rotate(54deg);
+  -webkit-transform: rotate(54deg);
+  transform: rotate(54deg);
+}
+
+.skills.circles .progress.p16 .bar {
+  -moz-transform: rotate(57.6deg);
+  -ms-transform: rotate(57.6deg);
+  -webkit-transform: rotate(57.6deg);
+  transform: rotate(57.6deg);
+}
+
+.skills.circles .progress.p17 .bar {
+  -moz-transform: rotate(61.2deg);
+  -ms-transform: rotate(61.2deg);
+  -webkit-transform: rotate(61.2deg);
+  transform: rotate(61.2deg);
+}
+
+.skills.circles .progress.p18 .bar {
+  -moz-transform: rotate(64.8deg);
+  -ms-transform: rotate(64.8deg);
+  -webkit-transform: rotate(64.8deg);
+  transform: rotate(64.8deg);
+}
+
+.skills.circles .progress.p19 .bar {
+  -moz-transform: rotate(68.4deg);
+  -ms-transform: rotate(68.4deg);
+  -webkit-transform: rotate(68.4deg);
+  transform: rotate(68.4deg);
+}
+
+.skills.circles .progress.p20 .bar {
+  -moz-transform: rotate(72deg);
+  -ms-transform: rotate(72deg);
+  -webkit-transform: rotate(72deg);
+  transform: rotate(72deg);
+}
+
+.skills.circles .progress.p21 .bar {
+  -moz-transform: rotate(75.6deg);
+  -ms-transform: rotate(75.6deg);
+  -webkit-transform: rotate(75.6deg);
+  transform: rotate(75.6deg);
+}
+
+.skills.circles .progress.p22 .bar {
+  -moz-transform: rotate(79.2deg);
+  -ms-transform: rotate(79.2deg);
+  -webkit-transform: rotate(79.2deg);
+  transform: rotate(79.2deg);
+}
+
+.skills.circles .progress.p23 .bar {
+  -moz-transform: rotate(82.8deg);
+  -ms-transform: rotate(82.8deg);
+  -webkit-transform: rotate(82.8deg);
+  transform: rotate(82.8deg);
+}
+
+.skills.circles .progress.p24 .bar {
+  -moz-transform: rotate(86.4deg);
+  -ms-transform: rotate(86.4deg);
+  -webkit-transform: rotate(86.4deg);
+  transform: rotate(86.4deg);
+}
+
+.skills.circles .progress.p25 .bar {
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.skills.circles .progress.p26 .bar {
+  -moz-transform: rotate(93.6deg);
+  -ms-transform: rotate(93.6deg);
+  -webkit-transform: rotate(93.6deg);
+  transform: rotate(93.6deg);
+}
+
+.skills.circles .progress.p27 .bar {
+  -moz-transform: rotate(97.2deg);
+  -ms-transform: rotate(97.2deg);
+  -webkit-transform: rotate(97.2deg);
+  transform: rotate(97.2deg);
+}
+
+.skills.circles .progress.p28 .bar {
+  -moz-transform: rotate(100.8deg);
+  -ms-transform: rotate(100.8deg);
+  -webkit-transform: rotate(100.8deg);
+  transform: rotate(100.8deg);
+}
+
+.skills.circles .progress.p29 .bar {
+  -moz-transform: rotate(104.4deg);
+  -ms-transform: rotate(104.4deg);
+  -webkit-transform: rotate(104.4deg);
+  transform: rotate(104.4deg);
+}
+
+.skills.circles .progress.p30 .bar {
+  -moz-transform: rotate(108deg);
+  -ms-transform: rotate(108deg);
+  -webkit-transform: rotate(108deg);
+  transform: rotate(108deg);
+}
+
+.skills.circles .progress.p31 .bar {
+  -moz-transform: rotate(111.6deg);
+  -ms-transform: rotate(111.6deg);
+  -webkit-transform: rotate(111.6deg);
+  transform: rotate(111.6deg);
+}
+
+.skills.circles .progress.p32 .bar {
+  -moz-transform: rotate(115.2deg);
+  -ms-transform: rotate(115.2deg);
+  -webkit-transform: rotate(115.2deg);
+  transform: rotate(115.2deg);
+}
+
+.skills.circles .progress.p33 .bar {
+  -moz-transform: rotate(118.8deg);
+  -ms-transform: rotate(118.8deg);
+  -webkit-transform: rotate(118.8deg);
+  transform: rotate(118.8deg);
+}
+
+.skills.circles .progress.p34 .bar {
+  -moz-transform: rotate(122.4deg);
+  -ms-transform: rotate(122.4deg);
+  -webkit-transform: rotate(122.4deg);
+  transform: rotate(122.4deg);
+}
+
+.skills.circles .progress.p35 .bar {
+  -moz-transform: rotate(126deg);
+  -ms-transform: rotate(126deg);
+  -webkit-transform: rotate(126deg);
+  transform: rotate(126deg);
+}
+
+.skills.circles .progress.p36 .bar {
+  -moz-transform: rotate(129.6deg);
+  -ms-transform: rotate(129.6deg);
+  -webkit-transform: rotate(129.6deg);
+  transform: rotate(129.6deg);
+}
+
+.skills.circles .progress.p37 .bar {
+  -moz-transform: rotate(133.2deg);
+  -ms-transform: rotate(133.2deg);
+  -webkit-transform: rotate(133.2deg);
+  transform: rotate(133.2deg);
+}
+
+.skills.circles .progress.p38 .bar {
+  -moz-transform: rotate(136.8deg);
+  -ms-transform: rotate(136.8deg);
+  -webkit-transform: rotate(136.8deg);
+  transform: rotate(136.8deg);
+}
+
+.skills.circles .progress.p39 .bar {
+  -moz-transform: rotate(140.4deg);
+  -ms-transform: rotate(140.4deg);
+  -webkit-transform: rotate(140.4deg);
+  transform: rotate(140.4deg);
+}
+
+.skills.circles .progress.p40 .bar {
+  -moz-transform: rotate(144deg);
+  -ms-transform: rotate(144deg);
+  -webkit-transform: rotate(144deg);
+  transform: rotate(144deg);
+}
+
+.skills.circles .progress.p41 .bar {
+  -moz-transform: rotate(147.6deg);
+  -ms-transform: rotate(147.6deg);
+  -webkit-transform: rotate(147.6deg);
+  transform: rotate(147.6deg);
+}
+
+.skills.circles .progress.p42 .bar {
+  -moz-transform: rotate(151.2deg);
+  -ms-transform: rotate(151.2deg);
+  -webkit-transform: rotate(151.2deg);
+  transform: rotate(151.2deg);
+}
+
+.skills.circles .progress.p43 .bar {
+  -moz-transform: rotate(154.8deg);
+  -ms-transform: rotate(154.8deg);
+  -webkit-transform: rotate(154.8deg);
+  transform: rotate(154.8deg);
+}
+
+.skills.circles .progress.p44 .bar {
+  -moz-transform: rotate(158.4deg);
+  -ms-transform: rotate(158.4deg);
+  -webkit-transform: rotate(158.4deg);
+  transform: rotate(158.4deg);
+}
+
+.skills.circles .progress.p45 .bar {
+  -moz-transform: rotate(162deg);
+  -ms-transform: rotate(162deg);
+  -webkit-transform: rotate(162deg);
+  transform: rotate(162deg);
+}
+
+.skills.circles .progress.p46 .bar {
+  -moz-transform: rotate(165.6deg);
+  -ms-transform: rotate(165.6deg);
+  -webkit-transform: rotate(165.6deg);
+  transform: rotate(165.6deg);
+}
+
+.skills.circles .progress.p47 .bar {
+  -moz-transform: rotate(169.2deg);
+  -ms-transform: rotate(169.2deg);
+  -webkit-transform: rotate(169.2deg);
+  transform: rotate(169.2deg);
+}
+
+.skills.circles .progress.p48 .bar {
+  -moz-transform: rotate(172.8deg);
+  -ms-transform: rotate(172.8deg);
+  -webkit-transform: rotate(172.8deg);
+  transform: rotate(172.8deg);
+}
+
+.skills.circles .progress.p49 .bar {
+  -moz-transform: rotate(176.4deg);
+  -ms-transform: rotate(176.4deg);
+  -webkit-transform: rotate(176.4deg);
+  transform: rotate(176.4deg);
+}
+
+.skills.circles .progress.p50 .bar {
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.skills.circles .progress.p51 .bar {
+  -moz-transform: rotate(183.6deg);
+  -ms-transform: rotate(183.6deg);
+  -webkit-transform: rotate(183.6deg);
+  transform: rotate(183.6deg);
+}
+
+.skills.circles .progress.p52 .bar {
+  -moz-transform: rotate(187.2deg);
+  -ms-transform: rotate(187.2deg);
+  -webkit-transform: rotate(187.2deg);
+  transform: rotate(187.2deg);
+}
+
+.skills.circles .progress.p53 .bar {
+  -moz-transform: rotate(190.8deg);
+  -ms-transform: rotate(190.8deg);
+  -webkit-transform: rotate(190.8deg);
+  transform: rotate(190.8deg);
+}
+
+.skills.circles .progress.p54 .bar {
+  -moz-transform: rotate(194.4deg);
+  -ms-transform: rotate(194.4deg);
+  -webkit-transform: rotate(194.4deg);
+  transform: rotate(194.4deg);
+}
+
+.skills.circles .progress.p55 .bar {
+  -moz-transform: rotate(198deg);
+  -ms-transform: rotate(198deg);
+  -webkit-transform: rotate(198deg);
+  transform: rotate(198deg);
+}
+
+.skills.circles .progress.p56 .bar {
+  -moz-transform: rotate(201.6deg);
+  -ms-transform: rotate(201.6deg);
+  -webkit-transform: rotate(201.6deg);
+  transform: rotate(201.6deg);
+}
+
+.skills.circles .progress.p57 .bar {
+  -moz-transform: rotate(205.2deg);
+  -ms-transform: rotate(205.2deg);
+  -webkit-transform: rotate(205.2deg);
+  transform: rotate(205.2deg);
+}
+
+.skills.circles .progress.p58 .bar {
+  -moz-transform: rotate(208.8deg);
+  -ms-transform: rotate(208.8deg);
+  -webkit-transform: rotate(208.8deg);
+  transform: rotate(208.8deg);
+}
+
+.skills.circles .progress.p59 .bar {
+  -moz-transform: rotate(212.4deg);
+  -ms-transform: rotate(212.4deg);
+  -webkit-transform: rotate(212.4deg);
+  transform: rotate(212.4deg);
+}
+
+.skills.circles .progress.p60 .bar {
+  -moz-transform: rotate(216deg);
+  -ms-transform: rotate(216deg);
+  -webkit-transform: rotate(216deg);
+  transform: rotate(216deg);
+}
+
+.skills.circles .progress.p61 .bar {
+  -moz-transform: rotate(219.6deg);
+  -ms-transform: rotate(219.6deg);
+  -webkit-transform: rotate(219.6deg);
+  transform: rotate(219.6deg);
+}
+
+.skills.circles .progress.p62 .bar {
+  -moz-transform: rotate(223.2deg);
+  -ms-transform: rotate(223.2deg);
+  -webkit-transform: rotate(223.2deg);
+  transform: rotate(223.2deg);
+}
+
+.skills.circles .progress.p63 .bar {
+  -moz-transform: rotate(226.8deg);
+  -ms-transform: rotate(226.8deg);
+  -webkit-transform: rotate(226.8deg);
+  transform: rotate(226.8deg);
+}
+
+.skills.circles .progress.p64 .bar {
+  -moz-transform: rotate(230.4deg);
+  -ms-transform: rotate(230.4deg);
+  -webkit-transform: rotate(230.4deg);
+  transform: rotate(230.4deg);
+}
+
+.skills.circles .progress.p65 .bar {
+  -moz-transform: rotate(234deg);
+  -ms-transform: rotate(234deg);
+  -webkit-transform: rotate(234deg);
+  transform: rotate(234deg);
+}
+
+.skills.circles .progress.p66 .bar {
+  -moz-transform: rotate(237.6deg);
+  -ms-transform: rotate(237.6deg);
+  -webkit-transform: rotate(237.6deg);
+  transform: rotate(237.6deg);
+}
+
+.skills.circles .progress.p67 .bar {
+  -moz-transform: rotate(241.2deg);
+  -ms-transform: rotate(241.2deg);
+  -webkit-transform: rotate(241.2deg);
+  transform: rotate(241.2deg);
+}
+
+.skills.circles .progress.p68 .bar {
+  -moz-transform: rotate(244.8deg);
+  -ms-transform: rotate(244.8deg);
+  -webkit-transform: rotate(244.8deg);
+  transform: rotate(244.8deg);
+}
+
+.skills.circles .progress.p69 .bar {
+  -moz-transform: rotate(248.4deg);
+  -ms-transform: rotate(248.4deg);
+  -webkit-transform: rotate(248.4deg);
+  transform: rotate(248.4deg);
+}
+
+.skills.circles .progress.p70 .bar {
+  -moz-transform: rotate(252deg);
+  -ms-transform: rotate(252deg);
+  -webkit-transform: rotate(252deg);
+  transform: rotate(252deg);
+}
+
+.skills.circles .progress.p71 .bar {
+  -moz-transform: rotate(255.6deg);
+  -ms-transform: rotate(255.6deg);
+  -webkit-transform: rotate(255.6deg);
+  transform: rotate(255.6deg);
+}
+
+.skills.circles .progress.p72 .bar {
+  -moz-transform: rotate(259.2deg);
+  -ms-transform: rotate(259.2deg);
+  -webkit-transform: rotate(259.2deg);
+  transform: rotate(259.2deg);
+}
+
+.skills.circles .progress.p73 .bar {
+  -moz-transform: rotate(262.8deg);
+  -ms-transform: rotate(262.8deg);
+  -webkit-transform: rotate(262.8deg);
+  transform: rotate(262.8deg);
+}
+
+.skills.circles .progress.p74 .bar {
+  -moz-transform: rotate(266.4deg);
+  -ms-transform: rotate(266.4deg);
+  -webkit-transform: rotate(266.4deg);
+  transform: rotate(266.4deg);
+}
+
+.skills.circles .progress.p75 .bar {
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.skills.circles .progress.p76 .bar {
+  -moz-transform: rotate(273.6deg);
+  -ms-transform: rotate(273.6deg);
+  -webkit-transform: rotate(273.6deg);
+  transform: rotate(273.6deg);
+}
+
+.skills.circles .progress.p77 .bar {
+  -moz-transform: rotate(277.2deg);
+  -ms-transform: rotate(277.2deg);
+  -webkit-transform: rotate(277.2deg);
+  transform: rotate(277.2deg);
+}
+
+.skills.circles .progress.p78 .bar {
+  -moz-transform: rotate(280.8deg);
+  -ms-transform: rotate(280.8deg);
+  -webkit-transform: rotate(280.8deg);
+  transform: rotate(280.8deg);
+}
+
+.skills.circles .progress.p79 .bar {
+  -moz-transform: rotate(284.4deg);
+  -ms-transform: rotate(284.4deg);
+  -webkit-transform: rotate(284.4deg);
+  transform: rotate(284.4deg);
+}
+
+.skills.circles .progress.p80 .bar {
+  -moz-transform: rotate(288deg);
+  -ms-transform: rotate(288deg);
+  -webkit-transform: rotate(288deg);
+  transform: rotate(288deg);
+}
+
+.skills.circles .progress.p81 .bar {
+  -moz-transform: rotate(291.6deg);
+  -ms-transform: rotate(291.6deg);
+  -webkit-transform: rotate(291.6deg);
+  transform: rotate(291.6deg);
+}
+
+.skills.circles .progress.p82 .bar {
+  -moz-transform: rotate(295.2deg);
+  -ms-transform: rotate(295.2deg);
+  -webkit-transform: rotate(295.2deg);
+  transform: rotate(295.2deg);
+}
+
+.skills.circles .progress.p83 .bar {
+  -moz-transform: rotate(298.8deg);
+  -ms-transform: rotate(298.8deg);
+  -webkit-transform: rotate(298.8deg);
+  transform: rotate(298.8deg);
+}
+
+.skills.circles .progress.p84 .bar {
+  -moz-transform: rotate(302.4deg);
+  -ms-transform: rotate(302.4deg);
+  -webkit-transform: rotate(302.4deg);
+  transform: rotate(302.4deg);
+}
+
+.skills.circles .progress.p85 .bar {
+  -moz-transform: rotate(306deg);
+  -ms-transform: rotate(306deg);
+  -webkit-transform: rotate(306deg);
+  transform: rotate(306deg);
+}
+
+.skills.circles .progress.p86 .bar {
+  -moz-transform: rotate(309.6deg);
+  -ms-transform: rotate(309.6deg);
+  -webkit-transform: rotate(309.6deg);
+  transform: rotate(309.6deg);
+}
+
+.skills.circles .progress.p87 .bar {
+  -moz-transform: rotate(313.2deg);
+  -ms-transform: rotate(313.2deg);
+  -webkit-transform: rotate(313.2deg);
+  transform: rotate(313.2deg);
+}
+
+.skills.circles .progress.p88 .bar {
+  -moz-transform: rotate(316.8deg);
+  -ms-transform: rotate(316.8deg);
+  -webkit-transform: rotate(316.8deg);
+  transform: rotate(316.8deg);
+}
+
+.skills.circles .progress.p89 .bar {
+  -moz-transform: rotate(320.4deg);
+  -ms-transform: rotate(320.4deg);
+  -webkit-transform: rotate(320.4deg);
+  transform: rotate(320.4deg);
+}
+
+.skills.circles .progress.p90 .bar {
+  -moz-transform: rotate(324deg);
+  -ms-transform: rotate(324deg);
+  -webkit-transform: rotate(324deg);
+  transform: rotate(324deg);
+}
+
+.skills.circles .progress.p91 .bar {
+  -moz-transform: rotate(327.6deg);
+  -ms-transform: rotate(327.6deg);
+  -webkit-transform: rotate(327.6deg);
+  transform: rotate(327.6deg);
+}
+
+.skills.circles .progress.p92 .bar {
+  -moz-transform: rotate(331.2deg);
+  -ms-transform: rotate(331.2deg);
+  -webkit-transform: rotate(331.2deg);
+  transform: rotate(331.2deg);
+}
+
+.skills.circles .progress.p93 .bar {
+  -moz-transform: rotate(334.8deg);
+  -ms-transform: rotate(334.8deg);
+  -webkit-transform: rotate(334.8deg);
+  transform: rotate(334.8deg);
+}
+
+.skills.circles .progress.p94 .bar {
+  -moz-transform: rotate(338.4deg);
+  -ms-transform: rotate(338.4deg);
+  -webkit-transform: rotate(338.4deg);
+  transform: rotate(338.4deg);
+}
+
+.skills.circles .progress.p95 .bar {
+  -moz-transform: rotate(342deg);
+  -ms-transform: rotate(342deg);
+  -webkit-transform: rotate(342deg);
+  transform: rotate(342deg);
+}
+
+.skills.circles .progress.p96 .bar {
+  -moz-transform: rotate(345.6deg);
+  -ms-transform: rotate(345.6deg);
+  -webkit-transform: rotate(345.6deg);
+  transform: rotate(345.6deg);
+}
+
+.skills.circles .progress.p97 .bar {
+  -moz-transform: rotate(349.2deg);
+  -ms-transform: rotate(349.2deg);
+  -webkit-transform: rotate(349.2deg);
+  transform: rotate(349.2deg);
+}
+
+.skills.circles .progress.p98 .bar {
+  -moz-transform: rotate(352.8deg);
+  -ms-transform: rotate(352.8deg);
+  -webkit-transform: rotate(352.8deg);
+  transform: rotate(352.8deg);
+}
+
+.skills.circles .progress.p99 .bar {
+  -moz-transform: rotate(356.4deg);
+  -ms-transform: rotate(356.4deg);
+  -webkit-transform: rotate(356.4deg);
+  transform: rotate(356.4deg);
+}
+
+.skills.circles .progress.p100 .bar {
+  -moz-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+@media (max-width: 840px) {
+  .skills.circles ul li {
+    width: 25%;
+  }
+}
+
+@media (max-width: 580px) {
+  .skills.dotted ul li {
+    width: 100%;
+    display: block;
+  }
+
+  .skills.circles ul li {
+    width: 33.333%;
+  }
+
+  .skills.list ul li {
+    display: block;
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
+
+/* List Skills */
+.skills.list ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 4%;
+}
+
+.skills.list ul li {
+  /* flex: 0 1 calc(48% - 2%); */
+  padding: 8px 0;
+}
+
+.skills.list ul li .progress {
+  display: none;
+}
+
+@media (max-width: 580px) {
+  .skills.list ul li {
+    flex: 0 1 100%;
+  }
+}
+
+/* Services Grid */
+.service-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 4%;
+  margin-top: 50px;
+}
+
+.service-items .service-item {
+  flex: 0 1 calc(32% - 3%);
+  min-width: 250px;
+}
+
+@media (max-width: 840px) {
+  .service-items .service-item {
+    flex: 0 1 calc(48% - 2%);
+  }
+}
+
+@media (max-width: 580px) {
+  .service-items .service-item {
+    flex: 0 1 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .service-items .service-item {
+    text-align: center;
+  }
+}
+
+.service-items .service-item .icon {
+  float: left;
+  width: 36px;
+  text-align: center;
+  font-size: 30px;
+  color: var(--color-primary);
+  margin-right: 15px;
+}
+
+@media (max-width: 400px) {
+  .service-items .service-item .icon {
+    float: none;
+    display: block;
+    margin: 0 auto 10px auto;
+  }
+}
+
+.service-items .service-item .name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-dark);
+  margin: 6px 0 10px 0;
+}
+
+@media (max-width: 400px) {
+  .service-items .service-item .name {
+    margin: 0 0 10px 0;
+  }
+}
+
+.service-items .service-item p {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+@media (max-width: 400px) {
+  .service-items .service-item p {
+    margin-left: 0;
+  }
+}

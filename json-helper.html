@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blog Post JSON Generator</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 1rem;
+        line-height: 1.5;
+      }
+      label {
+        display: block;
+        margin-top: 1rem;
+        font-weight: bold;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.25rem;
+        font-size: 1rem;
+      }
+      button {
+        margin-top: 1.5rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        background: #f26b38;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+      pre {
+        background: #f6f6f6;
+        padding: 1rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Blog Post JSON Generator</h1>
+    <p>
+      Fill in the details for your new blog post and copy the JSON snippet into
+      <code>search.json</code>.
+    </p>
+
+    <label>Post Title</label>
+    <input type="text" id="title" />
+
+    <label>Short Summary / Excerpt</label>
+    <textarea id="content" rows="4"></textarea>
+
+    <label>URL (relative to site root)</label>
+    <input type="text" id="url" placeholder="/blog/my-post/" />
+
+    <label>Categories (comma-separated)</label>
+    <input type="text" id="categories" placeholder="design, tutorial" />
+
+    <label>Tags (comma-separated)</label>
+    <input type="text" id="tags" placeholder="css, responsive, layout" />
+
+    <button id="generate">Generate JSON</button>
+
+    <h2>Generated JSON:</h2>
+    <pre id="output"></pre>
+
+    <script>
+      document
+        .getElementById("generate")
+        .addEventListener("click", function () {
+          const title = document.getElementById("title").value.trim();
+          const content = document.getElementById("content").value.trim();
+          const url = document.getElementById("url").value.trim();
+          const categories = document
+            .getElementById("categories")
+            .value.split(",")
+            .map((c) => c.trim())
+            .filter((c) => c !== "");
+          const tags = document
+            .getElementById("tags")
+            .value.split(",")
+            .map((t) => t.trim())
+            .filter((t) => t !== "");
+
+          const jsonSnippet = {
+            title: title,
+            content: content,
+            url: url,
+            categories: categories,
+            tags: tags,
+          };
+
+          document.getElementById("output").textContent = JSON.stringify(
+            jsonSnippet,
+            null,
+            2
+          );
+        });
+    </script>
+  </body>
+</html>

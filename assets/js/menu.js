@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   // Load header & footer dynamically
-  fetch("components/header.html")
+  fetch("../components/header.html")
     .then((response) => response.text())
     .then((data) => {
       document.getElementById("header-container").innerHTML = data;
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch((error) => console.error("Error loading header:", error));
 
-  fetch("components/footer.html")
+  fetch("../components/footer.html")
     .then((response) => response.text())
     .then((data) => {
       document.getElementById("footer-container").innerHTML = data;
@@ -111,25 +111,216 @@ function initializeSidebar() {
   const closeBtn = document.querySelector(".content-sidebar .close");
 
   if (sidebarBtn && sidebar) {
-    sidebarBtn.addEventListener("click", function () {
+    sidebarBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      // Add active class to sidebar
       sidebar.classList.add("active");
-      if (overlay) overlay.style.display = "block";
+
+      // Fade in overlay
+      if (overlay) {
+        fadeInElement(overlay);
+      }
+
+      // Add scroll hidden to body (like the original jQuery)
+      document.body.classList.add("scroll_hidden");
+
+      return false;
     });
   }
 
+  // Close sidebar function
+  function closeSidebar() {
+    // Remove active class from sidebar
+    sidebar.classList.remove("active");
+
+    // Fade out overlay
+    if (overlay) {
+      fadeOutElement(overlay);
+    }
+
+    // Remove scroll hidden from body
+    document.body.classList.remove("scroll_hidden");
+  }
+
   if (closeBtn && sidebar) {
-    closeBtn.addEventListener("click", function () {
-      sidebar.classList.remove("active");
-      if (overlay) overlay.style.display = "none";
+    closeBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      closeSidebar();
     });
   }
 
   if (overlay) {
-    overlay.addEventListener("click", function () {
-      sidebar.classList.remove("active");
-      overlay.style.display = "none";
+    overlay.addEventListener("click", function (e) {
+      e.preventDefault();
+      closeSidebar();
     });
   }
+
+  // Close sidebar with Escape key
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && sidebar.classList.contains("active")) {
+      closeSidebar();
+    }
+  });
+}
+
+// Initialize search functionality
+function initializeSearch() {
+  // Initialize SimpleJekyllSearch if it exists
+  if (typeof SimpleJekyllSearch !== "undefined") {
+    const searchInput = document.getElementById("search-input");
+    const resultsContainer = document.getElementById("results-container");
+
+    if (searchInput && resultsContainer) {
+      try {
+        const sjs = SimpleJekyllSearch({
+          searchInput: searchInput,
+          resultsContainer: resultsContainer,
+          json: "/search.json",
+          searchResultTemplate:
+            '<li><a href="{url}" title="{desc}">{title}</a></li>',
+          noResultsText: "<li>No results found</li>",
+          limit: 10,
+          fuzzy: false,
+          exclude: ["Welcome"],
+        });
+        console.log("SimpleJekyllSearch initialized successfully");
+      } catch (error) {
+        console.error("Error initializing SimpleJekyllSearch:", error);
+      }
+    }
+  } else {
+    // Fallback: Basic search functionality without SimpleJekyllSearch
+    console.log("SimpleJekyllSearch not found, implementing basic search");
+    initializeBasicSearch();
+  }
+}
+
+// Basic search fallback (if SimpleJekyllSearch is not available)
+function initializeBasicSearch() {
+  const searchInput = document.getElementById("search-input");
+  const resultsContainer = document.getElementById("results-container");
+  const searchForm = document.querySelector(".search-form");
+
+  if (!searchInput || !resultsContainer) return;
+
+  // Hide results initially
+  resultsContainer.style.display = "none";
+
+  let searchData = [];
+
+  // Try to fetch search data
+  fetch("../search.json")
+    .then((response) => response.json())
+    .then((data) => {
+      searchData = data;
+      console.log("Search data loaded:", searchData.length + " items");
+    })
+    .catch((error) => {
+      console.warn(
+        "Could not load search.json, search will be limited:",
+        error
+      );
+    });
+
+  // Real-time search as user types
+  let searchTimeout;
+  searchInput.addEventListener("input", function () {
+    clearTimeout(searchTimeout);
+    const query = this.value.trim().toLowerCase();
+
+    if (query.length < 2) {
+      resultsContainer.style.display = "none";
+      resultsContainer.innerHTML = "";
+      return;
+    }
+
+    // Debounce search
+    searchTimeout = setTimeout(() => {
+      performSearch(query, resultsContainer, searchData);
+    }, 300);
+  });
+
+  // Handle form submission
+  if (searchForm) {
+    searchForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const query = searchInput.value.trim();
+      if (query) {
+        // Redirect to search page or perform search
+        window.location.href = `../search.html?q=${encodeURIComponent(query)}`;
+      }
+    });
+  }
+
+  // Hide results when clicking outside
+  document.addEventListener("click", function (e) {
+    if (
+      !searchInput.contains(e.target) &&
+      !resultsContainer.contains(e.target)
+    ) {
+      resultsContainer.style.display = "none";
+    }
+  });
+
+  // Show results when focusing on search input
+  searchInput.addEventListener("focus", function () {
+    if (resultsContainer.innerHTML.trim() !== "") {
+      resultsContainer.style.display = "block";
+    }
+  });
+}
+
+// Perform search function
+function performSearch(query, resultsContainer, searchData) {
+  if (searchData.length === 0) {
+    resultsContainer.innerHTML = "<li>Search data not available</li>";
+    resultsContainer.style.display = "block";
+    return;
+  }
+
+  const results = searchData.filter((item) => {
+    const title = (item.title || "").toLowerCase();
+    const content = (item.content || "").toLowerCase();
+    const categories = (item.categories || []).join(" ").toLowerCase();
+    const tags = (item.tags || []).join(" ").toLowerCase();
+
+    return (
+      title.includes(query) ||
+      content.includes(query) ||
+      categories.includes(query) ||
+      tags.includes(query)
+    );
+  });
+
+  if (results.length === 0) {
+    resultsContainer.innerHTML = "<li>No results found</li>";
+  } else {
+    const html = results
+      .slice(0, 10)
+      .map(
+        (item) =>
+          `<li><a href="${item.url}" title="${item.excerpt || item.title}">${
+            item.title
+          }</a></li>`
+      )
+      .join("");
+    resultsContainer.innerHTML = html;
+  }
+
+  resultsContainer.style.display = "block";
+}
+
+// Widget title wrapping
+function initializeWidgetTitles() {
+  const widgetTitles = document.querySelectorAll(".widget-title");
+  widgetTitles.forEach((title) => {
+    if (!title.querySelector(".widget-title-span")) {
+      const content = title.innerHTML;
+      title.innerHTML = `<span class="widget-title-span">${content}</span>`;
+    }
+  });
 }
 
 // Hide/show scroll mouse button based on scroll position
@@ -200,24 +391,28 @@ function initializeScrollMouseButton() {
 
 // Fade out function
 function fadeOutElement(element) {
-  if (element.style.display === "none") return;
+  if (!element || element.style.display === "none") return;
 
-  element.style.opacity = "1";
+  element.style.opacity = element.style.opacity || "1";
   element.style.transition = "opacity 0.3s ease";
+  element.style.display = "block";
 
   // Start fade out
-  setTimeout(() => {
+  requestAnimationFrame(() => {
     element.style.opacity = "0";
-  }, 10);
+  });
 
   // Set display none after animation
   setTimeout(() => {
-    element.style.display = "none";
-  }, 330); // 300ms transition + 30ms buffer
+    if (element.style.opacity === "0") {
+      element.style.display = "none";
+    }
+  }, 300);
 }
 
 // Fade in function
 function fadeInElement(element) {
+  if (!element) return;
   if (element.style.display === "block" && element.style.opacity === "1")
     return;
 
@@ -226,9 +421,9 @@ function fadeInElement(element) {
   element.style.transition = "opacity 0.3s ease";
 
   // Start fade in
-  setTimeout(() => {
+  requestAnimationFrame(() => {
     element.style.opacity = "1";
-  }, 10);
+  });
 }
 
 // Initialize all menu functionality
@@ -237,25 +432,6 @@ function initializeAllMenu() {
   setActiveMenuItem();
   initializeSidebar();
   initializeScrollMouseButton();
+  initializeSearch();
+  initializeWidgetTitles();
 }
-
-// Export menu functions for use in other scripts
-window.MenuManager = {
-  setActive: function (pageName) {
-    const menuItems = document.querySelectorAll(".top-menu ul li");
-    menuItems.forEach((item) => {
-      const link = item.querySelector("a");
-      if (link && link.getAttribute("href").includes(pageName)) {
-        document
-          .querySelector(".top-menu ul li.active")
-          ?.classList.remove("active");
-        item.classList.add("active");
-      }
-    });
-  },
-
-  // Re-initialize scroll effects
-  reinitializeScrollEffects: function () {
-    initializeScrollMouseButton();
-  },
-};

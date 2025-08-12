@@ -187,11 +187,3 @@ function initializePageTypewriter(pageType) {
       break;
   }
 }
-
-// Export for global use
-window.TypeWriterManager = {
-  TypeWriter: TypeWriter,
-  typeWriter: typeWriter,
-  initializePage: initializePageTypewriter,
-  manageCursor: manageCursor,
-};
