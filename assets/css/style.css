@@ -11,6 +11,8 @@
   /* Fonts */
   --font-main: "ivystyle-tw", "Geist Mono", monospace;
   --font-sans: "ivystyle-sans", "Geist", sans-serif;
+  --font-weight-thin: 200;
+  --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semi-bold: 600;
@@ -1307,9 +1309,9 @@ body:not(.homepage) .section.started {
   transition: var(--transition-medium);
 }
 
-.box-item .image .info .icon {
+.box-item .image .info i {
   color: var(--color-white);
-  font-size: 38px;
+  font-size: 28px;
   transition: var(--transition-slow);
 }
 
@@ -1350,7 +1352,7 @@ body:not(.homepage) .section.started {
   display: block;
   color: var(--color-text);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: var(--font-weight-semi-bold);
   text-transform: uppercase;
   transition: var(--transition-medium);
   text-decoration: none;

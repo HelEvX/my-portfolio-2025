@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 // add-post.js - Append a blog post entry to search.json with optional auto-summary + auto URL
+// run in terminal with `node add-post.js`
 
 const fs = require("fs");
 const path = require("path");
@@ -7,7 +8,6 @@ const readline = require("readline");
 
 const filePath = path.join(__dirname, "search.json");
 const blogFolder = path.join(__dirname, "posts"); // change this to your blog posts folder
-const blogUrlBase = "/blog/"; // change this if your blog URLs are different
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -31,9 +31,9 @@ function stripHtml(html) {
 // Basic Markdown strip (optional, quick cleanup)
 function stripMarkdown(md) {
   return md
-    .replace(/[#*_`>~\-]+/g, "") // remove markdown symbols
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // links
-    .replace(/\s+/g, " ") // collapse spaces
+    .replace(/[#*_`>~\-]+/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
@@ -58,10 +58,27 @@ function getNewestPostFile() {
   return files.length > 0 ? path.join(blogFolder, files[0].name) : null;
 }
 
-// Convert filename to URL slug
-function filenameToUrl(filePath) {
-  const baseName = path.basename(filePath, path.extname(filePath));
-  return `${blogUrlBase}${baseName.replace(/\s+/g, "-").toLowerCase()}/`;
+// Extract Category from HTML file path
+function extractCategoryFromHtml(html) {
+  const match = html.match(
+    /<div class="cat-links">[\s\S]*?<a [^>]*>([^<]+)<\/a>/i
+  );
+  return match ? match[1].trim().toLowerCase() : null;
+}
+
+// Generate pretty URL like /category/yyyy/mm/dd/slug/
+function createPrettyUrl(category, filePath) {
+  const slug = path
+    .basename(filePath, path.extname(filePath))
+    .replace(/\s+/g, "-")
+    .toLowerCase();
+
+  const date = new Date(fs.statSync(filePath).mtime);
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+
+  return `/${category}/${yyyy}/${mm}/${dd}/${slug}/`;
 }
 
 (async function () {
@@ -106,6 +123,8 @@ function filenameToUrl(filePath) {
 
     let content = "";
     let url = "";
+    let categories = [];
+
     if (postFilePath && fs.existsSync(postFilePath)) {
       // Auto-generate content
       let raw = fs.readFileSync(postFilePath, "utf8");
@@ -117,26 +136,26 @@ function filenameToUrl(filePath) {
       content = getFirstSentences(raw, 3);
       console.log(`📄 Auto-generated summary: ${content}`);
 
-      // Auto-generate URL
-      url = filenameToUrl(postFilePath);
-      console.log(`🔗 Auto-generated URL: ${url}`);
+      // Ask for category so we can build pretty URL
+      const catInput = await ask(
+        "Category (single word, e.g. design, music, blog): "
+      );
+      categories.push(catInput.toLowerCase() || "blog");
+
+      // Auto-generate pretty URL
+      url = createPrettyUrl(categories[0], postFilePath);
+      console.log(`🔗 Auto-generated pretty URL: ${url}`);
     } else {
       // Manual mode
       content = await ask("Short summary (1–3 sentences): ");
-      url = await ask("URL (relative, e.g. /blog/my-post/): ");
+      const catInput = await ask(
+        "Category (single word, e.g. design, music, blog): "
+      );
+      categories.push(catInput.toLowerCase() || "blog");
+      url = await ask("URL (relative, e.g. /design/2025/08/12/my-post/): ");
     }
 
-    const categoriesInput = await ask(
-      "Categories (comma-separated, optional): "
-    );
     const tagsInput = await ask("Tags (comma-separated, optional): ");
-
-    const categories = categoriesInput
-      ? categoriesInput
-          .split(",")
-          .map((c) => c.trim())
-          .filter(Boolean)
-      : [];
     const tags = tagsInput
       ? tagsInput
           .split(",")
