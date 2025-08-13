@@ -215,47 +215,28 @@
               </div>
             </nav>
 
-            <div class="post-comments" id="comments-section">
+            <div class="post-comments">
               <div class="title">
                 <div class="title_inner">Comments</div>
               </div>
-
-              <!-- Placeholder text -->
-              <p id="no-comments-msg" class="placeholder-text">
-                Start the discussion
-              </p>
-
-              <!-- Comments list -->
-              <div id="comments-list"></div>
-
-              <!-- Comment form -->
-              <div class="form-comment">
-                <div class="title">Leave a Comment</div>
-                <form
-                  name="post-comments"
-                  method="POST"
-                  data-netlify="true"
-                  id="comment-form"
-                >
-                  <input type="hidden" name="post" value="POST_SLUG_HERE" />
-
-                  <label>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Your name"
-                      required
-                    />
-                  </label>
-                  <label>
-                    <textarea
-                      name="comment"
-                      placeholder="Write your comment here..."
-                      required
-                    ></textarea>
-                  </label>
-                  <button type="submit" class="btn">Submit</button>
-                </form>
+              <div class="comments">
+                <script
+                  src="https://giscus.app/client.js"
+                  data-repo="HelEvX/my-portfolio-2025"
+                  data-repo-id="R_kgDOPbHa9A"
+                  data-category="Blog Comments"
+                  data-category-id="DIC_kwDOPbHa9M4CuIJX"
+                  data-mapping="pathname"
+                  data-strict="0"
+                  data-reactions-enabled="1"
+                  data-emit-metadata="1"
+                  data-input-position="top"
+                  data-theme="preferred_color_scheme"
+                  data-lang="en"
+                  data-loading="lazy"
+                  crossorigin="anonymous"
+                  async
+                ></script>
               </div>
             </div>
 
@@ -279,6 +260,5 @@
 
     <!-- Main JavaScript Files -->
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/comments.js"></script>
   </body>
 </html>

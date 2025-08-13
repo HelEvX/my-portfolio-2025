@@ -1,54 +1,14 @@
 [
   {
-    "title": "Welcome to Jekyll!",
-    "content": "This is your first post. Edit or delete it...",
-    "url": "/video/music/2020/08/08/welcome-to-jekyll/",
+    "title": "My First Post",
+    "content": "Heleen Evers | Single Blog Post loading... | 05 July 2020 FIRST BLOG POST Home / Blog So striking at of to welcomed resolved. Northward by described up household therefore attention.",
+    "url": "/general/2025/08/13/first-post/",
     "categories": [
-      "video",
-      "music"
+      "general"
     ],
     "tags": [
-      "jekyll"
-    ]
-  },
-  {
-    "title": "By spite about do of do allow blush",
-    "content": "A short excerpt of this post goes here...",
-    "url": "/music/2020/08/05/by-spite-about/",
-    "categories": [
-      "music"
+      "introduction"
     ],
-    "tags": []
-  },
-  {
-    "title": "Two Before Arrow Not Relied",
-    "content": "Brief description of the post...",
-    "url": "/design/2020/07/20/two-before-arrow/",
-    "categories": [
-      "design"
-    ],
-    "tags": []
-  },
-  {
-    "title": "Design in Mobile Application",
-    "content": "Post about mobile design...",
-    "url": "/mobile/2020/07/05/design-in-mobile/",
-    "categories": [
-      "mobile"
-    ],
-    "tags": []
-  },
-  {
-    "title": "My New Post",
-    "content": "A short description here...",
-    "url": "/blog/my-new-post/",
-    "categories": [
-      "design",
-      "tutorial"
-    ],
-    "tags": [
-      "css",
-      "responsive"
-    ]
+    "date": "2025-08-13"
   }
 ]

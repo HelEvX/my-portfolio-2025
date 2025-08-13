@@ -1,25 +1,54 @@
 // Menu functionality, page loading effects, and dynamic content loading
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Load header & footer dynamically
-  fetch("../components/header.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById("header-container").innerHTML = data;
+  /**
+   * Utility function to load an HTML component into a target element
+   * and then run a callback after it's loaded.
+   */
+  function loadComponent(targetSelector, componentPath, callback) {
+    const target = document.querySelector(targetSelector);
+    if (!target) return;
 
-      // Initialize menu functionality after header is loaded
-      initializeAllMenu();
-    })
-    .catch((error) => console.error("Error loading header:", error));
+    fetch(componentPath)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Failed to load ${componentPath}`);
+        return response.text();
+      })
+      .then((html) => {
+        target.innerHTML = html;
+        if (typeof callback === "function") callback();
+      })
+      .catch((error) =>
+        console.error(`Error loading ${componentPath}:`, error)
+      );
+  }
 
-  fetch("../components/footer.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById("footer-container").innerHTML = data;
-    })
-    .catch((error) => console.error("Error loading footer:", error));
+  // -------------------------------
+  // Load Header
+  // -------------------------------
+  loadComponent("#header-container", "../components/header.html", () => {
+    // Only run after header is in DOM
+    initializeAllMenu();
+  });
 
+  // -------------------------------
+  // Load Sidebar
+  // -------------------------------
+  loadComponent("#sidebar-container", "../components/sidebar.html", () => {
+    // Only run after sidebar is in DOM
+    initializeSidebar();
+    initializeSearch();
+    populateSidebar();
+  });
+
+  // -------------------------------
+  // Load Footer
+  // -------------------------------
+  loadComponent("#footer-container", "../components/footer.html");
+
+  // -------------------------------
   // Preloader functionality
+  // -------------------------------
   const preloader = document.getElementById("preloader");
   const body = document.body;
 
@@ -110,54 +139,57 @@ function initializeSidebar() {
   const overlay = document.querySelector(".s_overlay");
   const closeBtn = document.querySelector(".content-sidebar .close");
 
+  // Animation helpers for overlay
+  function fadeInElement(element) {
+    if (!element) return;
+    element.style.opacity = 0;
+    element.style.display = "block";
+    element.style.transition = "opacity 0.3s ease";
+    requestAnimationFrame(() => {
+      element.style.opacity = 1;
+    });
+  }
+
+  function fadeOutElement(element) {
+    if (!element) return;
+    element.style.opacity = 1;
+    element.style.transition = "opacity 0.3s ease";
+    element.style.opacity = 0;
+    setTimeout(() => {
+      element.style.display = "none";
+    }, 300);
+  }
+
+  // Open sidebar
   if (sidebarBtn && sidebar) {
     sidebarBtn.addEventListener("click", function (e) {
       e.preventDefault();
-
-      // Add active class to sidebar
       sidebar.classList.add("active");
-
-      // Fade in overlay
-      if (overlay) {
-        fadeInElement(overlay);
-      }
-
-      // Add scroll hidden to body (like the original jQuery)
+      fadeInElement(overlay);
+      overlay.classList.add("active");
       document.body.classList.add("scroll_hidden");
-
-      return false;
     });
   }
 
   // Close sidebar function
   function closeSidebar() {
-    // Remove active class from sidebar
     sidebar.classList.remove("active");
-
-    // Fade out overlay
-    if (overlay) {
-      fadeOutElement(overlay);
-    }
-
-    // Remove scroll hidden from body
+    overlay.classList.remove("active");
+    fadeOutElement(overlay);
     document.body.classList.remove("scroll_hidden");
   }
 
-  if (closeBtn && sidebar) {
-    closeBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      closeSidebar();
-    });
-  }
-
+  // Close on overlay click
   if (overlay) {
-    overlay.addEventListener("click", function (e) {
-      e.preventDefault();
-      closeSidebar();
-    });
+    overlay.addEventListener("click", closeSidebar);
   }
 
-  // Close sidebar with Escape key
+  // Close on "X" button click
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeSidebar);
+  }
+
+  // Close on Esc key
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && sidebar.classList.contains("active")) {
       closeSidebar();
@@ -165,40 +197,90 @@ function initializeSidebar() {
   });
 }
 
-// Initialize search functionality
-function initializeSearch() {
-  // Initialize SimpleJekyllSearch if it exists
-  if (typeof SimpleJekyllSearch !== "undefined") {
-    const searchInput = document.getElementById("search-input");
-    const resultsContainer = document.getElementById("results-container");
-
-    if (searchInput && resultsContainer) {
-      try {
-        const sjs = SimpleJekyllSearch({
-          searchInput: searchInput,
-          resultsContainer: resultsContainer,
-          json: "/search.json",
-          searchResultTemplate:
-            '<li><a href="{url}" title="{desc}">{title}</a></li>',
-          noResultsText: "<li>No results found</li>",
-          limit: 10,
-          fuzzy: false,
-          exclude: ["Welcome"],
-        });
-        console.log("SimpleJekyllSearch initialized successfully");
-      } catch (error) {
-        console.error("Error initializing SimpleJekyllSearch:", error);
+function populateSidebar() {
+  fetch("/search.json")
+    .then((response) => {
+      if (!response.ok) throw new Error("Failed to load search.json");
+      return response.json();
+    })
+    .then((posts) => {
+      // -------------------------
+      // Latest Posts (limit 5)
+      // -------------------------
+      const latestList = document.getElementById("latest-posts-list");
+      if (latestList) {
+        latestList.innerHTML = "";
+        posts
+          .slice() // copy array before sorting
+          .sort((a, b) => {
+            // Sort newest date first
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return dateB - dateA;
+          })
+          .slice(0, 5)
+          .forEach((post) => {
+            const li = document.createElement("li");
+            li.innerHTML = `<a href="${post.url}">${post.title}</a>`;
+            latestList.appendChild(li);
+          });
       }
-    }
-  } else {
-    // Fallback: Basic search functionality without SimpleJekyllSearch
-    console.log("SimpleJekyllSearch not found, implementing basic search");
-    initializeBasicSearch();
+
+      // -------------------------
+      // Categories
+      // -------------------------
+      const categoriesList = document.getElementById("categories-list");
+      if (categoriesList) {
+        const catCount = {};
+        posts.forEach((post) => {
+          (post.categories || []).forEach((cat) => {
+            catCount[cat] = (catCount[cat] || 0) + 1;
+          });
+        });
+
+        categoriesList.innerHTML = Object.keys(catCount)
+          .sort()
+          .map(
+            (cat) =>
+              `<li><a href="/categories/${cat}">${capitalize(
+                cat
+              )}</a> <small>(${catCount[cat]})</small></li>`
+          )
+          .join("");
+      }
+
+      // -------------------------
+      // Tags
+      // -------------------------
+      const tagsList = document.getElementById("tags-list");
+      if (tagsList) {
+        const tagCount = {};
+        posts.forEach((post) => {
+          (post.tags || []).forEach((tag) => {
+            tagCount[tag] = (tagCount[tag] || 0) + 1;
+          });
+        });
+
+        tagsList.innerHTML = Object.keys(tagCount)
+          .sort()
+          .map(
+            (tag) =>
+              `<li><a href="/tags/${tag}">${capitalize(tag)}</a> <small>(${
+                tagCount[tag]
+              })</small></li>`
+          )
+          .join("");
+      }
+    })
+    .catch((err) => console.error("Error populating sidebar:", err));
+
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }
 
-// Basic search fallback (if SimpleJekyllSearch is not available)
-function initializeBasicSearch() {
+// Initialize search functionality
+function initializeSearch() {
   const searchInput = document.getElementById("search-input");
   const resultsContainer = document.getElementById("results-container");
   const searchForm = document.querySelector(".search-form");
