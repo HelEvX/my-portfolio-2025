@@ -66,6 +66,68 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 600);
     }, 2000);
   }
+
+  // -------------------------------
+  // Filter functionality with two-phase fade-out/fade-in
+  // -------------------------------
+  const filterInputs = document.querySelectorAll(
+    '.filters input[type="radio"]'
+  );
+  const items = document.querySelectorAll(".box-item");
+
+  // Apply transition styles via CSS or JS for smooth fade/scale
+  items.forEach((item) => {
+    item.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+  });
+
+  filterInputs.forEach((input) => {
+    input.addEventListener("change", (e) => {
+      e.preventDefault();
+
+      const filterValue = input.value;
+
+      // ---- Phase 1: Fade out everything ----
+      items.forEach((item) => {
+        item.style.opacity = "0";
+        item.style.transform = "scale(0.8)";
+      });
+
+      // ---- After fade-out finishes, filter and fade-in matches ----
+      setTimeout(() => {
+        items.forEach((item) => {
+          const matches =
+            filterValue === ".box-item" ||
+            item.classList.contains(filterValue.slice(1));
+
+          if (matches) {
+            item.style.display = "block";
+            // small delay before fade in for smoother effect
+            requestAnimationFrame(() => {
+              item.style.opacity = "1";
+              item.style.transform = "scale(1)";
+            });
+          } else {
+            item.style.display = "none";
+          }
+        });
+      }, 400); // matches fade-out duration
+
+      // ---- Active button highlight ----
+      document
+        .querySelectorAll(".filters .btn-group label")
+        .forEach((label) => {
+          label.classList.remove("glitch-effect");
+        });
+      input.closest("label").classList.add("glitch-effect");
+    });
+  });
+
+  // Activate the first filter on load
+  const firstInput = document.querySelector('.filters input[type="radio"]');
+  if (firstInput) {
+    firstInput.checked = true;
+    firstInput.dispatchEvent(new Event("change"));
+  }
 });
 
 // Mobile menu toggle functionality
@@ -437,8 +499,8 @@ function initializeScrollMouseButton() {
     mouseBtn.style.display = "block";
     mouseBtn.style.opacity = "1";
 
-    // Scroll event listener
-    window.addEventListener("scroll", function () {
+    // Scroll event listener function
+    const onScrollCheck = function () {
       const scrollY = window.pageYOffset || document.documentElement.scrollTop;
 
       if (scrollY >= 1) {
@@ -448,7 +510,13 @@ function initializeScrollMouseButton() {
         // Fade in (like jQuery fadeIn)
         fadeInElement(mouseBtn);
       }
-    });
+    };
+
+    // Run once immediately on load (fixes refresh bug)
+    onScrollCheck();
+
+    // Run on every scroll
+    window.addEventListener("scroll", onScrollCheck);
 
     // Click handler for smooth scroll
     mouseBtn.addEventListener("click", function (e) {

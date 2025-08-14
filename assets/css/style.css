@@ -1243,6 +1243,17 @@ body:not(.homepage) .section.started {
   transition: var(--transition-medium);
 }
 
+.box-item.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.box-item.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
 /* Responsive breakpoints */
 @media (min-width: 1400px) {
   .box-item {

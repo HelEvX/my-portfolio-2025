@@ -1,0 +1,223 @@
+/* Overlay background */
+#popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: none; /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Inner popup content box */
+#popup-content {
+  max-width: 90%;
+  max-height: 90%;
+  position: relative;
+  background: transparent; /* images/videos fill it fully */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+/* Remove default shadow for videos */
+.popup-video-open #popup-content {
+  box-shadow: none;
+}
+
+/* Outer container for video + link */
+.popup-video-container {
+  width: 80vw;
+  max-width: 800px;
+  margin: 0 auto;
+  background: transparent;
+}
+
+/* Video frame with 16:9 ratio */
+.popup-video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9; /* modern browsers */
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Fallback for older browsers that don't support aspect-ratio */
+@supports not (aspect-ratio: 16 / 9) {
+  .popup-video-container {
+    padding-top: 56.25%; /* height based on width for 16:9 ratio */
+    height: 0;
+  }
+  .popup-video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.popup-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #000;
+}
+
+/* Video-specific shadow */
+.popup-video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* shadow only for video area */
+}
+
+/* "Watch on..." link */
+.popup-video-open-link {
+  display: block;
+  margin: 10px auto 0;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.25s;
+  max-width: fit-content;
+}
+
+.popup-video-open-link:hover,
+.popup-video-open-link:focus {
+  background: rgba(255, 255, 255, 0.4);
+  outline: none;
+}
+
+/* Images and iframes scale to fit */
+#popup-content img,
+#popup-content iframe {
+  display: block;
+  max-width: 100%;
+  max-height: 90vh;
+  border: none;
+  border-radius: 4px;
+}
+
+/* Text / Content popup style */
+#popup-content .popup-box {
+  background: #fff;
+  color: #333;
+  padding: 20px;
+  border-radius: 4px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Close button */
+#popup-close {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  font-size: 32px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10000;
+  transition: opacity 0.2s ease;
+}
+#popup-close:hover {
+  opacity: 0.7;
+}
+
+/* Navigation arrows */
+.popup-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 48px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10000;
+  padding: 0 10px;
+  transition: opacity 0.2s ease;
+}
+#popup-prev {
+  right: calc(100vw / 2 - 100px);
+}
+#popup-next {
+  left: calc(100vw / 2 - 100px);
+}
+.popup-nav:hover {
+  opacity: 0.7;
+}
+
+.popup-nav:focus,
+.popup-nav:active,
+#popup-close:focus,
+#popup-close:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.popup-nav,
+#popup-close {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.popup-nav:focus:not(:focus-visible),
+#popup-close:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Pagination / Counter */
+#popup-pagination {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+/* Fade-in effect for popup */
+#popup-overlay.show {
+  display: flex;
+  animation: popupFade 0.25s ease forwards;
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  #popup-content img,
+  #popup-content iframe {
+    max-height: 80vh;
+  }
+  .popup-nav {
+    font-size: 32px;
+  }
+}

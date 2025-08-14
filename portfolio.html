@@ -31,6 +31,7 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/popups.css" />
   </head>
 
   <body>
@@ -129,58 +130,31 @@
             </div>
 
             <div class="box-items portfolio-items">
-              <!-- Gallery Item 1 -->
+              <!-- Gallery Item -->
               <div class="box-item f-gallery">
                 <div class="image">
-                  <a
-                    href="#gallery--works-amore-mio-three-cups"
-                    class="has-popup-gallery"
-                  >
-                    <img
-                      src="assets/img/works/work1.jpg"
-                      alt="Amore Mio Three Cups"
-                    />
+                  <a href="#gallery--works-myproject" class="has-popup-gallery">
+                    <img src="assets/img/works/work1.jpg" alt="My Project" />
+                    <!-- work1-thumb.jpg -->
                     <span class="info">
-                      <i class="ri-image-line"></i>
+                      <i class="ri-multi-image-line"></i>
                     </span>
                   </a>
                 </div>
                 <div class="desc">
                   <div class="category">Gallery</div>
-                  <a href="#gallery-1" class="name has-popup-gallery"
-                    >Amore Mio Three Cups</a
-                  >
-                </div>
-              </div>
-
-              <!-- Gallery Item 2 -->
-              <div class="box-item f-gallery">
-                <div class="image">
                   <a
-                    href="#gallery--works-canvas-tote-bag-mockup"
-                    class="has-popup-gallery"
-                  >
-                    <img
-                      src="assets/img/works/work2.jpg"
-                      alt="Canvas Tote Bag MockUp"
-                    />
-                    <span class="info">
-                      <i class="ri-image-line"></i>
-                    </span>
-                  </a>
-                </div>
-                <div class="desc">
-                  <div class="category">Gallery</div>
-                  <a href="#gallery-1" class="name has-popup-gallery"
-                    >Canvas Tote Bag MockUp</a
+                    href="#gallery--works-myproject"
+                    class="name has-popup-gallery"
+                    >My Project</a
                   >
                 </div>
               </div>
 
-              <!-- Content Item 1 -->
+              <!-- Content Item -->
               <div class="box-item f-content">
                 <div class="image">
-                  <a href="#popup--works-cardboard-box" class="has-popup-media">
+                  <a href="#content--cardboard-box" class="has-popup-content">
                     <img src="assets/img/works/work3.jpg" alt="Cardboard Box" />
                     <span class="info">
                       <i class="ri-add-line"></i>
@@ -272,71 +246,25 @@
                 </div>
               </div>
 
-              <!-- Image Item 1 -->
+              <!-- Image Item -->
               <div class="box-item f-image">
                 <div class="image">
-                  <a href="#image-popup" class="has-popup-image">
+                  <a href="assets/img/works/work7.jpg" class="has-popup-image">
                     <img
                       src="assets/img/works/work7.jpg"
                       alt="Minimal Poster Frame"
                     />
-                    <span class="info">
-                      <i class="ri-image-line"></i>
-                    </span>
+                    <span class="info"><i class="ri-image-line"></i></span>
                   </a>
                 </div>
                 <div class="desc">
                   <div class="category">Image</div>
-                  <a href="#image-popup" class="name has-popup-image"
-                    >Minimal Poster Frame</a
-                  >
-                </div>
-              </div>
-
-              <!-- Image Item 2 -->
-              <div class="box-item f-image">
-                <div class="image">
-                  <a href="#image-popup-2" class="has-popup-image">
-                    <img
-                      src="assets/img/works/work8.jpg"
-                      alt="Shopping Gift Bag"
-                    />
-                    <span class="info">
-                      <i class="ri-image-line"></i>
-                    </span>
-                  </a>
-                </div>
-                <div class="desc">
-                  <div class="category">Image</div>
-                  <a href="#image-popup-2" class="name has-popup-image"
-                    >Shopping Gift Bag</a
-                  >
-                </div>
-              </div>
-
-              <!-- Content Item 2 -->
-              <div class="box-item f-content">
-                <div class="image">
                   <a
-                    href="#popup--works-social-website"
-                    class="has-popup-media"
+                    href="assets/img/works/work7.jpg"
+                    class="name has-popup-image"
                   >
-                    <img
-                      src="assets/img/works/work9.jpg"
-                      alt="Social Website"
-                    />
-                    <span class="info">
-                      <i class="ri-add-line"></i>
-                    </span>
+                    Minimal Poster Frame
                   </a>
-                </div>
-                <div class="desc">
-                  <div class="category">Content</div>
-                  <a
-                    href="#popup--works-social-website"
-                    class="name has-popup-media"
-                    >Social Website</a
-                  >
                 </div>
               </div>
             </div>
@@ -358,6 +286,83 @@
 
     <!-- Sidebar placeholder -->
     <div id="sidebar-container"></div>
+
+    <!-- Popups -->
+    <div id="popup-overlay" style="display: none">
+      <div id="popup-content"></div>
+      <button id="popup-close" title="Close">&times;</button>
+      <button id="popup-prev" class="popup-nav">&#10094;</button>
+      <button id="popup-next" class="popup-nav">&#10095;</button>
+      <div id="popup-pagination"></div>
+    </div>
+
+    <!-- Gallery -->
+    <div
+      id="gallery--works-myproject"
+      class="popup-gallery-source"
+      style="display: none"
+    >
+      <a href="assets/img/works/work1.jpg" title="First shot description"></a>
+      <!-- work1-full.jpg -->
+      <a href="assets/img/works/work2.jpg" title="Second shot description"></a>
+      <!-- work2-full.jpg -->
+      <a href="assets/img/works/work3.jpg" title="Third shot description"></a>
+      <!-- work3-full.jpg -->
+    </div>
+
+    <!-- Content -->
+    <div id="content--cardboard-box" style="display: none">
+      <div class="popup-box">
+        <div class="image">
+          <img src="/assets/img/works/work3.jpg" alt="Cardboard Box" />
+        </div>
+        <div class="desc">
+          <div class="category">Content</div>
+          <h4>Cardboard Box</h4>
+          <div class="single-post-text">
+            <p>
+              So striking at of to welcomed resolved. Northward by described up
+              household therefore attention. Excellence decisively nay man yet
+              impression for contrasted remarkably.
+            </p>
+            <p>
+              Forfeited you engrossed but gay sometimes explained. Another as
+              studied it to evident. Merry sense given he be arise. Conduct at
+              an replied removal an amongst. Remaining determine few her two
+              cordially admitting old.
+            </p>
+            <p>
+              ^Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+              posuere cubilia Curae; Pellentesque suscipit.
+            </p>
+            <p>
+              Tiled say decay spoil now walls meant house. My mr interest
+              thoughts screened of outweigh removing. Evening society musical
+              besides inhabit ye my. Lose hill well up will he over on.
+              Increasing sufficient everything men him admiration unpleasing.
+            </p>
+            <ul>
+              <li>Greatest properly off ham exercise all.</li>
+              <li>Unsatiable invitation its possession nor off.</li>
+              <li>
+                All difficulty estimating unreserved increasing the solicitude.
+              </li>
+            </ul>
+            <p>
+              Unpleasant astonished an diminution up partiality. Noisy an their
+              of meant. Death means up civil do an offer wound of.
+            </p>
+          </div>
+          <a
+            href="https://bslthemes.com/"
+            target="_blank"
+            class="btn"
+            data-text="View Project"
+            >View Project</a
+          >
+        </div>
+      </div>
+    </div>
 
     <!-- Load Components -->
     <script src="assets/js/menu.js"></script>
