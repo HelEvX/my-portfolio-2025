@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
   loadComponent("#header-container", "../components/header.html", () => {
     // Only run after header is in DOM
     initializeAllMenu();
+    // Re-run to bind glitch effect to Contact button now present in the DOM
+    initializeButtonHoverEffects();
   });
 
   // -------------------------------
@@ -53,18 +55,27 @@ document.addEventListener("DOMContentLoaded", function () {
   const body = document.body;
 
   if (preloader) {
-    // Simulate loading time
-    setTimeout(() => {
-      preloader.classList.add("hide");
-      body.classList.add("loaded");
+    const MAX_WAIT = 10000; // 10 seconds fallback
 
-      // Remove preloader from DOM after transition
-      setTimeout(() => {
-        if (preloader.parentNode) {
-          preloader.remove();
-        }
-      }, 600);
-    }, 2000);
+    function hidePreloader() {
+      if (!preloader.classList.contains("hide")) {
+        preloader.classList.add("hide");
+        body.classList.add("loaded");
+
+        // Remove preloader from DOM after transition
+        setTimeout(() => {
+          if (preloader.parentNode) {
+            preloader.remove();
+          }
+        }, 600); // match your CSS transition duration
+      }
+    }
+
+    // Hide normally when everything is loaded
+    window.addEventListener("load", hidePreloader);
+
+    // ⬅ NEW fallback right here
+    setTimeout(hidePreloader, MAX_WAIT);
   }
 
   // -------------------------------
@@ -584,4 +595,5 @@ function initializeAllMenu() {
   initializeScrollMouseButton();
   initializeSearch();
   initializeWidgetTitles();
+  initializeButtonHoverEffects();
 }

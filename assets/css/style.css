@@ -275,8 +275,8 @@ header {
 }
 
 .menu-btn span,
-.menu-btn:before,
-.menu-btn:after {
+.menu-btn::before,
+.menu-btn::after {
   content: "";
   position: absolute;
   left: 0;
@@ -286,7 +286,7 @@ header {
   transition: var(--transition-fast);
 }
 
-.menu-btn:before {
+.menu-btn::before {
   top: 0;
 }
 
@@ -295,13 +295,13 @@ header {
   margin-top: -1px;
 }
 
-.menu-btn:after {
+.menu-btn::after {
   bottom: 0;
 }
 
 .menu-btn:hover span,
-.menu-btn:hover:before,
-.menu-btn:hover:after {
+.menu-btn:hover::before,
+.menu-btn:hover::after {
   background: var(--color-primary);
 }
 
@@ -311,12 +311,12 @@ header.active {
   visibility: visible !important;
 }
 
-header.active .menu-btn:before {
+header.active .menu-btn::before {
   opacity: 0;
   transform: translateY(9px);
 }
 
-header.active .menu-btn:after {
+header.active .menu-btn::after {
   transform: translateY(-9px) rotate(-45deg);
 }
 
@@ -424,7 +424,7 @@ a.btn,
   color: var(--color-text);
   font-size: 13px;
   background: none;
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   position: relative;
   overflow: hidden;
   padding: 0 30px;
@@ -454,14 +454,14 @@ a.btn.fill,
 .btn.fill {
   color: var(--color-white);
   background: var(--color-primary);
-  border: 1px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 a.btn:hover,
 .btn:hover {
   color: var(--color-white);
   background: var(--color-primary);
-  border: 1px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 /* Overlay */
@@ -517,8 +517,8 @@ a.btn:hover,
   -o-transition: var(--transition-fast);
 }
 
-.sidebar_btn span:before,
-.sidebar_btn span:after {
+.sidebar_btn span::before,
+.sidebar_btn span::after {
   content: "";
   position: absolute;
   left: 0;
@@ -532,14 +532,14 @@ a.btn:hover,
   -o-transition: var(--transition-fast);
 }
 
-.sidebar_btn span:after {
+.sidebar_btn span::after {
   top: auto;
   bottom: -8px;
 }
 
 .sidebar_btn:hover span,
-.sidebar_btn:hover span:before,
-.sidebar_btn:hover span:after {
+.sidebar_btn:hover span::before,
+.sidebar_btn:hover span::after {
   background: var(--color-primary);
 }
 
@@ -755,8 +755,8 @@ a.btn:hover,
   cursor: pointer;
 }
 
-.content-sidebar .close:before,
-.content-sidebar .close:after {
+.content-sidebar .close::before,
+.content-sidebar .close::after {
   content: "";
   margin: 0 0 0 -10px;
   position: absolute;
@@ -768,7 +768,7 @@ a.btn:hover,
   transform: rotate(45deg);
 }
 
-.content-sidebar .close:after {
+.content-sidebar .close::after {
   transform: rotate(-45deg);
 }
 
@@ -848,8 +848,8 @@ a.btn:hover,
 
   .sidebar_btn,
   .sidebar_btn span,
-  .sidebar_btn span:before,
-  .sidebar_btn span:after {
+  .sidebar_btn span::before,
+  .sidebar_btn span::after {
     transition: all 0s ease 0s;
     -moz-transition: all 0s ease 0s;
     -webkit-transition: all 0s ease 0s;
@@ -935,7 +935,8 @@ a.btn:hover,
 
 /* Homepage - section fills container height */
 body.homepage .section.started {
-  height: 100vh;
+  height: calc(100vh - var(--footer-height) / 2);
+  /* height: 100vh; */
 }
 
 /* Non-homepage - section fills viewport height */
@@ -1021,10 +1022,10 @@ body:not(.homepage) .section.started {
   position: relative;
 }
 
-.glitch-effect:before,
-.glitch-effect:after,
-.glitch-effect-white:before,
-.glitch-effect-white:after {
+.glitch-effect::before,
+.glitch-effect::after,
+.glitch-effect-white::before,
+.glitch-effect-white::after {
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -1034,20 +1035,20 @@ body:not(.homepage) .section.started {
   clip: rect(0, 0, 0, 0);
 }
 
-.glitch-effect-white:before,
-.glitch-effect-white:after {
+.glitch-effect-white::before,
+.glitch-effect-white::after {
   background: var(--color-primary);
 }
 
-.glitch-effect:after,
-.glitch-effect-white:after {
+.glitch-effect::after,
+.glitch-effect-white::after {
   left: 2px;
   text-shadow: -1px 0 var(--color-primary);
   animation: glitch-1 2s infinite linear alternate-reverse;
 }
 
-.glitch-effect:before,
-.glitch-effect-white:before {
+.glitch-effect::before,
+.glitch-effect-white::before {
   left: -2px;
   text-shadow: 2px 0 var(--color-primary);
   animation: glitch-2 2s infinite linear alternate-reverse;
@@ -1342,7 +1343,7 @@ body:not(.homepage) .section.started {
 
 /* Description */
 .box-item .desc {
-  padding: 15px 45px 5px 45px;
+  padding: 15px 25px 5px 25px;
 }
 
 @media (max-width: 1000px) {

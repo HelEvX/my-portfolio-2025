@@ -14,7 +14,6 @@
 /* Inner popup content box */
 #popup-content {
   max-width: 90%;
-  max-height: 90%;
   position: relative;
   background: transparent; /* images/videos fill it fully */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -111,13 +110,75 @@
 }
 
 /* Text / Content popup style */
+.popup-box .desc {
+  padding: 30px 20px;
+}
+
 #popup-content .popup-box {
+  margin: 30px auto;
+  max-width: 680px;
   background: #fff;
-  color: #333;
-  padding: 20px;
+  position: relative;
+  padding: 10px;
   border-radius: 4px;
-  max-height: 90vh;
-  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  color: var(--color-text);
+}
+
+/* Content popup image */
+.popup-box .image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px 4px 0 0;
+}
+
+.popup-box .category {
+  display: inline-block;
+  font-size: 11px;
+  color: rgb(54, 54, 54);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: rgb(237, 229, 116) 0px -6px 0px inset;
+  margin: 0px 0px 10px;
+}
+
+.popup-box .desc h4 {
+  display: block;
+  color: rgb(54, 54, 54);
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: normal;
+  margin: 0px 0px 15px;
+}
+
+.popup-box .desc p {
+  margin-top: 15px;
+}
+
+.single-post-text ul {
+  list-style: none;
+}
+
+.single-post-text ul li,
+.single-post-text ol li {
+  position: relative;
+  margin: 5px 0px;
+  padding: 0px 0px 0px 18px;
+}
+
+.single-post-text ul li::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  margin: 0px;
+  background: rgb(242, 107, 56);
+  border-radius: 4px;
 }
 
 /* Close button */
@@ -134,6 +195,46 @@
   transition: opacity 0.2s ease;
 }
 #popup-close:hover {
+  opacity: 0.7;
+}
+
+/* Hide the overlay close button in content mode */
+.popup-content-open > #popup-close {
+  display: none;
+}
+
+/* Scroll behaviour for content popups */
+#popup-overlay.popup-content-open {
+  align-items: flex-start;
+  overflow-y: auto;
+  padding: 0;
+}
+
+/* Let box grow freely inside the scrollable overlay */
+#popup-overlay.popup-content-open .popup-box {
+  max-height: none;
+  overflow: visible;
+  position: relative;
+}
+
+/* Inner close button in content popups */
+.popup-close-inner {
+  position: absolute;
+  width: 60px;
+  top: 8px;
+  right: 8px;
+  font-size: 28px;
+  color: #333;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  line-height: 1;
+  padding: 0;
+  border-radius: 2px; /* optional to match style */
+  transition: opacity 0.2s ease;
+}
+.popup-close-inner:hover {
   opacity: 0.7;
 }
 

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      name="description"
+      content="Heleen Evers - Digital Designer Portfolio"
+    />
+    <title>Heleen Evers | Contact</title>
+
+    <!-- Adobe Fonts - Replace with kit ID -->
+    <link rel="stylesheet" href="https://use.typekit.net/gce1qdi.css" />
+
+    <!-- Fallback Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Remix Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/resume.css" />
+  </head>
+
+  <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+      <div class="centralize full-width">
+        <div class="vertical-center">
+          <div class="pre-inner">
+            <span class="typed-load">loading...</span
+            ><span class="typed-cursor">|</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+      <!-- Header -->
+      <div id="header-container"></div>
+
+      <!-- Wrapper -->
+      <div class="wrapper">
+        <!-- Started Section -->
+        <div class="section started">
+          <div class="started-content">
+            <div class="h-title glitch-effect" data-text="CONTACT">CONTACT</div>
+            <div class="h-subtitle typing-bread">
+              <p>
+                <a href="index.html">Home</a> /
+                <a href="contact.html">Contact</a>
+              </p>
+            </div>
+          </div>
+          <a href="#" class="mouse_btn"
+            ><i class="ri-mouse-line moving-mouse"></i
+          ></a>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="section contacts">
+          <div class="content">
+            <div class="title">
+              <div class="title_inner">Get in Touch</div>
+            </div>
+
+            <div class="service-items">
+              <div class="service-item">
+                <div class="icon">
+                  <i class="ri-smartphone-line"></i>
+                </div>
+                <div>
+                  <div class="name">Phone</div>
+                  <p>+32 (0)473 09 21</p>
+                </div>
+              </div>
+
+              <div class="service-item">
+                <div class="icon">
+                  <i class="ri-mail-line"></i>
+                </div>
+                <div>
+                  <div class="name">Email</div>
+                  <p>
+                    <a href="mailto:heleen.evers@gmail.com"
+                      >heleen.evers@gmail.com</a
+                    >
+                  </p>
+                </div>
+              </div>
+
+              <div class="service-item">
+                <div class="icon">
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <div>
+                  <div class="name">Address</div>
+                  <div>
+                    <p>Zavelvennestraat 87</p>
+                    <p>3500 Hasselt</p>
+                    <p>(Belgium)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="section contacts">
+          <div class="content">
+            <div class="title">
+              <div class="title_inner">Contact Form</div>
+            </div>
+
+            <div class="contact_form">
+              <form
+                id="cform"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify
+                novalidate="novalidate"
+                netlify-honeypot="bot-field"
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <!-- Honeypot field for spam bots -->
+                <p style="display: none">
+                  <label
+                    >Don’t fill this out if you're human:
+                    <input name="bot-field"
+                  /></label>
+                </p>
+
+                <div class="group-val">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    id="name"
+                  />
+                </div>
+                <div class="group-val">
+                  <input
+                    type="text"
+                    name="email"
+                    placeholder="Email Address"
+                    id="email"
+                  />
+                </div>
+                <div class="group-val ct-gr">
+                  <textarea
+                    name="message"
+                    placeholder="Your Message"
+                    id="message"
+                  ></textarea>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn fill" data-text="Send Message">
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div id="footer-container"></div>
+
+      <!-- Border Lines -->
+      <div class="line top"></div>
+      <div class="line bottom"></div>
+      <div class="line left"></div>
+      <div class="line right"></div>
+    </div>
+
+    <!-- Sidebar placeholder -->
+    <div id="sidebar-container"></div>
+
+    <!-- Load Components -->
+    <script src="assets/js/menu.js"></script>
+
+    <!-- Main JavaScript Files -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/typewriter.js"></script>
+  </body>
+</html>

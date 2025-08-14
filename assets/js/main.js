@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     contentBox.innerHTML = "";
     galleryItems = [];
     currentIndex = 0;
+    overlay.classList.remove("popup-video-open", "popup-content-open");
   }
 
   // Helper to update pagination text
@@ -201,9 +202,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const contentContainer = document.querySelector(contentId);
 
       if (contentContainer) {
-        openPopup(contentContainer.innerHTML); // inject the hidden HTML
-      } else {
-        console.warn("Content container not found for", contentId);
+        openPopup(contentContainer.innerHTML);
+        document
+          .querySelector("#popup-overlay")
+          .classList.add("popup-content-open");
+
+        // Re-run glitch effect on all .btn buttons inside popup
+        initializeButtonHoverEffects();
+
+        // Then bind close listener to inner close button
+        const innerCloseBtn = document.querySelector(
+          "#popup-content .popup-box .popup-close-inner"
+        );
+        if (innerCloseBtn) {
+          innerCloseBtn.addEventListener("click", closePopup);
+        }
       }
       return;
     }

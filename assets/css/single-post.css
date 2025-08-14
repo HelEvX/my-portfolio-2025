@@ -319,7 +319,7 @@ p iframe {
   font-size: 13px;
   line-height: 23px;
 }
-.single-post-text:after {
+.single-post-text::after {
   content: "";
   position: relative;
   clear: both;
@@ -370,7 +370,7 @@ p iframe {
 .single-post-text ul {
   list-style: none;
 }
-.single-post-text ul li:before {
+.single-post-text ul li::before {
   margin: 0;
   content: "";
   position: absolute;
@@ -445,7 +445,7 @@ p iframe {
   color: #999;
   text-align: center;
 }
-.post-navigation:after {
+.post-navigation::after {
   content: "";
   display: block;
   clear: both;
@@ -467,8 +467,8 @@ p iframe {
 .post-navigation a:hover {
   opacity: 1;
 }
-.post-navigation a:before,
-.post-navigation a:after {
+.post-navigation a::before,
+.post-navigation a::after {
   margin-top: -10px;
   position: absolute;
   content: "";
@@ -485,17 +485,17 @@ p iframe {
   float: left;
   padding-left: 34px;
 }
-.post-navigation .nav-previous a:after {
+.post-navigation .nav-previous a::after {
   display: none;
 }
 .post-navigation .nav-next a {
   float: right;
   padding-right: 34px;
 }
-.post-navigation .nav-next a:before {
+.post-navigation .nav-next a::before {
   display: none;
 }
-.post-navigation .nav-next a:after {
+.post-navigation .nav-next a::after {
   left: auto;
   right: 0;
   -webkit-transform: scaleX(1);
