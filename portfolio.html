@@ -36,14 +36,12 @@
 
   <body>
     <!-- Preloader -->
-    <div class="preloader" id="preloader">
-      <div class="centralize full-width">
-        <div class="vertical-center">
-          <div class="pre-inner">
-            <span class="typed-load">loading...</span
-            ><span class="typed-cursor">|</span>
-          </div>
+    <div id="preloader" class="preloader">
+      <div class="pre-inner">
+        <div class="load typing-load" style="display: none">
+          <p>loading...</p>
         </div>
+        <span class="typed-load"></span>
       </div>
     </div>
 
@@ -60,12 +58,17 @@
             <div class="h-title glitch-effect" data-text="PORTFOLIO">
               PORTFOLIO
             </div>
-            <div class="h-subtitle typing-bread">
+
+            <!-- Hidden source text for typing -->
+            <div class="h-subtitle typing-bread" style="display: none">
               <p>
                 <a href="index.html">Home</a> /
-                <a href="portfolio.html">Portfolio</a>
+                <strong><a href="portfolio.html">Portfolio</a></strong>
               </p>
             </div>
+
+            <!-- Visible target for typewriter effect -->
+            <span class="typed-bread"></span>
           </div>
           <a href="#" class="mouse_btn"
             ><i class="ri-mouse-line moving-mouse"></i
@@ -370,8 +373,11 @@
     <!-- Load Components -->
     <script src="assets/js/menu.js"></script>
 
+    <!-- Typed Scripts -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="assets/js/typewriter.js"></script>
+
     <!-- Main JavaScript Files -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/typewriter.js"></script>
   </body>
 </html>

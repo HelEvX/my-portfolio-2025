@@ -1,10 +1,6 @@
-// Menu functionality, page loading effects, and dynamic content loading
-
 document.addEventListener("DOMContentLoaded", function () {
-  /**
-   * Utility function to load an HTML component into a target element
-   * and then run a callback after it's loaded.
-   */
+  // Utility function to load an HTML component into a target element
+  // and then run a callback after it's loaded.
   function loadComponent(targetSelector, componentPath, callback) {
     const target = document.querySelector(targetSelector);
     if (!target) return;
@@ -27,20 +23,21 @@ document.addEventListener("DOMContentLoaded", function () {
   // Load Header
   // -------------------------------
   loadComponent("#header-container", "../components/header.html", () => {
-    // Only run after header is in DOM
-    initializeAllMenu();
-    // Re-run to bind glitch effect to Contact button now present in the DOM
-    initializeButtonHoverEffects();
+    if (typeof initializeAllMenu === "function") initializeAllMenu();
+    if (typeof initializeButtonHoverEffects === "function")
+      initializeButtonHoverEffects();
+
+    // Call the active menu highlighter here
+    if (typeof setActiveMenuItem === "function") setActiveMenuItem();
   });
 
   // -------------------------------
   // Load Sidebar
   // -------------------------------
   loadComponent("#sidebar-container", "../components/sidebar.html", () => {
-    // Only run after sidebar is in DOM
-    initializeSidebar();
-    initializeSearch();
-    populateSidebar();
+    if (typeof initializeSidebar === "function") initializeSidebar();
+    if (typeof initializeSearch === "function") initializeSearch();
+    if (typeof populateSidebar === "function") populateSidebar();
   });
 
   // -------------------------------
@@ -49,33 +46,38 @@ document.addEventListener("DOMContentLoaded", function () {
   loadComponent("#footer-container", "../components/footer.html");
 
   // -------------------------------
-  // Preloader functionality
+  // Preloader functionality (no custom typing)
   // -------------------------------
   const preloader = document.getElementById("preloader");
   const body = document.body;
 
   if (preloader) {
-    const MAX_WAIT = 10000; // 10 seconds fallback
+    const MAX_WAIT = 10000; // fallback 10s
 
     function hidePreloader() {
-      if (!preloader.classList.contains("hide")) {
-        preloader.classList.add("hide");
-        body.classList.add("loaded");
+      preloader.classList.add("hide");
+      body.classList.add("loaded");
 
-        // Remove preloader from DOM after transition
-        setTimeout(() => {
-          if (preloader.parentNode) {
-            preloader.remove();
-          }
-        }, 600); // match your CSS transition duration
-      }
+      setTimeout(() => {
+        if (preloader.parentNode) {
+          preloader.remove();
+        }
+        if (typeof startTypedAnimations === "function") {
+          startTypedAnimations();
+        }
+      }, 600); // match CSS transition duration
     }
 
-    // Hide normally when everything is loaded
-    window.addEventListener("load", hidePreloader);
+    function startFlow() {
+      hidePreloader();
+    }
 
-    // ⬅ NEW fallback right here
-    setTimeout(hidePreloader, MAX_WAIT);
+    if (document.readyState === "complete") {
+      startFlow();
+    } else {
+      window.addEventListener("load", startFlow);
+      setTimeout(startFlow, MAX_WAIT);
+    }
   }
 
   // -------------------------------
@@ -146,6 +148,14 @@ function initializeMobileMenu() {
   const menuBtn = document.querySelector(".menu-btn");
   const topMenu = document.querySelector(".top-menu");
   const header = document.querySelector("header");
+  const body = document.body;
+
+  // Elements to hide/show dynamically
+  const elementsToToggle = [
+    document.querySelector("header"),
+    document.querySelector("footer"),
+    ...document.querySelectorAll(".section"),
+  ].filter((el) => el !== null);
 
   if (menuBtn && topMenu) {
     menuBtn.addEventListener("click", function (e) {
@@ -155,15 +165,29 @@ function initializeMobileMenu() {
       const isActive = header.classList.contains("active");
 
       if (isActive) {
+        // Close menu: remove classes
         header.classList.remove("active");
         topMenu.classList.remove("active");
         menuBtn.classList.remove("active");
         document.body.classList.remove("menu-open");
+
+        // Restore visibility of elements
+        elementsToToggle.forEach((el) => {
+          el.style.opacity = "";
+          el.style.visibility = "";
+        });
       } else {
+        // Open menu: add classes
         header.classList.add("active");
         topMenu.classList.add("active");
         menuBtn.classList.add("active");
         document.body.classList.add("menu-open");
+
+        // Hide elements with desired styles
+        elementsToToggle.forEach((el) => {
+          el.style.opacity = "0";
+          el.style.visibility = "hidden";
+        });
       }
     });
 
@@ -175,34 +199,65 @@ function initializeMobileMenu() {
         topMenu.classList.remove("active");
         menuBtn.classList.remove("active");
         document.body.classList.remove("menu-open");
+
+        // Restore visibility of elements
+        elementsToToggle.forEach((el) => {
+          el.style.opacity = "";
+          el.style.visibility = "";
+        });
       });
     });
   }
 }
 
+// Utility: normalize href for comparison by removing leading "../"
+function normalizePath(path) {
+  return path.replace(/^\/+/, "");
+}
+
 // Active menu item highlighting
 function setActiveMenuItem() {
+  const currentPath = window.location.pathname.replace(/^\/+/, "");
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const menuItems = document.querySelectorAll(".top-menu ul li");
 
   menuItems.forEach((item) => {
     const link = item.querySelector("a");
     if (link) {
-      const href = link.getAttribute("href");
+      const href = normalizePath(link.getAttribute("href"));
 
       // Remove active class from all items
       item.classList.remove("active");
 
-      // Add active class to current page
-      if (
-        href === currentPage ||
-        (currentPage === "" && href === "index.html") ||
-        (currentPage === "index.html" && href === "index.html")
-      ) {
+      // Exact filename match
+      if (href === currentPage) {
+        item.classList.add("active");
+        return; // done for this item
+      }
+
+      // For pages inside folders, highlight parent menu item by matching folder
+      if (href.replace(/\.html$/, "") === currentPath.split("/")[0]) {
         item.classList.add("active");
       }
     }
   });
+}
+
+// Define loadComponent globally
+function loadComponent(targetSelector, componentPath, callback) {
+  const target = document.querySelector(targetSelector);
+  if (!target) return;
+
+  fetch(componentPath)
+    .then((response) => {
+      if (!response.ok) throw new Error(`Failed to load ${componentPath}`);
+      return response.text();
+    })
+    .then((html) => {
+      target.innerHTML = html;
+      if (typeof callback === "function") callback();
+    })
+    .catch((error) => console.error(`Error loading ${componentPath}:`, error));
 }
 
 // Sidebar functionality

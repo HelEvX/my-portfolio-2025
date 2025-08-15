@@ -10,8 +10,8 @@ document.getElementById("cform").addEventListener("submit", function (event) {
     body: new URLSearchParams(data).toString(),
   })
     .then(() => {
-      alert("Thank you for your message! We will get back to you soon.");
-      form.reset();
+      document.querySelector(".contact_form").innerHTML =
+        '<div class="success-message"><h3>Thank you!</h3><p>Your message was sent successfully. We\'ll get back to you soon.</p></div>';
     })
     .catch((error) => alert("Submission failed: " + error.message));
 });

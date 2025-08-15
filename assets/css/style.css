@@ -132,19 +132,15 @@ body.loaded .section {
   font-family: var(--font-main);
 }
 
-.preloader .typed-cursor {
-  animation: blink 1s infinite;
+/* Typed subtitles */
+.h-subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes blink {
-  0%,
-  50% {
-    opacity: 1;
-  }
-  51%,
-  100% {
-    opacity: 0;
-  }
+.typed-subtitle {
+  white-space: nowrap;
 }
 
 /* Container and Layout */
@@ -1168,26 +1164,6 @@ body:not(.homepage) .section.started {
   }
 }
 
-/* Subtitle with typing effect */
-.h-subtitle {
-  font-size: 13px;
-}
-
-.typed-subtitle,
-.typed-cursor,
-.typed-bread {
-  font-size: 13px;
-}
-
-.typed-cursor {
-  animation: blink 1s infinite;
-}
-
-/* Breadcrumbs */
-.typing-bread p a:last-child {
-  font-weight: var(--font-weight-bold);
-}
-
 /* Filters */
 .section.works .filters {
   margin-bottom: 30px;
@@ -1614,7 +1590,7 @@ div p {
 }
 
 strong {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-semi-bold);
 }
 
 a {
