@@ -6,7 +6,7 @@
 let subtitleTyped = null; // persistent reference
 
 function startTypedAnimations() {
-  console.log("startTypedAnimations triggered at", performance.now());
+  //console.log("startTypedAnimations triggered at", performance.now());
 
   // Remove any leftover cursors
   document.querySelectorAll(".typed-cursor").forEach((el) => el.remove());
@@ -21,7 +21,7 @@ function startTypedAnimations() {
 
   // Kill any existing instance before starting new
   if (subtitleTyped) {
-    console.log("Destroying old subtitle Typed instance...");
+    //console.log("Destroying old subtitle Typed instance...");
     subtitleTyped.destroy();
     subtitleTyped = null;
   }
@@ -42,19 +42,19 @@ function startTypedAnimations() {
       autoInsertCss: true,
 
       // Debug logging
-      preStringTyped: (pos, self) => {
-        if (!self._instanceId) {
-          self._instanceId = Math.random().toString(36).slice(2, 7);
-        }
-        console.log(
-          `Instance ${self._instanceId}: About to type string index: ${pos} / total: ${self.strings.length}`
-        );
-      },
-      onStringTyped: (pos, self) => {
-        console.log(
-          `Instance ${self._instanceId}: Finished typing string index: ${pos}`
-        );
-      },
+      // preStringTyped: (pos, self) => {
+      //   if (!self._instanceId) {
+      //     self._instanceId = Math.random().toString(36).slice(2, 7);
+      //   }
+      //   console.log(
+      //     `Instance ${self._instanceId}: About to type string index: ${pos} / total: ${self.strings.length}`
+      //   );
+      // },
+      // onStringTyped: (pos, self) => {
+      //   console.log(
+      //     `Instance ${self._instanceId}: Finished typing string index: ${pos}`
+      //   );
+      // },
     });
   }
 

@@ -48,15 +48,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show nav if gallery
     if (gallery) {
       pagination.style.display = "block";
-      prevBtn.style.display = "block";
-      nextBtn.style.display = "block";
+      if (prevBtn) prevBtn.style.display = "block";
+      if (nextBtn) nextBtn.style.display = "block";
       updatePagination();
     } else {
       pagination.style.display = "none";
-      prevBtn.style.display = "none";
-      nextBtn.style.display = "none";
+      if (prevBtn) prevBtn.style.display = "none";
+      if (nextBtn) nextBtn.style.display = "none";
     }
-
     overlay.style.display = "flex";
     document.body.style.overflow = "hidden";
   }
@@ -76,25 +75,34 @@ document.addEventListener("DOMContentLoaded", () => {
     pagination.textContent = `${currentIndex + 1} of ${galleryItems.length}`;
   }
 
-  // Gallery navigation
-  prevBtn.addEventListener("click", () => {
-    currentIndex =
-      (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-    const imgSrc = galleryItems[currentIndex].href;
-    openPopup(`<img src="${imgSrc}" alt="">`, { gallery: true });
-  });
+  // Add event listeners ONLY if element exists
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      currentIndex =
+        (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+      const imgSrc = galleryItems[currentIndex].href;
+      openPopup(`<img src="${imgSrc}" alt="">`, { gallery: true });
+    });
+  }
 
-  nextBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % galleryItems.length;
-    const imgSrc = galleryItems[currentIndex].href;
-    openPopup(`<img src="${imgSrc}" alt="">`, { gallery: true });
-  });
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % galleryItems.length;
+      const imgSrc = galleryItems[currentIndex].href;
+      openPopup(`<img src="${imgSrc}" alt="">`, { gallery: true });
+    });
+  }
 
-  // Close events
-  closeBtn.addEventListener("click", closePopup);
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) closePopup();
-  });
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closePopup);
+  }
+
+  if (overlay) {
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closePopup();
+    });
+  }
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closePopup();
   });

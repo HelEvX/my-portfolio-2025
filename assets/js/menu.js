@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+  document.body.classList.add("loaded");
+
+  // Helper to safely attach event listeners
+  function safeAddEventListener(selector, event, handler) {
+    const el = document.querySelector(selector);
+    if (el) {
+      el.addEventListener(event, handler);
+    } else {
+      console.warn(`Element not found for selector: ${selector}`);
+    }
+  }
+
   // Utility function to load an HTML component into a target element
   // and then run a callback after it's loaded.
   function loadComponent(targetSelector, componentPath, callback) {
@@ -29,6 +41,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Call the active menu highlighter here
     if (typeof setActiveMenuItem === "function") setActiveMenuItem();
+
+    // Attach navigation event listeners AFTER header is loaded
+    safeAddEventListener("header .top-menu", "click", handleMenuLinkClick);
+    safeAddEventListener(".typed-bread", "click", handleMenuLinkClick);
   });
 
   // -------------------------------
@@ -84,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Smooth Fadeout Between Pages
   // -------------------------------
   function handleMenuLinkClick(event) {
+    console.log("Menu link clicked:", event.target);
     const link = event.target.closest("a");
     if (!link) return;
 
@@ -116,16 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = href;
       }, 500);
     }
-  }
-
-  const topMenu = document.querySelector("header .top-menu");
-  const typedBread = document.querySelector(".typed-bread");
-
-  if (topMenu) {
-    topMenu.addEventListener("click", handleMenuLinkClick);
-  }
-  if (typedBread) {
-    typedBread.addEventListener("click", handleMenuLinkClick);
   }
 
   // -------------------------------
@@ -188,6 +195,57 @@ document.addEventListener("DOMContentLoaded", function () {
   if (firstInput) {
     firstInput.checked = true;
     firstInput.dispatchEvent(new Event("change"));
+  }
+
+  // -------------------------------
+  // Search functionality event listeners with null checks
+  // -------------------------------
+  const searchInput = document.getElementById("search-input");
+  const resultsContainer = document.getElementById("results-container");
+  const searchForm = document.querySelector(".search-form");
+
+  if (searchInput && resultsContainer) {
+    resultsContainer.style.display = "none";
+
+    searchInput.addEventListener("input", function () {
+      clearTimeout(window.searchTimeout);
+      const query = this.value.trim().toLowerCase();
+
+      if (query.length < 2) {
+        resultsContainer.style.display = "none";
+        resultsContainer.innerHTML = "";
+        return;
+      }
+
+      window.searchTimeout = setTimeout(() => {
+        performSearch(query, resultsContainer, window.searchData || []);
+      }, 300);
+    });
+
+    searchInput.addEventListener("focus", function () {
+      if (resultsContainer.innerHTML.trim() !== "") {
+        resultsContainer.style.display = "block";
+      }
+    });
+
+    document.addEventListener("click", function (e) {
+      if (
+        !searchInput.contains(e.target) &&
+        !resultsContainer.contains(e.target)
+      ) {
+        resultsContainer.style.display = "none";
+      }
+    });
+  }
+
+  if (searchForm) {
+    searchForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const query = searchInput.value.trim();
+      if (query) {
+        window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+      }
+    });
   }
 });
 
@@ -473,7 +531,7 @@ function initializeSearch() {
     .then((response) => response.json())
     .then((data) => {
       searchData = data;
-      console.log("Search data loaded:", searchData.length + " items");
+      //console.log("Search data loaded:", searchData.length + " items");
     })
     .catch((error) => {
       console.warn(
@@ -607,7 +665,7 @@ function initializeScrollMouseButton() {
       return; // Exit early, no scroll listeners needed
     }
 
-    console.log("Mouse button found and initialized");
+    //console.log("Mouse button found and initialized");
 
     // Ensure initial visible state
     mouseBtn.style.display = "block";

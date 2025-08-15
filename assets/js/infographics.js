@@ -45,8 +45,8 @@ class SkillsInitializer {
     const dottedSkills = document.querySelectorAll(".skills.dotted");
     const skillItems = document.querySelectorAll(".skills.dotted li");
 
-    console.log("Found dotted skills containers:", dottedSkills.length);
-    console.log("Found skill items:", skillItems.length);
+    //console.log("Found dotted skills containers:", dottedSkills.length);
+    //console.log("Found skill items:", skillItems.length);
 
     // Add instruction text
     dottedSkills.forEach((container) => {
@@ -69,7 +69,7 @@ class SkillsInitializer {
     // Add tooltips to skill items
     skillItems.forEach((li, index) => {
       const percentage = parseInt(li.getAttribute("data-percentage"));
-      console.log(`Processing skill ${index}: ${percentage}%`);
+      //console.log(`Processing skill ${index}: ${percentage}%`);
 
       if (isNaN(percentage)) {
         console.warn("Invalid percentage for skill item:", li);
@@ -77,7 +77,7 @@ class SkillsInitializer {
       }
 
       const description = this.getSkillDescription(percentage);
-      console.log(`Description for ${percentage}%:`, description);
+      //console.log(`Description for ${percentage}%:`, description);
 
       // Create tooltip element
       if (!li.querySelector(".skill-tooltip")) {
@@ -107,7 +107,7 @@ class SkillsInitializer {
         li.style.position = "relative";
         li.appendChild(tooltip);
 
-        console.log("Tooltip added to skill item:", li);
+        //console.log("Tooltip added to skill item:", li);
       }
 
       const tooltip = li.querySelector(".skill-tooltip");
