@@ -1,14 +1,10 @@
 [
   {
-    "title": "My First Post",
-    "content": "Heleen Evers | Single Blog Post loading... | 05 July 2020 FIRST BLOG POST Home / Blog So striking at of to welcomed resolved. Northward by described up household therefore attention.",
-    "url": "/general/2025/08/13/first-post/",
-    "categories": [
-      "general"
-    ],
-    "tags": [
-      "introduction"
-    ],
-    "date": "2025-08-13"
+    "title": "Welcome to my blog",
+    "content": "Just a short about-me post",
+    "url": "/blog/2025/08/15/introduction/",
+    "categories": ["blog"],
+    "tags": ["introduction"],
+    "date": "2025-08-15"
   }
 ]

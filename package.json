@@ -1,0 +1,15 @@
+{
+  "name": "my-portfolio-2025",
+  "version": "1.0.0",
+  "main": "add-post.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "jsdom": "^26.1.0"
+  }
+}

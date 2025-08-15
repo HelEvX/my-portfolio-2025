@@ -6,6 +6,9 @@ const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
 const filePath = path.join(__dirname, "search.json");
 const blogFolder = path.join(__dirname, "posts"); // blog posts folder
 
@@ -123,11 +126,19 @@ function createPrettyUrl(category, filePath) {
 
       // Extract summary
       if (postFilePath.endsWith(".html")) {
-        content = stripHtml(raw);
+        const dom = new JSDOM(raw);
+        const summaryElem = dom.window.document.querySelector("#post-summary");
+        if (summaryElem) {
+          content = summaryElem.textContent.trim();
+        } else {
+          content = stripHtml(raw);
+          content = getFirstSentences(content, 3);
+        }
       } else if (postFilePath.endsWith(".md")) {
         content = stripMarkdown(raw);
+        content = getFirstSentences(content, 3);
       }
-      content = getFirstSentences(content, 3);
+
       console.log(`📄 Auto-generated summary: ${content}`);
 
       // Ask category if you want (simple approach)

@@ -218,7 +218,7 @@
 }
 
 /* Inner close button in content popups */
-.popup-close-inner {
+/* .popup-close-inner {
   position: absolute;
   width: 60px;
   top: 8px;
@@ -231,12 +231,13 @@
   z-index: 1000;
   line-height: 1;
   padding: 0;
-  border-radius: 2px; /* optional to match style */
+  border-radius: 2px; 
   transition: opacity 0.2s ease;
-}
-.popup-close-inner:hover {
+} */
+
+/* .popup-close-inner:hover {
   opacity: 0.7;
-}
+} */
 
 /* Navigation arrows */
 .popup-nav {

@@ -81,6 +81,54 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // -------------------------------
+  // Smooth Fadeout Between Pages
+  // -------------------------------
+  function handleMenuLinkClick(event) {
+    const link = event.target.closest("a");
+    if (!link) return;
+
+    const href = link.getAttribute("href");
+    if (!href) return;
+
+    if (href.indexOf("#section-") === 0) {
+      if (!document.body.classList.contains("home")) {
+        location.href = "/" + href;
+        event.preventDefault();
+        return;
+      }
+      const target = document.querySelector(href);
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - 110,
+          behavior: "smooth",
+        });
+        event.preventDefault();
+      }
+      const header = document.querySelector("header");
+      if (header && header.classList.contains("active")) {
+        const menuBtn = document.querySelector(".menu-btn");
+        if (menuBtn) menuBtn.click();
+      }
+    } else {
+      document.body.classList.remove("loaded"); // start fade-out animation
+      event.preventDefault();
+      setTimeout(function () {
+        window.location.href = href;
+      }, 500);
+    }
+  }
+
+  const topMenu = document.querySelector("header .top-menu");
+  const typedBread = document.querySelector(".typed-bread");
+
+  if (topMenu) {
+    topMenu.addEventListener("click", handleMenuLinkClick);
+  }
+  if (typedBread) {
+    typedBread.addEventListener("click", handleMenuLinkClick);
+  }
+
+  // -------------------------------
   // Filter functionality with two-phase fade-out/fade-in
   // -------------------------------
   const filterInputs = document.querySelectorAll(
