@@ -17,9 +17,9 @@
 
     <!-- Fallback Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;family=Geist:wght@100..900&amp;display=swap"
       rel="stylesheet"
     />
 
@@ -180,25 +180,22 @@
               </div>
             </div>
 
-            <nav class="navigation post-navigation">
+            <div class="post-navigation" id="post-navigation-placeholder">
               <div class="nav-links">
                 <div class="nav-previous">
-                  <a
-                    href="/design/2020/07/20/two-before-arrow/"
-                    title="Two Before Arrow Not Relied"
-                    ><span class="post-nav-next post-nav-text">Prev</span></a
-                  >
+                  <span class="disabled post-nav-prev post-nav-text">
+                    <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
+                    Prev
+                  </span>
                 </div>
-
                 <div class="nav-next">
-                  <a
-                    href="/video/music/2020/08/08/welcome-to-jekyll/"
-                    title="Welcome to Jekyll!"
-                    ><span class="post-nav-prev post-nav-text">Next</span></a
-                  >
+                  <span class="disabled post-nav-next post-nav-text">
+                    Next
+                    <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+                  </span>
                 </div>
               </div>
-            </nav>
+            </div>
 
             <div class="post-comments">
               <div class="title">
@@ -220,7 +217,7 @@
                   data-lang="en"
                   data-loading="lazy"
                   crossorigin="anonymous"
-                  async
+                  async=""
                 ></script>
               </div>
             </div>
