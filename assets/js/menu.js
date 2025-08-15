@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // -------------------------------
   // Load Header
   // -------------------------------
-  loadComponent("#header-container", "../components/header.html", () => {
+  loadComponent("#header-container", "/components/header.html", () => {
     if (typeof initializeAllMenu === "function") initializeAllMenu();
     if (typeof initializeButtonHoverEffects === "function")
       initializeButtonHoverEffects();
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // -------------------------------
   // Load Sidebar
   // -------------------------------
-  loadComponent("#sidebar-container", "../components/sidebar.html", () => {
+  loadComponent("#sidebar-container", "/components/sidebar.html", () => {
     if (typeof initializeSidebar === "function") initializeSidebar();
     if (typeof initializeSearch === "function") initializeSearch();
     if (typeof populateSidebar === "function") populateSidebar();
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // -------------------------------
   // Load Footer
   // -------------------------------
-  loadComponent("#footer-container", "../components/footer.html");
+  loadComponent("#footer-container", "/components/footer.html");
 
   // -------------------------------
   // Preloader functionality (no custom typing)
@@ -469,7 +469,7 @@ function initializeSearch() {
   let searchData = [];
 
   // Try to fetch search data
-  fetch("../search.json")
+  fetch("/search.json")
     .then((response) => response.json())
     .then((data) => {
       searchData = data;
@@ -507,7 +507,7 @@ function initializeSearch() {
       const query = searchInput.value.trim();
       if (query) {
         // Redirect to search page or perform search
-        window.location.href = `../search.html?q=${encodeURIComponent(query)}`;
+        window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
       }
     });
   }
