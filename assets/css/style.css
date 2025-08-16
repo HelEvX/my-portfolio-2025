@@ -1006,12 +1006,6 @@ body:not(.homepage) .section.started {
   position: relative;
 }
 
-.blog_title {
-  font-size: 50px;
-  font-weight: var(--font-weight-medium);
-  text-transform: none;
-}
-
 @media (max-width: 1060px) {
   .section.started .started-content .h-title.blog_title {
     font-size: 48px;
@@ -1393,7 +1387,7 @@ body:not(.homepage) .section.started {
   color: var(--color-text);
   font-size: 13px;
   font-weight: var(--font-weight-semi-bold);
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   transition: var(--transition-medium);
   text-decoration: none;
   line-height: 1.3;
