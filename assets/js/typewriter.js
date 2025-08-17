@@ -26,6 +26,7 @@ function startTypedAnimations() {
     subtitleTyped = null;
   }
 
+  // ---------- SUBTITLE ----------
   if (document.querySelector(".typed-subtitle")) {
     subtitleTyped = new Typed(".typed-subtitle", {
       strings: subtitleStrings,
