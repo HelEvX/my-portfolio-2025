@@ -917,7 +917,7 @@ a.btn:hover,
   margin-bottom: 40px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .section .content .title {
     text-align: center;
   }
@@ -967,7 +967,7 @@ body:not(.homepage) .section.started {
 }
 
 /* Mouse btn */
-.section.started .mouse_btn {
+.mouse_btn {
   font-size: 32px;
   color: var(--color-primary);
   text-align: center;
@@ -976,7 +976,7 @@ body:not(.homepage) .section.started {
   bottom: calc(100vh * 0.1);
 }
 
-.section.started .mouse_btn .moving-mouse {
+.mouse_btn .moving-mouse {
   position: relative;
   top: 0px;
   animation: mouse-anim 1s ease-out 0s infinite;
@@ -1006,6 +1006,12 @@ body:not(.homepage) .section.started {
   position: relative;
 }
 
+.blog_title {
+  font-size: 50px;
+  font-weight: var(--font-weight-medium);
+  text-transform: none;
+}
+
 @media (max-width: 1060px) {
   .section.started .started-content .h-title.blog_title {
     font-size: 48px;
@@ -1019,7 +1025,7 @@ body:not(.homepage) .section.started {
   .section.started .started-content .h-title.blog_title {
     font-size: 40px;
   }
-  .section.started .mouse_btn {
+  .mouse_btn {
     bottom: calc(100vh * 0.15);
   }
 }
@@ -1361,7 +1367,7 @@ body:not(.homepage) .section.started {
   padding: 15px 25px 5px 25px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1060px) {
   .box-item .desc {
     padding: 15px 15px 5px 15px;
   }

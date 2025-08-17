@@ -16,13 +16,38 @@
   max-width: 90%;
   position: relative;
   background: transparent; /* images/videos fill it fully */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
 }
 
-/* Remove default shadow for videos */
-.popup-video-open #popup-content {
-  box-shadow: none;
+#popup-content figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#popup-content figcaption {
+  margin-top: 0.5em;
+  max-width: 60%;
+  display: inline-block;
+  padding: 0 20px;
+  /* font-family: var(--font-sans); */
+  font-size: 15px;
+  font-weight: var(--font-weight-light);
+  color: var(--color-light-text);
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  #popup-content figcaption {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 840px) {
+  #popup-content figcaption {
+    max-width: 100%;
+  }
 }
 
 /* Outer container for video + link */
@@ -67,14 +92,22 @@
   background: #000;
 }
 
-/* Video-specific shadow */
-.popup-video-frame {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  background: #000;
-  border-radius: 4px;
+/* Soundcloud styling */
+.popup-music iframe {
+  border-radius: 12px;
+  width: 100%;
+  height: 600px;
+  max-width: 600px; /* Or whatever fits your layout */
+  font-size: 10px;
+  color: #cccccc;
+  line-break: anywhere;
+  word-break: normal;
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* shadow only for video area */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Interstate, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans",
+    Garuda, Verdana, Tahoma, sans-serif;
+  font-weight: 100;
 }
 
 /* "Watch on..." link */
@@ -101,12 +134,20 @@
 
 /* Images and iframes scale to fit */
 #popup-content img,
-#popup-content iframe {
+#popup-content iframe,
+.popup-video-frame {
   display: block;
   max-width: 100%;
   max-height: 90vh;
   border: none;
   border-radius: 4px;
+}
+
+/* Shadows */
+#popup-content iframe,
+.popup-video-frame,
+#popup-content figure img {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Text / Content popup style */
@@ -261,6 +302,15 @@
 }
 .popup-nav:hover {
   opacity: 0.7;
+}
+
+@media (max-width: 840px) {
+  #popup-prev {
+    right: calc(100vw / 2 - 20px);
+  }
+  #popup-next {
+    left: calc(100vw / 2 - 20px);
+  }
 }
 
 .popup-nav:focus,

@@ -32,10 +32,11 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/assets/css/single-post.css" />
+    <link rel="stylesheet" href="/assets/css/popups.css" />
     <link rel="stylesheet" href="/assets/css/syntax.css" />
   </head>
 
-  <body>
+  <body class="blogpage">
     <!-- Hidden Summary -->
     <div id="post-summary" style="display: none">
       This is the short summary of the post that you want for search and meta
@@ -60,7 +61,7 @@
       <!-- Wrapper -->
       <div class="wrapper">
         <!-- Started Section -->
-        <div class="section started blog-cover anxious-boardgame-cover">
+        <div class="section started blog-cover">
           <div class="started-content">
             <div class="date">15 August 2025</div>
             <div class="h-title blog_title" data-text="Blog Post Template">
@@ -74,14 +75,15 @@
                 <a href="blog.html">Blog</a>
               </p>
             </div>
-
             <!-- Visible target for typewriter effect -->
             <span class="typed-bread"></span>
           </div>
-          <a href="#" class="mouse_btn"
-            ><i class="ri-mouse-line moving-mouse"></i
-          ></a>
         </div>
+
+        <!-- Mouse Animation -->
+        <a href="#" class="mouse_btn"
+          ><i class="ri-mouse-line moving-mouse"></i
+        ></a>
 
         <!-- Blog Post Content -->
         <div class="section blog">
@@ -90,6 +92,8 @@
               <!-- Full project blog post template HTML here -->
               <section class="project-overview">
                 <h2>Project Overview</h2>
+
+                <!-- 2x Table with Info -->
                 <div class="table-responsive">
                   <table class="project-table">
                     <tr>
@@ -168,12 +172,78 @@
 
               <section class="design-evolution">
                 <h2>Design: From Sketch to Prototype</h2>
-                <p>
-                  <img
-                    src="/assets/img/blog/blog_1.jpg"
-                    alt="Early wireframe"
-                  />
-                </p>
+
+                <!-- Popup Modal -->
+                <div class="box-items portfolio-items">
+                  <!-- Gallery Item -->
+                  <div class="box-item f-gallery">
+                    <div class="image">
+                      <a
+                        href="#gallery--works-myproject"
+                        class="has-popup-gallery"
+                      >
+                        <img
+                          src="/assets/img/works/work1.jpg"
+                          alt="My Project"
+                        />
+                        <!-- work1-thumb.jpg -->
+                        <span class="info">
+                          <i class="ri-multi-image-line"></i>
+                        </span>
+                      </a>
+                    </div>
+                    <div class="caption">
+                      Gallery caption or short description goes here.
+                    </div>
+                  </div>
+                  <!-- Image Item -->
+                  <div class="box-item f-image">
+                    <div class="image">
+                      <a
+                        href="/assets/img/works/work7.jpg"
+                        class="has-popup-image"
+                      >
+                        <img
+                          src="/assets/img/works/work7.jpg"
+                          alt="Minimal Poster Frame"
+                        />
+                        <span class="info"><i class="ri-image-line"></i></span>
+                      </a>
+                    </div>
+                    <div class="caption">
+                      Image caption or short description goes here.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Inset image -->
+                <div class="inset-image-row">
+                  <fig>
+                    <img
+                      src="/assets/img/works/work1.jpg"
+                      alt="Inset Caption"
+                      class="inset-img"
+                    />
+                    <figcaption>This is a caption.</figcaption>
+                  </fig>
+
+                  <div class="inset-text">
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Mauris cursus consequat lorem…
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Fullsize image -->
+                <div class="fullsize-image anxious-boardgame-cover"></div>
+                <div class="caption">
+                  <span>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Mauris cursus consequat lorem…
+                  </span>
+                </div>
+
                 <p>
                   Progression: wireframes → interactive prototype → development.
                 </p>
@@ -204,13 +274,27 @@
                   Deployed static site on Netlify;
                   <a href="/link-to-live-project">Live demo</a> available.
                 </p>
+
+                <!-- Media tile for project link -->
+                <a
+                  class="media-tile highlight"
+                  href="https://figma.com/projectxyz"
+                  target="_blank"
+                >
+                  <img
+                    src="/assets/images/128px-Figma-logo.png"
+                    alt="View Figma Project"
+                    class="media-thumb"
+                  />
+                  <div class="media-label">View Figma Prototype</div>
+                </a>
               </section>
 
               <section class="reflection">
                 <h2>Reflection & Future Possibilities</h2>
                 <p>
                   Limited by free tier tools and student license; with full
-                  access, I’d integrate headless CMS and advanced analytics...
+                  access, I'd integrate headless CMS and advanced analytics...
                 </p>
                 <p>
                   Next steps: explore animation, accessibility improvements.
@@ -332,8 +416,31 @@
     <!-- Sidebar placeholder -->
     <div id="sidebar-container"></div>
 
+    <!-- Popups -->
+    <div id="popup-overlay" style="display: none">
+      <div id="popup-content"></div>
+      <button id="popup-close" title="Close">&times;</button>
+      <button id="popup-prev" class="popup-nav">&#10094;</button>
+      <button id="popup-next" class="popup-nav">&#10095;</button>
+      <div id="popup-pagination"></div>
+    </div>
+
+    <!-- Gallery -->
+    <div
+      id="gallery--works-myproject"
+      class="popup-gallery-source"
+      style="display: none"
+    >
+      <a href="/assets/img/works/work1.jpg" title="First shot description"></a>
+      <!-- work1-full.jpg -->
+      <a href="/assets/img/works/work2.jpg" title="Second shot description"></a>
+      <!-- work2-full.jpg -->
+      <a href="/assets/img/works/work3.jpg" title="Third shot description"></a>
+      <!-- work3-full.jpg -->
+    </div>
+
     <!-- Load Components -->
-    <script src="../assets/js/menu.js"></script>
+    <script src="/assets/js/menu.js"></script>
 
     <!-- Typed Scripts -->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>

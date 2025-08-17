@@ -75,21 +75,39 @@ document.addEventListener("DOMContentLoaded", () => {
     pagination.textContent = `${currentIndex + 1} of ${galleryItems.length}`;
   }
 
+  // Update Gallery Items
+  function updateGalleryPopup() {
+    const currentItem = galleryItems[currentIndex];
+    const src = currentItem.getAttribute("href");
+    const caption = currentItem.getAttribute("title") || "";
+    openPopup(
+      `<figure>
+       <img src="${src}" alt="${caption}">
+       <figcaption>${caption}</figcaption>
+     </figure>`,
+      { gallery: true }
+    );
+    updatePagination();
+  }
+
   // Add event listeners ONLY if element exists
+  if (galleryItems.length) {
+    currentIndex = 0;
+    updateGalleryPopup();
+  }
+
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
       currentIndex =
         (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-      const imgSrc = galleryItems[currentIndex].href;
-      openPopup(`<img src="${imgSrc}" alt="">`, { gallery: true });
+      updateGalleryPopup();
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
       currentIndex = (currentIndex + 1) % galleryItems.length;
-      const imgSrc = galleryItems[currentIndex].href;
-      openPopup(`<img src="${imgSrc}" alt="">`, { gallery: true });
+      updateGalleryPopup();
     });
   }
 
@@ -136,8 +154,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (galleryItems.length) {
           currentIndex = 0;
-          const firstSrc = galleryItems[currentIndex].getAttribute("href");
-          openPopup(`<img src="${firstSrc}" alt="">`, { gallery: true });
+          const firstItem = galleryItems[currentIndex]; // Declare and assign here
+          const src = firstItem.getAttribute("href");
+          const caption = firstItem.getAttribute("title") || "";
+          openPopup(
+            `<figure>
+              <img src="${src}" alt="${caption}">
+              <figcaption>${caption}</figcaption>
+            </figure>`,
+            { gallery: true }
+          );
         }
       } else {
         console.warn("Gallery container not found for", galleryId);
@@ -147,7 +173,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ---- Handle Image ----
     if (link.classList.contains("has-popup-image")) {
-      openPopup(`<img src="${link.getAttribute("href")}" alt="">`);
+      const src = link.getAttribute("href");
+      const caption = link.querySelector("img")?.alt || "";
+      openPopup(
+        `<figure>
+       <img src="${src}" alt="${caption}">
+       <figcaption>${caption}</figcaption>
+     </figure>`
+      );
       return;
     }
 
@@ -195,11 +228,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ---- Handle Music ----
     if (link.classList.contains("has-popup-music")) {
-      // Assuming SoundCloud track URL is directly in href
       const trackUrl = encodeURIComponent(link.getAttribute("href"));
-      const scEmbed = `https://w.soundcloud.com/player/?url=${trackUrl}&auto_play=true`;
+      const scEmbed = `https://w.soundcloud.com/player/?url=${trackUrl}&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`;
       openPopup(
-        `<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="${scEmbed}"></iframe>`
+        `<iframe width="100%" height="600" scrolling="no" frameborder="no" allow="autoplay" src="${scEmbed}"></iframe>`
       );
       return;
     }
