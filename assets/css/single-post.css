@@ -374,40 +374,82 @@ figcaption,
   font-size: 1em;
 }
 
-/* Media tiles */
+/* Media tile */
 .media-tile {
   display: inline-block;
-  text-align: center;
   margin: 0.5em;
   padding: 1em 1em 1.2em 1em;
+  border: 1px solid var(--color-dark);
   border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(50, 50, 100, 0.11);
-  background: var(--color-white);
-  text-decoration: none;
-  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: var(--color-bg-light);
+  text-align: center;
   cursor: pointer;
-}
-.media-tile.highlight {
-  border: 2px solid var(--color-accent, #3bc9db);
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 .media-thumb {
-  width: 110px;
-  height: auto;
+  height: 200px;
   display: block;
-  margin: 0 auto 0.7em auto;
   border-radius: 5px;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto 0.7em auto;
+  position: relative;
 }
 .media-label {
   font-family: var(--font-sans);
-  font-size: 1.03em;
-  font-weight: 600;
-  color: var(--color-accent, #3bc9db);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-dark);
   letter-spacing: 0.05em;
 }
 .media-tile:hover {
-  box-shadow: 0 8px 40px rgba(45, 140, 190, 0.17);
+  box-shadow: 0 12px 20px rgba(237, 229, 116, 0.5);
   transform: translateY(-2px) scale(1.03);
   text-decoration: none;
+}
+
+/* Aspect Ratios */
+.media-thumb.pinterest-thumb {
+  aspect-ratio: 1 / 1;
+}
+.media-thumb.youtube-thumb {
+  aspect-ratio: 16 / 9;
+}
+.media-thumb.ig-story-thumb {
+  aspect-ratio: 9 / 16;
+}
+
+/* PDF viewer */
+
+.pdf-viewer-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 2em auto;
+  box-sizing: border-box;
+  padding: 0 1em;
+}
+
+.pdf-viewer-container iframe {
+  width: 100%;
+  height: 700px;
+  border: none;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .pdf-viewer-container {
+    max-width: 100%;
+    padding: 0 0.5em;
+  }
+  .pdf-viewer-container iframe {
+    height: 500px;
+  }
+}
+
+@media (max-width: 360px) {
+  .pdf-viewer-container iframe {
+    height: 400px;
+  }
 }
 
 /* Bottom Section */

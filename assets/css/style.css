@@ -1304,6 +1304,7 @@ body:not(.homepage) .section.started {
 .box-item .image.client {
   aspect-ratio: inherit;
   padding: 10px;
+  background: var(--color-white);
 }
 
 .box-item .image.dark {
@@ -1323,6 +1324,15 @@ body:not(.homepage) .section.started {
   object-fit: cover;
   display: block;
   transition: var(--transition-medium);
+}
+
+.clients .box-item {
+  flex: initial;
+}
+
+.box-item .image.client a img {
+  max-height: 120px;
+  width: auto;
 }
 
 /* Hover overlay */

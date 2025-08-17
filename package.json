@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "jsdom": "^26.1.0"
+    "jsdom": "^26.1.0",
+    "sharp": "^0.34.3"
   }
 }
