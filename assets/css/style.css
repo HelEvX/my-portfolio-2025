@@ -1197,16 +1197,11 @@ body:not(.homepage) .section.started {
 
 /* Filters */
 .section.works .filters {
-  margin-bottom: 30px;
-}
-
-.section.works .filters input {
-  display: none;
+  display: flex;
+  align-items: baseline;
 }
 
 .section.works .filters label {
-  display: inline-block;
-  vertical-align: top;
   margin-right: 25px;
   font-size: 13px;
   color: var(--color-text);
@@ -1219,6 +1214,53 @@ body:not(.homepage) .section.started {
   color: var(--color-primary);
 }
 
+.section.works .filters .btn-group.sort-toggle {
+  margin-right: 3em;
+}
+
+.section.works .filters .btn-group.sort-toggle label:nth-child(2) {
+  margin: 0;
+  border-radius: 4px 0 0 4px;
+}
+.section.works .filters .btn-group.sort-toggle label:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.section.works .filters .btn-group.sort-toggle label {
+  cursor: pointer;
+  padding: 0.3em 0.7em;
+  border: 1px solid var(--color-border);
+  user-select: none;
+  transition: var(--transition-fast);
+  color: var(--color-text);
+  font-weight: normal;
+  background-color: transparent;
+}
+
+/* Checked Active */
+.section.works
+  .filters
+  .btn-group.sort-toggle
+  input[type="radio"]:checked
+  + label {
+  background-color: var(--color-primary); /* your orange */
+  color: var(--color-white);
+  font-weight: 500;
+  border-color: var(--color-primary);
+}
+
+/* Hide the actual radios but keep them accessible for a11y */
+.section.works .filters .btn-group.sort-toggle input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.section.works .filters input {
+  display: none;
+}
+
 @media (max-width: 580px) {
   .section.works .filters label {
     padding-bottom: 15px;
@@ -1228,11 +1270,6 @@ body:not(.homepage) .section.started {
   .section.works .filters {
     margin-bottom: 10px;
   }
-}
-
-.section.works .filters .btn-group {
-  display: inline-block;
-  vertical-align: top;
 }
 
 /* Portfolio Grid Styles */

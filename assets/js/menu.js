@@ -31,6 +31,34 @@ document.addEventListener("DOMContentLoaded", function () {
       );
   }
 
+  // Define Glitch Effect Funtion for Nav Items
+  function highlightActiveNavLink() {
+    document
+      .querySelectorAll("header .top-menu a.lnk, header .top-menu a.btn")
+      .forEach((link) => {
+        link.classList.remove("glitch-effect");
+      });
+
+    const currentPath = window.location.pathname;
+
+    const activeLink = Array.from(
+      document.querySelectorAll(
+        "header .top-menu a.lnk, header .top-menu a.btn"
+      )
+    ).find((link) => {
+      let href = link.getAttribute("href");
+      if (href.endsWith("/")) href += "index.html";
+      let normalizedCurrentPath = currentPath.endsWith("/")
+        ? currentPath + "index.html"
+        : currentPath;
+      return href === normalizedCurrentPath;
+    });
+
+    if (activeLink) {
+      activeLink.classList.add("glitch-effect");
+    }
+  }
+
   // -------------------------------
   // Load Header
   // -------------------------------
@@ -41,6 +69,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Call the active menu highlighter here
     if (typeof setActiveMenuItem === "function") setActiveMenuItem();
+
+    // Glitch effect highlighter with small delay
+    setTimeout(() => {
+      highlightActiveNavLink();
+    }, 50);
 
     // Attach navigation event listeners AFTER header is loaded
     safeAddEventListener("header .top-menu", "click", handleMenuLinkClick);
@@ -135,67 +168,167 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // -------------------------------
-  // Filter functionality with two-phase fade-out/fade-in
-  // -------------------------------
+  // ---------------
+  // Sorting and filtering combined with two-phase fade animation
+  // ---------------
+
+  const container = document.querySelector(".box-items.portfolio-items");
+  const itemsArray = Array.from(container.children);
+
+  // Select filter inputs with correct name attribute
   const filterInputs = document.querySelectorAll(
-    '.filters input[type="radio"]'
+    '.filters input[name="fl_radio"]'
   );
-  const items = document.querySelectorAll(".box-item");
+  // Select sort inputs with correct name attribute
+  const sortInputs = document.querySelectorAll(
+    '.sort-menu input[name="sort_radio"]'
+  );
 
-  // Apply transition styles via CSS or JS for smooth fade/scale
-  items.forEach((item) => {
-    item.style.transition = "opacity 0.4s ease, transform 0.4s ease";
-  });
+  let currentFilter = ".box-item"; // default: show all
+  let currentSort = "date"; // default: newest first
 
+  // Sort only visible items (after filtering) with two-phase fade animation
+  function sortItems(sortType) {
+    // Phase 1: fade out visible items
+    let visibleItems = itemsArray.filter(
+      (item) => item.style.display !== "none"
+    );
+
+    visibleItems.forEach((item) => {
+      item.style.opacity = "0";
+      item.style.transform = "scale(0.8)";
+    });
+
+    // Phase 2: after fade-out delay, reorder and fade-in visible items
+    setTimeout(() => {
+      if (sortType === "date") {
+        visibleItems.sort((a, b) => {
+          const dateA = a.getAttribute("data-date") || "";
+          const dateB = b.getAttribute("data-date") || "";
+          return dateB.localeCompare(dateA); // Newest first
+        });
+      } else if (sortType === "az") {
+        visibleItems.sort((a, b) => {
+          const nameAEl = a.querySelector(".name");
+          const nameBEl = b.querySelector(".name");
+          const nameA = nameAEl ? nameAEl.textContent.trim().toLowerCase() : "";
+          const nameB = nameBEl ? nameBEl.textContent.trim().toLowerCase() : "";
+          return nameA.localeCompare(nameB); // Alphabetical A-Z
+        });
+      }
+
+      // Append sorted items back to container
+      visibleItems.forEach((item) => container.appendChild(item));
+
+      // Fade-in phase
+      visibleItems.forEach((item) => {
+        void item.offsetWidth;
+
+        requestAnimationFrame(() => {
+          item.style.opacity = "1";
+          item.style.transform = "scale(1)";
+        });
+      });
+    }, 400); // match your CSS transition duration
+  }
+
+  // Apply filter with two-phase fade-out/fade-in animation
+  function applyFilter(filterValue) {
+    // Phase 1: fade out everything
+    itemsArray.forEach((item) => {
+      item.style.opacity = "0";
+      item.style.transform = "scale(0.8)";
+    });
+
+    // Phase 2: after fade-out duration, show/hide and fade in matches
+    setTimeout(() => {
+      itemsArray.forEach((item) => {
+        const matches =
+          filterValue === ".box-item" ||
+          item.classList.contains(filterValue.slice(1));
+
+        if (matches) {
+          item.style.display = "block";
+
+          // Trigger fade-in transition
+          requestAnimationFrame(() => {
+            item.style.opacity = "1";
+            item.style.transform = "scale(1)";
+          });
+        } else {
+          item.style.display = "none";
+        }
+      });
+
+      // After filtering is applied, also sort the visible set
+      sortItems(currentSort);
+    }, 400); // duration = match CSS transition duration
+  }
+
+  // Highlight the active filter label with glitch-effect class
+  function updateFilterHighlight(selectedInput) {
+    document.querySelectorAll(".filters .btn-group label").forEach((label) => {
+      label.classList.remove("glitch-effect");
+    });
+    if (selectedInput.closest("label")) {
+      selectedInput.closest("label").classList.add("glitch-effect");
+    }
+  }
+
+  // Event handler for filter changes
   filterInputs.forEach((input) => {
     input.addEventListener("change", (e) => {
       e.preventDefault();
-
-      const filterValue = input.value;
-
-      // ---- Phase 1: Fade out everything ----
-      items.forEach((item) => {
-        item.style.opacity = "0";
-        item.style.transform = "scale(0.8)";
-      });
-
-      // ---- After fade-out finishes, filter and fade-in matches ----
-      setTimeout(() => {
-        items.forEach((item) => {
-          const matches =
-            filterValue === ".box-item" ||
-            item.classList.contains(filterValue.slice(1));
-
-          if (matches) {
-            item.style.display = "block";
-            // small delay before fade in for smoother effect
-            requestAnimationFrame(() => {
-              item.style.opacity = "1";
-              item.style.transform = "scale(1)";
-            });
-          } else {
-            item.style.display = "none";
-          }
-        });
-      }, 400); // matches fade-out duration
-
-      // ---- Active button highlight ----
-      document
-        .querySelectorAll(".filters .btn-group label")
-        .forEach((label) => {
-          label.classList.remove("glitch-effect");
-        });
-      input.closest("label").classList.add("glitch-effect");
+      currentFilter = input.value;
+      applyFilter(currentFilter);
+      updateFilterHighlight(input);
     });
   });
 
-  // Activate the first filter on load
-  const firstInput = document.querySelector('.filters input[type="radio"]');
-  if (firstInput) {
-    firstInput.checked = true;
-    firstInput.dispatchEvent(new Event("change"));
-  }
+  // Event handler for sort changes
+  sortInputs.forEach((input) => {
+    input.addEventListener("change", () => {
+      currentSort = input.value;
+      // Re-sort currently visible items with fade animation
+      sortItems(currentSort);
+    });
+  });
+
+  // Apply CSS transitions upfront
+  itemsArray.forEach((item) => {
+    item.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+  });
+
+  // On page load, activate default filter and sort properly
+  window.addEventListener("DOMContentLoaded", () => {
+    // Set default sort radio (newest)
+    const defaultSort = document.querySelector(
+      '.sort-menu input[name="sort_radio"][value="date"]'
+    );
+    if (defaultSort) {
+      defaultSort.checked = true;
+      currentSort = "date";
+    }
+
+    // Set default filter radio (all)
+    const defaultFilter = document.querySelector(
+      '.filters input[name="fl_radio"][value=".box-item"]'
+    );
+    if (defaultFilter) {
+      defaultFilter.checked = true;
+      currentFilter = ".box-item";
+      updateFilterHighlight(defaultFilter);
+    }
+
+    // Initialize all items fully transparent and scaled down
+    itemsArray.forEach((item) => {
+      item.style.opacity = "0";
+      item.style.transform = "scale(0.8)";
+    });
+
+    // Apply filter and sort to initialize the display
+    applyFilter(currentFilter);
+  });
 
   // -------------------------------
   // Search functionality event listeners with null checks

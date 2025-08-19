@@ -29,6 +29,9 @@
       rel="stylesheet"
     />
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" />
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/assets/css/popups.css" />
@@ -80,8 +83,38 @@
           <div class="content">
             <div class="filter-menu">
               <div class="filters">
+                <!-- SORTING CONTROLS -->
+                <div class="sort-menu">
+                  <div class="btn-group sort-toggle">
+                    <input
+                      type="radio"
+                      id="sort-date"
+                      name="sort_radio"
+                      value="date"
+                      checked
+                    />
+                    <label
+                      for="sort-date"
+                      data-text="Newest"
+                      class="sort-label"
+                    >
+                      Newest
+                    </label>
+                    <input
+                      type="radio"
+                      id="sort-az"
+                      name="sort_radio"
+                      value="az"
+                    />
+                    <label for="sort-az" data-text="A-Z" class="sort-label">
+                      A-Z
+                    </label>
+                  </div>
+                </div>
+
+                <!-- FILTERING CONTROLS -->
                 <div class="btn-group">
-                  <label data-text="All" class="glitch-effect">
+                  <label data-text="All">
                     <input type="radio" name="fl_radio" value=".box-item" />All
                   </label>
                 </div>
@@ -134,7 +167,7 @@
 
             <div class="box-items portfolio-items">
               <!-- Gallery Item -->
-              <div class="box-item f-gallery">
+              <div class="box-item f-gallery" data-date="2025-07-12">
                 <div class="image">
                   <a href="#gallery--works-myproject" class="has-popup-gallery">
                     <img src="/assets/img/works/work1.jpg" alt="My Project" />
@@ -154,7 +187,7 @@
               </div>
 
               <!-- Content Item -->
-              <div class="box-item f-content">
+              <div class="box-item f-content" data-date="2025-07-13">
                 <div class="image">
                   <a href="#content--cardboard-box" class="has-popup-content">
                     <img
@@ -177,7 +210,7 @@
               </div>
 
               <!-- Video Item -->
-              <div class="box-item f-video">
+              <div class="box-item f-video" data-date="2025-07-14">
                 <div class="image">
                   <a
                     href="https://youtu.be/S4L8T2kFFck"
@@ -203,7 +236,7 @@
               </div>
 
               <!-- Link Item -->
-              <div class="box-item f-link">
+              <div class="box-item f-link" data-date="2025-07-15">
                 <div class="image">
                   <a
                     href="https://example.com"
@@ -231,7 +264,7 @@
               </div>
 
               <!-- Music Item -->
-              <div class="box-item f-music">
+              <div class="box-item f-music" data-date="2025-07-16">
                 <div class="image">
                   <a
                     href="https://api.soundcloud.com/tracks/790365085"
@@ -257,7 +290,7 @@
               </div>
 
               <!-- Image Item -->
-              <div class="box-item f-image">
+              <div class="box-item f-image" data-date="2025-07-17">
                 <div class="image">
                   <a href="/assets/img/works/work7.jpg" class="has-popup-image">
                     <img
@@ -278,8 +311,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="clear"></div>
           </div>
         </div>
       </div>
