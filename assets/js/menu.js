@@ -328,6 +328,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Apply filter and sort to initialize the display
     applyFilter(currentFilter);
+
+    // **Add mobile dropdown filter listener here**
+    const mobileFilterSelect = document.getElementById("mobile-filter");
+    if (mobileFilterSelect) {
+      mobileFilterSelect.addEventListener("change", (e) => {
+        currentFilter = e.target.value;
+        applyFilter(currentFilter);
+        // Sync desktop buttons visually
+        filterInputs.forEach((input) => {
+          input.checked = input.value === currentFilter;
+          if (input.checked) updateFilterHighlight(input);
+        });
+      });
+    }
   });
 
   // -------------------------------

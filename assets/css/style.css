@@ -1214,8 +1214,8 @@ body:not(.homepage) .section.started {
   color: var(--color-primary);
 }
 
-.section.works .filters .btn-group.sort-toggle {
-  margin-right: 3em;
+.section.works .filters .sort-menu {
+  flex-grow: 1;
 }
 
 .section.works .filters .btn-group.sort-toggle label:nth-child(2) {
@@ -1228,7 +1228,7 @@ body:not(.homepage) .section.started {
 
 .section.works .filters .btn-group.sort-toggle label {
   cursor: pointer;
-  padding: 0.3em 0.7em;
+  padding: 0.5em 2em;
   border: 1px solid var(--color-border);
   user-select: none;
   transition: var(--transition-fast);
@@ -1269,6 +1269,73 @@ body:not(.homepage) .section.started {
 @media (max-width: 580px) {
   .section.works .filters {
     margin-bottom: 10px;
+  }
+}
+
+/* Hide dropdown on desktop */
+.mobile-filter-select {
+  display: none;
+  padding: 0.5em 2em 0.5em 1em;
+  font-size: 13px;
+  background-color: white;
+  border-radius: 4px;
+  border-color: var(--color-border);
+  font-family: var(--font-main);
+  color: var(--color-text);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L6 10H18L12 16Z"></path></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1em center;
+  background-size: 14px;
+  cursor: pointer;
+}
+
+/* Show dropdown on mobile */
+@media (max-width: 840px) {
+  /* Hide all filter btn-groups except the sort-toggle */
+  .filters .btn-group:not(.sort-toggle) {
+    display: none;
+  }
+
+  .mobile-filter-select {
+    display: block;
+  }
+
+  .btn-group.sort-toggle label {
+    padding: 0.4em 1em;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    font-size: 14px;
+    background-color: transparent;
+    user-select: none;
+    margin-right: 0.5em;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn-group.sort-toggle label:last-child {
+    margin-right: 0;
+  }
+
+  .btn-group.sort-toggle input[type="radio"]:checked + label {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 600;
+    border-color: var(--color-primary);
+  }
+
+  .btn-group.sort-toggle {
+    display: flex;
+    margin-bottom: 0.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  .section.works .filters {
+    flex-direction: column;
+    gap: 20px;
   }
 }
 
