@@ -13,55 +13,37 @@ function startTypedAnimations() {
 
   // ---------- SUBTITLE ----------
   const subtitleStrings = [
-    "for Web & Video Projects.",
+    "for Web &amp; Video Projects.",
     "putting your ideas in motion.",
     "working internationally.",
     "based in Belgium.",
   ];
 
-  // Kill any existing instance before starting new
-  if (subtitleTyped) {
-    //console.log("Destroying old subtitle Typed instance...");
-    subtitleTyped.destroy();
-    subtitleTyped = null;
-  }
+  const subtitleEl = document.querySelector(".typed-subtitle");
+  if (subtitleEl) {
+    // Destroy old instance if exists
+    if (subtitleTyped) {
+      subtitleTyped.destroy();
+      subtitleTyped = null;
+    }
 
-  // ---------- SUBTITLE ----------
-  if (document.querySelector(".typed-subtitle")) {
-    subtitleTyped = new Typed(".typed-subtitle", {
+    subtitleTyped = new Typed(subtitleEl, {
       strings: subtitleStrings,
       typeSpeed: 50,
       backSpeed: 40,
       backDelay: 2500,
-      startDelay: 0,
       loop: true,
-      loopCount: Infinity,
       smartBackspace: false,
-      contentType: "null",
       showCursor: true,
       cursorChar: "|",
       autoInsertCss: true,
-
-      // Debug logging
-      // preStringTyped: (pos, self) => {
-      //   if (!self._instanceId) {
-      //     self._instanceId = Math.random().toString(36).slice(2, 7);
-      //   }
-      //   console.log(
-      //     `Instance ${self._instanceId}: About to type string index: ${pos} / total: ${self.strings.length}`
-      //   );
-      // },
-      // onStringTyped: (pos, self) => {
-      //   console.log(
-      //     `Instance ${self._instanceId}: Finished typing string index: ${pos}`
-      //   );
-      // },
     });
   }
 
   // ---------- BREADCRUMBS ----------
-  if (document.querySelector(".typed-bread")) {
-    new Typed(".typed-bread", {
+  const breadEl = document.querySelector(".typed-bread");
+  if (breadEl) {
+    new Typed(breadEl, {
       stringsElement: ".typing-bread",
       typeSpeed: 50,
       showCursor: false,
@@ -69,12 +51,24 @@ function startTypedAnimations() {
   }
 
   // ---------- PRELOADER ----------
-  if (document.querySelector(".typed-load")) {
-    new Typed(".typed-load", {
+  const loadEl = document.querySelector(".typed-load");
+  if (loadEl) {
+    new Typed(loadEl, {
       stringsElement: ".typing-load",
       typeSpeed: 50,
       backSpeed: 25,
+      backDelay: 500,
+      loop: true,
       showCursor: true,
+      cursorChar: "|",
+      fadeOut: true,
+      fadeOutClass: "typed-fade-out",
+      fadeOutDelay: 500,
     });
   }
 }
+
+// Ensure script runs after DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  startTypedAnimations();
+});

@@ -133,11 +133,20 @@ body.loaded .section {
   position: relative;
 }
 
+.typing-load {
+  display: none;
+}
+
 .preloader .typed-load,
 .preloader .typed-cursor {
   color: var(--color-primary);
-  font-size: 12px;
-  font-family: var(--font-main);
+  letter-spacing: 0.1em;
+  font-weight: var(--font-weight-medium);
+}
+
+.typed-fade-out {
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
 }
 
 /* Typed subtitles */

@@ -30,7 +30,7 @@
     />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" />
+    <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico" />
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
@@ -41,9 +41,9 @@
     <!-- Preloader -->
     <div id="preloader" class="preloader">
       <div class="pre-inner">
-        <div class="load typing-load" style="display: none">
-          <p>loading...</p>
-        </div>
+        <!-- Hidden source for Typed.js -->
+        <div class="typing-load">loading...</div>
+        <!-- Visible target -->
         <span class="typed-load"></span>
       </div>
     </div>
@@ -185,7 +185,7 @@
                 <div class="image">
                   <a href="#gallery--go-animations" class="has-popup-gallery">
                     <img
-                      src="/assets/img/works/motion/go-modern.gif"
+                      src="/assets/img/works/motion/go-modern.webm"
                       alt="Good Omens Fanvideo Interstitial Card for the Modern Era"
                     />
                     <span class="info">
@@ -208,7 +208,7 @@
                 <div class="image">
                   <a href="#gallery--fah-endcards" class="has-popup-gallery">
                     <img
-                      src="/assets/img/works/motion/fah-toptencard.gif"
+                      src="/assets/img/works/motion/fah-toptencard.webm"
                       alt="Foil Arms and Hog Top 10 Sketches for 2022"
                     />
                     <span class="info">
@@ -231,7 +231,7 @@
                 <div class="image">
                   <a href="#content--pxl-esports" class="has-popup-content">
                     <img
-                      src="/assets/img/works/motion/pxl-esports-heroanimation.gif"
+                      src="/assets/img/works/motion/pxl-esports-heroanimation.webm"
                       alt="PXL Esports hero animation"
                     />
                     <span class="info">
@@ -266,6 +266,29 @@
                     href="#content--fah-squatters"
                     class="name has-popup-content"
                     >Title Sequence for 'Squatters' (FAH)</a
+                  >
+                </div>
+              </div>
+
+              <!-- Content Item -->
+              <div class="box-item f-content" data-date="2021-03-11">
+                <div class="image">
+                  <a href="#content--fah-toptencards" class="has-popup-content">
+                    <img
+                      src="/assets/img/works/motion/fah-toptencard.webm"
+                      alt="Title Sequence for Squatters"
+                    />
+                    <span class="info">
+                      <i class="ri-add-line"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Content</div>
+                  <a
+                    href="#content--fah-toptencards"
+                    class="name has-popup-content"
+                    >Adaptable Card & Title Animations (FAH)</a
                   >
                 </div>
               </div>
@@ -404,19 +427,19 @@
       class="popup-gallery-source"
       style="display: none"
     >
-      <a href="/assets/img/works/motion/go-eden.gif" title="Eden"></a>
+      <a href="/assets/img/works/motion/go-eden.webm" title="Eden"></a>
       <a
-        href="/assets/img/works/motion/go-renaissance.gif"
+        href="/assets/img/works/motion/go-renaissance.webm"
         title="Renaissance"
       ></a>
-      <a href="/assets/img/works/motion/go-baroque.gif" title="Baroque"></a>
-      <a href="/assets/img/works/motion/go-choral.gif" title="Choral"></a>
-      <a href="/assets/img/works/motion/go-folk.gif" title="Folk"></a>
-      <a href="/assets/img/works/motion/go-jazz.gif" title="Jazz"></a>
-      <a href="/assets/img/works/motion/go-modern.gif" title="Modern"></a>
-      <a href="/assets/img/works/motion/go-rock.gif" title="Rock"></a>
-      <a href="/assets/img/works/motion/go-today.gif" title="Today"></a>
-      <a href="/assets/img/works/motion/go-end.gif" title="End Card"></a>
+      <a href="/assets/img/works/motion/go-baroque.webm" title="Baroque"></a>
+      <a href="/assets/img/works/motion/go-choral.webm" title="Choral"></a>
+      <a href="/assets/img/works/motion/go-folk.webm" title="Folk"></a>
+      <a href="/assets/img/works/motion/go-jazz.webm" title="Jazz"></a>
+      <a href="/assets/img/works/motion/go-modern.webm" title="Modern"></a>
+      <a href="/assets/img/works/motion/go-rock.webm" title="Rock"></a>
+      <a href="/assets/img/works/motion/go-today.webm" title="Today"></a>
+      <a href="/assets/img/works/motion/go-end.webm" title="End Card"></a>
     </div>
 
     <div
@@ -425,7 +448,7 @@
       style="display: none"
     >
       <a
-        href="/assets/img/works/motion/fah-toptencard.gif"
+        href="/assets/img/works/motion/fah-toptencard.webm"
         title="Top 10 Intro/Outro Card"
       ></a>
     </div>
@@ -439,7 +462,7 @@
         <span class="popup-close-inner close"></span>
         <div class="image">
           <img
-            src="/assets/img/works/motion/pxl-esports-heroanimation.gif"
+            src="/assets/img/works/motion/pxl-esports-heroanimation.webm"
             alt="PXL Esports hero animation"
           />
         </div>
@@ -475,6 +498,7 @@
         <div
           class="image video-preview"
           data-video-id="rCU4bWqnpzQ"
+          data-video-provider="youtube"
           data-start-time="115"
         >
           <div
@@ -505,6 +529,54 @@
           </div>
           <a
             href="/posts/fah-squatters-titles.html"
+            target="_blank"
+            class="btn"
+            data-text="View Project"
+            >View Project</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div id="content--fah-toptencards" style="display: none">
+      <div class="popup-box">
+        <!-- <button class="popup-close-inner" type="button" title="Close">
+          &times;
+        </button> -->
+        <span class="popup-close-inner close"></span>
+        <div
+          class="image video-preview"
+          data-video-id="1111481401"
+          data-video-provider="vimeo"
+          data-start-time="0"
+        >
+          <div
+            class="video-thumb"
+            style="
+              background-image: url('https://vumbnail.com/1111481401.jpg');
+              cursor: pointer;
+              position: relative;
+            "
+          >
+            <span class="play-btn" aria-label="Play Video">▶</span>
+          </div>
+        </div>
+        <div class="desc">
+          <div class="category">Content</div>
+          <h4>
+            Top Ten Interstitial Cards & Lower Thirds for Foil Arms and Hog
+          </h4>
+          <div class="single-post-text">
+            <p>Paragraph.</p>
+            <ul>
+              <li>List item.</li>
+              <li>List item.</li>
+              <li>List item.</li>
+            </ul>
+            <p>Paragraph.</p>
+          </div>
+          <a
+            href="/posts/fah-topten-mogrts.html"
             target="_blank"
             class="btn"
             data-text="View Project"

@@ -95,13 +95,14 @@ document.addEventListener("DOMContentLoaded", function () {
   loadComponent("#footer-container", "/components/footer.html");
 
   // -------------------------------
-  // Preloader functionality (no custom typing)
+  // Preloader functionality
   // -------------------------------
   const preloader = document.getElementById("preloader");
   const body = document.body;
 
   if (preloader) {
     const MAX_WAIT = 10000; // fallback 10s
+    const startTime = Date.now();
 
     function hidePreloader() {
       preloader.classList.add("hide");
@@ -118,15 +119,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function startFlow() {
-      hidePreloader();
+      const elapsed = Date.now() - startTime;
+      const minDisplay = 1000; // 1s minimum
+      if (elapsed < minDisplay) {
+        setTimeout(hidePreloader, minDisplay - elapsed);
+      } else {
+        hidePreloader();
+      }
     }
 
-    if (document.readyState === "complete") {
-      startFlow();
-    } else {
-      window.addEventListener("load", startFlow);
-      setTimeout(startFlow, MAX_WAIT);
-    }
+    window.addEventListener("load", startFlow);
+    setTimeout(startFlow, MAX_WAIT);
   }
 
   // -------------------------------

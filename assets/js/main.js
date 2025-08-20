@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (galleryContainer) {
         galleryItems = Array.from(
           galleryContainer.querySelectorAll(
-            'a[href$=".jpg"],a[href$=".jpeg"],a[href$=".png"],a[href$=".gif"]'
+            'a[href$=".jpg"],a[href$=".jpeg"],a[href$=".png"],a[href$=".webp"]'
           )
         );
 
@@ -266,22 +266,39 @@ document.addEventListener("DOMContentLoaded", () => {
               "click",
               function () {
                 const videoId = preview.getAttribute("data-video-id");
-                let startTime = preview.getAttribute("data-start-time") || "0"; // default to 0
-                startTime = parseInt(startTime, 10);
+                const provider =
+                  preview.getAttribute("data-video-provider") || "youtube";
+
+                // get start time first
+                let startTime = parseInt(
+                  preview.getAttribute("data-start-time") || "0",
+                  10
+                );
+
+                // build embed src
+                let iframeSrc = "";
+                if (provider === "youtube") {
+                  iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1&start=${startTime}`;
+                } else if (provider === "vimeo") {
+                  // Vimeo accepts time as #t=115s or ?t=115
+                  iframeSrc = `https://player.vimeo.com/video/${videoId}?autoplay=1#t=${startTime}s`;
+                }
+
+                // create iframe
                 const iframe = document.createElement("iframe");
-                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1&start=${startTime}`;
-                iframe.allow = "autoplay; encrypted-media";
+                iframe.src = iframeSrc;
+                iframe.allow = "autoplay; encrypted-media; fullscreen";
                 iframe.allowFullscreen = true;
                 iframe.width = "100%";
-                iframe.style.height = "auto";
-                iframe.style.width = "100%";
                 iframe.style.aspectRatio = "16 / 9";
                 iframe.frameBorder = "0";
+
+                // replace preview thumbnail with iframe
                 preview.innerHTML = "";
                 preview.appendChild(iframe);
               },
               { once: true }
-            ); // Only replace on first click
+            );
           });
       }
       return;
