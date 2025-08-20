@@ -757,12 +757,13 @@ a.btn:hover,
   height: 68px;
   background: #fff;
   cursor: pointer;
+  z-index: var(--z-sidebar);
   transition: var(--transition-fast);
 }
 
 .popup-box .close {
-  top: 1px;
-  right: 1px;
+  top: 0;
+  right: -66.5px;
 }
 
 .content-sidebar .close:hover {
@@ -999,6 +1000,7 @@ body:not(.homepage) .section.started {
 .mouse_btn .moving-mouse {
   position: relative;
   top: 0px;
+  left: 1.2px;
   animation: mouse-anim 1s ease-out 0s infinite;
 }
 

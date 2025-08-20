@@ -257,6 +257,32 @@ document.addEventListener("DOMContentLoaded", () => {
         if (innerCloseBtn) {
           innerCloseBtn.addEventListener("click", closePopup);
         }
+
+        // ---- VIDEO THUMBNAIL CLICK HANDLER ----
+        document
+          .querySelectorAll("#popup-content .video-preview")
+          .forEach(function (preview) {
+            preview.addEventListener(
+              "click",
+              function () {
+                const videoId = preview.getAttribute("data-video-id");
+                let startTime = preview.getAttribute("data-start-time") || "0"; // default to 0
+                startTime = parseInt(startTime, 10);
+                const iframe = document.createElement("iframe");
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1&start=${startTime}`;
+                iframe.allow = "autoplay; encrypted-media";
+                iframe.allowFullscreen = true;
+                iframe.width = "100%";
+                iframe.style.height = "auto";
+                iframe.style.width = "100%";
+                iframe.style.aspectRatio = "16 / 9";
+                iframe.frameBorder = "0";
+                preview.innerHTML = "";
+                preview.appendChild(iframe);
+              },
+              { once: true }
+            ); // Only replace on first click
+          });
       }
       return;
     }

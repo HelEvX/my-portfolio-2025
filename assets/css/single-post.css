@@ -1,14 +1,9 @@
-/* Blog post cover art list */
-.anxious-boardgame-cover {
-  background-image: url("/assets/img/blog/anxious-boardgame.png");
-}
-
 /* Mouse icon fix */
 .blogpage .mouse_btn {
   top: calc(100vh * 0.78);
   left: 50%;
   height: 56px;
-  border-radius: 16px;
+  border-radius: 12px;
   transform: translateX(-50%);
   background: var(--color-white);
 }
@@ -88,7 +83,7 @@
   background-color: var(--color-white);
   /* opacity: 0.85; */
   padding: 20px 60px;
-  border-radius: 4px;
+  border-radius: 8px;
   border-bottom: solid 3px var(--color-primary);
   border-left: solid 2px var(--color-primary);
   box-shadow: inset -1px 2px 0 var(--color-dark);
@@ -160,15 +155,22 @@ section a:hover {
 .table-responsive {
   width: 100%;
   overflow-x: auto;
+  margin-top: 20px;
 }
 
 .project-table td {
-  padding: 0.8em 4.25em 0 0;
+  vertical-align: top;
+  padding: 0.8em 2.25em 0 0;
   width: auto;
   background: var(--color-white);
   color: var(--color-light-text);
   font-weight: var(--font-weight-light);
 }
+
+.project-table td:last-child {
+  padding: 0.8em 0 0 0;
+}
+
 .project-table tr:first-child td,
 .project-label {
   background: var(--color-white);
@@ -196,7 +198,7 @@ section a:hover {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 840px) {
   table.project-table {
     display: none;
   }
@@ -214,7 +216,7 @@ section a:hover {
   .project-label {
     font-weight: 500;
     color: var(--color-text);
-    margin-right: 1em;
+    margin-right: 4em;
     flex-shrink: 0;
     text-transform: uppercase;
     letter-spacing: 0.25em;
@@ -287,7 +289,7 @@ section a:hover {
   top: 8px;
   width: 4px;
   height: 4px;
-  background: #f26b38;
+  background: var(--color-primary);
   border-radius: 4px;
   -webkit-border-radius: 4px;
 }
@@ -338,10 +340,21 @@ figcaption,
   border-radius: 8px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
 }
+
 .inset-text {
   flex: 1;
   font-size: 1em;
 }
+
+/* Fullsize image */
+.fullsize-image {
+  background-size: 100% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 8px;
+}
+
 @media (max-width: 600px) {
   .inset-image-row {
     flex-direction: column;
@@ -357,16 +370,6 @@ figcaption,
   .box-item .image {
     margin-bottom: 1em;
   }
-}
-
-/* Fullsize image */
-.fullsize-image {
-  height: 350px;
-  background-size: 100% auto;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 8px;
 }
 
 .fullsize-text {

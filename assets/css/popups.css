@@ -13,7 +13,9 @@
 
 /* Inner popup content box */
 #popup-content {
-  max-width: 90%;
+  max-width: 620px; /* fix width to thumbnail width */
+  width: 100%;
+  margin: 0 auto;
   position: relative;
   background: transparent; /* images/videos fill it fully */
   border-radius: 4px;
@@ -136,7 +138,6 @@
 #popup-content img,
 #popup-content iframe,
 .popup-video-frame {
-  display: block;
   max-width: 100%;
   max-height: 90vh;
   border: none;
@@ -150,6 +151,57 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
+#popup-content iframe {
+  width: 100% !important; /* force full width */
+  height: auto; /* auto height */
+  aspect-ratio: 16 / 9; /* maintain 16:9 ratio */
+  max-width: 100%; /* don't overflow */
+  border-radius: 4px;
+}
+
+#popup-content div.image.video-preview iframe {
+  box-shadow: none;
+}
+
+/* Video preview inside content popups */
+/* Make video-thumb behave like an image with 16:9 ratio and cover */
+.popup-box .video-preview .video-thumb {
+  width: 600px;
+  aspect-ratio: 16 / 9; /* Modern browsers */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 4px;
+  position: relative;
+  display: block;
+  cursor: pointer;
+  min-height: 240px; /* fallback if aspect-ratio not supported */
+  max-width: 100%;
+}
+
+/* Fallback for browsers without aspect-ratio support */
+@supports not (aspect-ratio: 16 / 9) {
+  .popup-box .video-preview .video-thumb {
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 */
+  }
+}
+
+/* Style the play button in the middle */
+.popup-box .video-preview .play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-radius: 50%;
+  padding: 0.3em 0.42em;
+  pointer-events: none; /* Ensures clicks pass through to .video-thumb */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
 /* Text / Content popup style */
 .popup-box .desc {
   padding: 30px 20px;
@@ -161,17 +213,9 @@
   background: #fff;
   position: relative;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 4px 0 4px 4px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   color: var(--color-text);
-}
-
-/* Content popup image */
-.popup-box .image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 4px 4px 0 0;
 }
 
 .popup-box .category {
@@ -182,6 +226,12 @@
   letter-spacing: 0.04em;
   box-shadow: rgb(237, 229, 116) 0px -6px 0px inset;
   margin: 0px 0px 10px;
+}
+
+.popup-box .image,
+.popup-box .video-preview {
+  width: 100%;
+  max-width: 100%;
 }
 
 .popup-box .desc h4 {
