@@ -1,73 +1,81 @@
 // Run in Terminal: node generate-thumbnails.js
 
-// Processes both /assets/img/blog and /assets/img/works
-// Creates a /thumbnails/ folder inside each (if missing)
-// Converts all .jpg, .jpeg, .png, .gif images to JPG thumbnails of max 500px on the longest side, preserving aspect ratio
-// Uses medium-quality JPG (quality 60) to reduce file size but keep decent visuals
-// Skips any files inside the thumbnails folder to avoid recursion
+// Recursively processes images in assets/img/blog and assets/img/works
+// Generate multiple resized JPEG + WebP versions at 600px and 1200px widths from one master image
+// Saves them in a parallel /optimized/ folder within each original folder
 
 const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
 
-// Base folder where your images sit
 const baseFolder = path.join(__dirname, "assets/img");
-
-// Folders to process
 const folders = ["blog", "works"];
+const optimizedFolderName = "optimized";
 
-// Destination thumbnail folder name inside each folder
-const thumbnailFolderName = "thumbnails";
+// Target widths for output
+const sizes = [600, 1200];
 
-// Ensure thumbnail folder exists, create if missing
+// Ensure folder exists
 function ensureFolderExists(folder) {
   if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true });
 }
 
-// Process images for a specific folder
-function processFolder(folderPath, relativePath = "") {
+// Convert single image to multiple sizes and formats
+async function processImage(inputPath, outputBasePath) {
+  for (const size of sizes) {
+    // JPEG output
+    const jpegOutput = `${outputBasePath}-${size}.jpg`;
+    await sharp(inputPath)
+      .resize({ width: size, withoutEnlargement: true })
+      .jpeg({ quality: 80 })
+      .toFile(jpegOutput);
+    console.log(`Created ${jpegOutput}`);
+
+    // WebP output
+    const webpOutput = `${outputBasePath}-${size}.webp`;
+    await sharp(inputPath)
+      .resize({ width: size, withoutEnlargement: true })
+      .webp({ quality: 80 })
+      .toFile(webpOutput);
+    console.log(`Created ${webpOutput}`);
+  }
+}
+
+// Process folders recursively
+async function processFolder(folderPath, relativePath = "") {
   const fullPath = path.join(folderPath, relativePath);
   const entries = fs.readdirSync(fullPath, { withFileTypes: true });
 
-  entries.forEach((entry) => {
+  for (const entry of entries) {
     if (entry.isDirectory()) {
-      // Recurse into subdirectory
-      processFolder(folderPath, path.join(relativePath, entry.name));
+      await processFolder(folderPath, path.join(relativePath, entry.name));
     } else {
       const ext = path.extname(entry.name).toLowerCase();
-      if ([".jpg", ".jpeg", ".png", ".gif"].includes(ext)) {
+      if ([".jpg", ".jpeg", ".png"].includes(ext)) {
         const inputPath = path.join(folderPath, relativePath, entry.name);
         const destFolder = path.join(
           folderPath,
-          thumbnailFolderName,
+          optimizedFolderName,
           relativePath
         );
         ensureFolderExists(destFolder);
 
         const baseName = path.parse(entry.name).name;
-        const outputPath = path.join(destFolder, baseName + ".jpg");
+        const outputBasePath = path.join(destFolder, baseName);
 
-        sharp(inputPath)
-          .metadata()
-          .then((metadata) => {
-            const isLandscape = metadata.width >= metadata.height;
-            const resizeOptions = isLandscape
-              ? { height: 500, withoutEnlargement: true, fit: "inside" }
-              : { width: 500, withoutEnlargement: true, fit: "inside" };
-
-            return sharp(inputPath)
-              .resize(resizeOptions)
-              .jpeg({ quality: 60 })
-              .toFile(outputPath)
-              .then(() => console.log(`Thumbnail generated: ${outputPath}`));
-          })
-          .catch((err) =>
-            console.error(`Error processing ${inputPath}: ${err}`)
-          );
+        try {
+          await processImage(inputPath, outputBasePath);
+        } catch (err) {
+          console.error(`Error processing ${inputPath}: ${err}`);
+        }
       }
     }
-  });
+  }
 }
 
-// Loop through each folder
-folders.forEach((folder) => processFolder(path.join(baseFolder, folder)));
+(async () => {
+  for (const folder of folders) {
+    await processFolder(path.join(baseFolder, folder));
+  }
+  console.log("All images processed successfully.");
+})();

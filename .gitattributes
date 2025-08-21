@@ -1,1 +1,15 @@
+# Track these file types
+
 *.gif filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+
+# Show files that are tracked by regular Git
+# Run in Terminal: git lfs status
+
+# Output all files currently tracked by Git LFS
+# Run in Terminal: git lfs ls-files
+
+# LFS replaces the large file in your Git objects with a small pointer file that references the actual content.
+# Your working directory will have the normal file (thanks to LFS), but inside the Git repo, the real content is stored separately preventing repo bloat.

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Image Markup Helper: WebP with JPEG Fallback</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+        max-width: 700px;
+        margin: auto;
+        background: #f8f8f8;
+      }
+      h1 {
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+      h2 {
+        margin-top: 2.5rem;
+        font-weight: bold;
+      }
+      pre {
+        background: #272822;
+        color: #f8f8f2;
+        padding: 1rem;
+        border-radius: 5px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-size: 0.9rem;
+      }
+      p {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
+      ul {
+        font-size: 1rem;
+        margin-top: 0;
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>HTML Helper for Using WebP Images with JPEG Fallback</h1>
+
+    <section>
+      <h2>Basic Image with WebP + JPEG Fallback</h2>
+      <pre>
+&lt;picture&gt;
+  &lt;source srcset="assets/img/example-image.webp" type="image/webp" /&gt;
+  &lt;source srcset="assets/img/example-image.jpg" type="image/jpeg" /&gt;
+  &lt;img src="assets/img/example-image.jpg" alt="Descriptive text here" /&gt;
+&lt;/picture&gt;
+      </pre>
+      <p><strong>Explanation:</strong></p>
+      <ul>
+        <li>
+          The browser tries to load the first supported format
+          <code>image/webp</code>.
+        </li>
+        <li>
+          If WebP isn’t supported, it falls back to the JPEG
+          <code>source</code>.
+        </li>
+        <li>
+          <code>&lt;img&gt;</code> ensures content is shown on browsers that
+          don’t support <code>&lt;picture&gt;</code>.
+        </li>
+        <li>
+          Always include descriptive <code>alt</code> text for accessibility.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Example with Responsive Images</h2>
+      <pre>
+&lt;picture&gt;
+  &lt;source 
+    srcset="assets/img/example-600.webp 600w, assets/img/example-1200.webp 1200w" 
+    sizes="(max-width: 600px) 600px, 1200px" 
+    type="image/webp" /&gt;
+  &lt;source 
+    srcset="assets/img/example-600.jpg 600w, assets/img/example-1200.jpg 1200w" 
+    sizes="(max-width: 600px) 600px, 1200px" 
+    type="image/jpeg" /&gt;
+  &lt;img 
+    src="assets/img/example-1200.jpg" 
+    alt="Descriptive text for responsive image" /&gt;
+&lt;/picture&gt;
+      </pre>
+      <p><strong>Explanation:</strong></p>
+      <ul>
+        <li>
+          Use <code>srcset</code> with width descriptors (<code>600w</code>,
+          <code>1200w</code>) for different resolutions.
+        </li>
+        <li>
+          <code>sizes</code> attribute tells the browser which image size to
+          load based on viewport width.
+        </li>
+        <li>
+          This improves performance and image quality on different screens.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Tips</h2>
+      <ul>
+        <li>
+          You don’t need to change your CSS targeting the
+          <code>&lt;img&gt;</code> tag inside <code>&lt;picture&gt;</code>.
+        </li>
+        <li>
+          The browser loads only one image—the first supported source it finds.
+        </li>
+        <li>
+          Keep your images organized on disk with matching names for WebP and
+          JPEG versions.
+        </li>
+        <li>
+          Use automated scripts or tools (like Photoshop, ImageMagick, or cwebp)
+          to generate your WebP and JPEG images consistently.
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FFmpeg WebM to Animated WebP Helper</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+        max-width: 700px;
+        margin: auto;
+        background: #f8f8f8;
+      }
+      h1 {
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+      pre {
+        background: #272822;
+        color: #f8f8f2;
+        padding: 1rem;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      p {
+        font-size: 1rem;
+      }
+      ul {
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>FFmpeg WebM to Animated WebP Helper</h1>
+
+    <section>
+      <h2>1. Best settings for full clips (no trimming)</h2>
+      <pre>
+ffmpeg -i input.webm -vcodec libwebp -filter:v "fps=15,scale='if(gt(iw\,ih)\,-1\,459)':'if(gt(iw\,ih)\,459\,-1)':flags=lanczos" -loop 0 -preset default -an -vsync 0 -qscale 50 output.webp
+      </pre>
+      <p><strong>What it does:</strong></p>
+      <ul>
+        <li>
+          Converts the entire <code>input.webm</code> video to animated WebP.
+        </li>
+        <li>Scales shortest side to 459px, preserving aspect ratio.</li>
+        <li>Sets animation frame rate to 15 fps for smooth playback.</li>
+        <li>Loops infinitely (<code>-loop 0</code>). No audio included.</li>
+        <li>
+          Quality/size balanced with <code>-qscale 50</code> (can tweak this).
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. Trim a clip without re-encoding (fast, approximate)</h2>
+      <pre>
+ffmpeg -ss START_TIME -i input.webm -to END_TIME -c copy trimmed_output.webm
+      </pre>
+      <p><strong>What it does:</strong></p>
+      <ul>
+        <li>
+          Extracts a segment from <code>input.webm</code> between
+          <code>START_TIME</code> and <code>END_TIME</code>.
+        </li>
+        <li>
+          Does not re-encode, so runs very fast and keeps original quality.
+        </li>
+        <li>
+          Trim points snap to nearest keyframes, so start/end times are
+          approximate.
+        </li>
+      </ul>
+      <p>
+        <strong>Example:</strong> extract from 1:00 to 1:10 (10-second clip):
+      </p>
+      <pre>
+ffmpeg -ss 00:01:00 -i input.webm -to 00:01:10 -c copy trimmed_output.webm
+      </pre>
+    </section>
+
+    <section>
+      <h2>3. Trim a clip with re-encoding (precise, slower)</h2>
+      <pre>
+ffmpeg -i input.webm -ss START_TIME -t DURATION -vf "scale='if(gt(iw\,ih)\,-1\,459)':'if(gt(iw\,ih)\,459\,-1)':flags=lanczos" -c:v libvpx-vp9 -b:v BITRATE -an output_trimmed.webm
+
+ffmpeg -i output_trimmed.webm -vcodec libwebp -filter:v "fps=15,scale='if(gt(iw\,ih)\,-1\,459)':'if(gt(iw\,ih)\,459\,-1)':flags=lanczos" -loop 0 -preset default -an -vsync 0 -qscale 50 output.webp
+      </pre>
+      <p><strong>What it does:</strong></p>
+      <ul>
+        <li>
+          Cuts a segment starting at <code>START_TIME</code> with length
+          <code>DURATION</code>, re-encoding the video with shortest side scaled
+          to 459px.
+        </li>
+        <li>
+          <code>-b:v BITRATE</code> controls quality and size (e.g., 1M for 1
+          Mbps).
+        </li>
+        <li>
+          Generates a new trimmed WebM file <code>output_trimmed.webm</code>.
+        </li>
+        <li>
+          Then converts it to animated WebP with smooth 15 fps animation and
+          seamless looping.
+        </li>
+      </ul>
+      <p>
+        <strong>Example:</strong> trim 5 seconds from 10 seconds into the video,
+        bitrate 1 Mbps:
+      </p>
+      <pre>
+ffmpeg -i input.webm -ss 00:00:10 -t 5 -vf "scale='if(gt(iw\,ih)\,-1\,459)':'if(gt(iw\,ih)\,459\,-1)':flags=lanczos" -c:v libvpx-vp9 -b:v 1M -an output_trimmed.webm
+
+ffmpeg -i output_trimmed.webm -vcodec libwebp -filter:v "fps=15,scale='if(gt(iw\,ih)\,-1\,459)':'if(gt(iw\,ih)\,459\,-1)':flags=lanczos" -loop 0 -preset default -an -vsync 0 -qscale 50 output.webp
+      </pre>
+    </section>
+
+    <section>
+      <h2>4. If output WebP file size is too big</h2>
+      <pre>
+ffmpeg -i input.webm -vcodec libwebp -filter:v "fps=10,scale='if(gt(iw\,ih)\,-1\,459)':'if(gt(iw\,ih)\,459\,-1)':flags=lanczos" -loop 0 -preset default -an -vsync 0 -qscale 70 output_small.webp
+      </pre>
+      <p><strong>What it does:</strong></p>
+      <ul>
+        <li>
+          Reduces frame rate to 10 fps and lowers quality to reduce file size.
+        </li>
+        <li>Scale shortest side still 459px.</li>
+        <li>Good when smaller files are prioritized over maximum quality.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Tips & Notes</h2>
+      <ul>
+        <li>
+          Use <code>-preload auto</code> on your video tags for smooth playback
+          in browsers.
+        </li>
+        <li>
+          Adjust <code>fps</code> within 10-20 range for smoothness vs size
+          tradeoff.
+        </li>
+        <li>
+          Lower <code>-qscale</code> for better quality, higher for smaller
+          size.
+        </li>
+        <li>Test the final WebP animations on multiple browsers.</li>
+      </ul>
+    </section>
+  </body>
+</html>

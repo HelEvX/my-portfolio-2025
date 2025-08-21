@@ -13,11 +13,11 @@
 
 /* Inner popup content box */
 #popup-content {
-  max-width: 620px; /* fix width to thumbnail width */
+  /* max-width: 620px;  */
   width: 100%;
   margin: 0 auto;
   position: relative;
-  background: transparent; /* images/videos fill it fully */
+  background: transparent;
   border-radius: 4px;
 }
 
@@ -54,8 +54,8 @@
 
 /* Outer container for video + link */
 .popup-video-container {
-  width: 80vw;
-  max-width: 800px;
+  width: 90%;
+  /* max-width: 800px; */
   margin: 0 auto;
   background: transparent;
 }
@@ -67,6 +67,28 @@
   background: #000;
   border-radius: 4px;
   overflow: hidden;
+}
+
+.popup-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #000;
+}
+
+@media (min-width: 1399px) {
+  .popup-video-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 840px) {
+  .popup-video-container {
+    width: 100%;
+  }
 }
 
 /* Fallback for older browsers that don't support aspect-ratio */
@@ -82,16 +104,6 @@
     width: 100%;
     height: 100%;
   }
-}
-
-.popup-video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: #000;
 }
 
 /* Soundcloud styling */
@@ -166,7 +178,6 @@
 /* Video preview inside content popups */
 /* Make video-thumb behave like an image with 16:9 ratio and cover */
 .popup-box .video-preview .video-thumb {
-  width: 600px;
   aspect-ratio: 16 / 9; /* Modern browsers */
   background-size: cover;
   background-position: center;

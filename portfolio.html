@@ -181,16 +181,26 @@
 
             <div class="box-items portfolio-items">
               <!-- Gallery Item -->
+              <!-- CONVERSION WEBM to WEBP: see helper html -->
               <div class="box-item f-gallery" data-date="2023-07-31">
                 <div class="image">
                   <a href="#gallery--go-animations" class="has-popup-gallery">
-                    <img
-                      src="/assets/img/works/motion/go-modern.webm"
-                      alt="Good Omens Fanvideo Interstitial Card for the Modern Era"
-                    />
-                    <span class="info">
+                    <div>
+                      <video
+                        preload="auto"
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        poster="/assets/img/works/motion/go-modern.webp"
+                        aria-label="Good Omens Fanvideo Interstitial Card for the Modern Era"
+                      >
+                        <source src="go-modern.webm" type="video/webm" />
+                      </video>
+                    </div>
+                    <!-- <span class="info">
                       <i class="ri-multi-image-line"></i>
-                    </span>
+                    </span> -->
                   </a>
                 </div>
                 <div class="desc">
@@ -222,6 +232,29 @@
                     href="#gallery--fah-endcards"
                     class="name has-popup-gallery"
                     >End Card Motion Graphics (FAH)</a
+                  >
+                </div>
+              </div>
+
+              <!-- Gallery Item -->
+              <div class="box-item f-gallery" data-date="2020-03-01">
+                <div class="image">
+                  <a href="#gallery--ae-experiments" class="has-popup-gallery">
+                    <img
+                      src="/assets/img/works/motion/ae-experiments-rgbounce.webp"
+                      alt="Bouncing Ball with RGB Shift"
+                    />
+                    <span class="info">
+                      <i class="ri-multi-image-line"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Gallery</div>
+                  <a
+                    href="#gallery--ae-experiments"
+                    class="name has-popup-gallery"
+                    >Bouncing Ball with RGB Shift</a
                   >
                 </div>
               </div>
@@ -275,8 +308,8 @@
                 <div class="image">
                   <a href="#content--fah-toptencards" class="has-popup-content">
                     <img
-                      src="/assets/img/works/motion/fah-toptencard.webm"
-                      alt="Title Sequence for Squatters"
+                      src="https://vumbnail.com/1111481401.jpg"
+                      alt="Top Ten Card for Foil Arms & Hog"
                     />
                     <span class="info">
                       <i class="ri-add-line"></i>
@@ -421,7 +454,7 @@
       <div id="popup-pagination"></div>
     </div>
 
-    <!-- Gallery -->
+    <!-- GALLERY CONTENT -->
     <div
       id="gallery--go-animations"
       class="popup-gallery-source"

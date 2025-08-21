@@ -478,10 +478,10 @@ figcaption,
 .post-text-bottom > .byline,
 .post-text-bottom > .social-share {
   font-size: 12px;
-  color: #999;
+  color: var(--color-light-text);
 }
 .post-text-bottom .cat-links a {
-  color: #f26b38;
+  color: var(--color-primary);
 }
 .post-text-bottom .cat-links a:hover {
   text-decoration: underline;
@@ -496,7 +496,7 @@ figcaption,
 .post-text-bottom .tags-links span {
   display: inline-block;
   font-size: 12px;
-  color: #999;
+  color: var(--color-light-text);
   margin-right: 10px;
 }
 .post-text-bottom .tags-links a {
@@ -507,17 +507,17 @@ figcaption,
   line-height: 18px;
   font-weight: 500;
   font-size: 11px;
-  color: #f26b38;
-  border: 1px solid #f26b38;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
 }
 .post-text-bottom .author {
-  color: #363636;
+  color: var(--color-text);
 }
 
 /* Post navigation arrows */
 
 .post-navigation {
-  color: #999;
+  color: var(--color-light-text);
   text-align: center;
 }
 
@@ -533,7 +533,7 @@ figcaption,
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
-  color: #aca3a3;
+  color: var(--color-light-text);
   line-height: 20px;
   opacity: 0.7;
   transition: opacity 0.2s ease-out;

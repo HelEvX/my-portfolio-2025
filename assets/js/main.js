@@ -1,7 +1,9 @@
 // Styling effects and visual functionality
 
+//-------------------------------------------------------------
+// Glitching Buttons and Active Menu Tabs
+//-------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize all styling effects
   initializeButtonHoverEffects();
 });
 
@@ -17,7 +19,7 @@ function initializeButtonHoverEffects() {
     button.addEventListener("mouseleave", function () {
       this.classList.remove("glitch-effect-white");
 
-      // Keep glitch effect on active menu button
+      // Keep glitch effect on active menu tab
       const activeMenuBtn = document.querySelector(
         ".top-menu ul li.active a.btn"
       );
@@ -28,7 +30,9 @@ function initializeButtonHoverEffects() {
   });
 }
 
+//-------------------------------------------------------------
 // Popup functionality for images, videos, music, and galleries
+//-------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("popup-overlay");
   const contentBox = document.getElementById("popup-content");
@@ -47,9 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Show nav if gallery
     if (gallery) {
-      pagination.style.display = "block";
-      if (prevBtn) prevBtn.style.display = "block";
-      if (nextBtn) nextBtn.style.display = "block";
+      const showNav = galleryItems.length > 1;
+      pagination.style.display = showNav ? "block" : "none";
+      if (prevBtn) prevBtn.style.display = showNav ? "block" : "none";
+      if (nextBtn) nextBtn.style.display = showNav ? "block" : "none";
       updatePagination();
     } else {
       pagination.style.display = "none";
@@ -75,55 +80,64 @@ document.addEventListener("DOMContentLoaded", () => {
     pagination.textContent = `${currentIndex + 1} of ${galleryItems.length}`;
   }
 
-  // Update Gallery Items
-  function updateGalleryPopup() {
-    const currentItem = galleryItems[currentIndex];
-    const src = currentItem.getAttribute("href");
-    const caption = currentItem.getAttribute("title") || "";
-    openPopup(
-      `<figure>
-       <img src="${src}" alt="${caption}">
-       <figcaption>${caption}</figcaption>
-     </figure>`,
-      { gallery: true }
-    );
+  // Unified gallery item renderer supporting images and videos
+  function renderGalleryItem(index) {
+    const item = galleryItems[index];
+    if (!item) return;
+
+    const src = item.getAttribute("href");
+    const caption = item.getAttribute("title") || "";
+    const ext = src.split(".").pop().toLowerCase();
+
+    let popupContent = "";
+
+    if (ext === "webm") {
+      const baseName = src.substring(0, src.lastIndexOf("."));
+      const posterSrc = baseName + ".webp";
+
+      popupContent = `
+        <figure>
+          <video autoplay loop muted playsinline poster="${posterSrc}" aria-label="${caption}">
+            <source src="${src}" type="video/webm" />
+            Your browser does not support the video tag.
+          </video>
+          <figcaption>${caption}</figcaption>
+        </figure>
+      `;
+    } else {
+      popupContent = `
+        <figure>
+          <img src="${src}" alt="${caption}">
+          <figcaption>${caption}</figcaption>
+        </figure>
+      `;
+    }
+
+    openPopup(popupContent, { gallery: true });
     updatePagination();
   }
 
-  // Add event listeners ONLY if element exists
-  if (galleryItems.length) {
-    currentIndex = 0;
-    updateGalleryPopup();
+  // updateGalleryPopup just calls renderGalleryItem for current index
+  function updateGalleryPopup() {
+    renderGalleryItem(currentIndex);
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      currentIndex =
-        (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-      updateGalleryPopup();
-    });
+  // Navigation buttons event listeners added dynamically per gallery
+  function addNavigationHandlers() {
+    if (prevBtn) {
+      prevBtn.onclick = () => {
+        currentIndex =
+          (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        updateGalleryPopup();
+      };
+    }
+    if (nextBtn) {
+      nextBtn.onclick = () => {
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        updateGalleryPopup();
+      };
+    }
   }
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % galleryItems.length;
-      updateGalleryPopup();
-    });
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", closePopup);
-  }
-
-  if (overlay) {
-    overlay.addEventListener("click", (e) => {
-      if (e.target === overlay) closePopup();
-    });
-  }
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closePopup();
-  });
 
   // Event delegation for tiles
   document.body.addEventListener("click", (e) => {
@@ -140,47 +154,45 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // ---- Handle Single Image ----
+    if (link.classList.contains("has-popup-image")) {
+      const src = link.getAttribute("href");
+      const caption =
+        link.getAttribute("title") || link.querySelector("img")?.alt || "";
+
+      const popupContent = `
+        <figure>
+          <img src="${src}" alt="${caption}">
+          <figcaption>${caption}</figcaption>
+        </figure>
+      `;
+
+      openPopup(popupContent, { gallery: false }); // no arrows
+      return;
+    }
+
     // ---- Handle Gallery ----
     if (link.classList.contains("has-popup-gallery")) {
       const galleryId = link.getAttribute("href");
       const galleryContainer = document.querySelector(galleryId);
 
-      if (galleryContainer) {
-        galleryItems = Array.from(
-          galleryContainer.querySelectorAll(
-            'a[href$=".jpg"],a[href$=".jpeg"],a[href$=".png"],a[href$=".webp"]'
-          )
-        );
-
-        if (galleryItems.length) {
-          currentIndex = 0;
-          const firstItem = galleryItems[currentIndex]; // Declare and assign here
-          const src = firstItem.getAttribute("href");
-          const caption = firstItem.getAttribute("title") || "";
-          openPopup(
-            `<figure>
-              <img src="${src}" alt="${caption}">
-              <figcaption>${caption}</figcaption>
-            </figure>`,
-            { gallery: true }
-          );
-        }
-      } else {
+      if (!galleryContainer) {
         console.warn("Gallery container not found for", galleryId);
+        return;
       }
-      return;
-    }
 
-    // ---- Handle Image ----
-    if (link.classList.contains("has-popup-image")) {
-      const src = link.getAttribute("href");
-      const caption = link.querySelector("img")?.alt || "";
-      openPopup(
-        `<figure>
-       <img src="${src}" alt="${caption}">
-       <figcaption>${caption}</figcaption>
-     </figure>`
+      galleryItems = Array.from(
+        galleryContainer.querySelectorAll(
+          'a[href$=".jpg"],a[href$=".jpeg"],a[href$=".png"],a[href$=".webp"],a[href$=".gif"],a[href$=".webm"]'
+        )
       );
+
+      if (galleryItems.length === 0) return;
+
+      currentIndex = 0;
+      renderGalleryItem(currentIndex);
+      addNavigationHandlers();
+
       return;
     }
 
@@ -204,7 +216,6 @@ document.addEventListener("DOMContentLoaded", () => {
         watchUrl = href;
       }
 
-      // Wrap iframe in a responsive container
       openPopup(
         `
         <div class="popup-video-container">
@@ -215,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Watch on ${href.includes("vimeo.com") ? "Vimeo" : "YouTube"}
           </a>
         </div>
-      `,
+        `,
         { type: "video" }
       );
 
@@ -250,7 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Re-run glitch effect on all .btn buttons inside popup
         initializeButtonHoverEffects();
 
-        // Then bind close listener to inner close button
+        // Bind close listener to inner close button
         const innerCloseBtn = document.querySelector(
           "#popup-content .popup-box .popup-close-inner"
         );
@@ -280,7 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (provider === "youtube") {
                   iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1&start=${startTime}`;
                 } else if (provider === "vimeo") {
-                  // Vimeo accepts time as #t=115s or ?t=115
                   iframeSrc = `https://player.vimeo.com/video/${videoId}?autoplay=1#t=${startTime}s`;
                 }
 
@@ -303,5 +313,36 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       return;
     }
+  });
+
+  // Play video preview on hover for tiles with video (NOT working)
+  const videoTiles = document.querySelectorAll(".box-item.f-gallery video");
+
+  videoTiles.forEach((video) => {
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.autoplay = false;
+
+    video.addEventListener("mouseenter", () => {
+      video.play().catch(() => {});
+    });
+
+    video.addEventListener("mouseleave", () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+
+  // Close buttons
+
+  if (closeBtn) closeBtn.addEventListener("click", closePopup);
+  if (overlay) {
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closePopup();
+    });
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closePopup();
   });
 });

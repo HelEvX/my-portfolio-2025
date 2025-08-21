@@ -54,7 +54,7 @@ class SkillsInitializer {
         const instruction = document.createElement("div");
         instruction.className = "skill-instruction";
         instruction.style.cssText =
-          "font-size: 12px; color: #999; margin-bottom: 10px; margin-top: -20px; font-family: ivystyle-sans; font-style: italic; text-align: right;";
+          "font-size: 12px; color: var(--color-light-text);; margin-bottom: 10px; margin-top: -20px; font-family: ivystyle-sans; font-style: italic; text-align: right;";
         instruction.textContent = "Hover over skills for detailed explanations";
 
         const ul = container.querySelector("ul");
@@ -86,7 +86,7 @@ class SkillsInitializer {
         tooltip.textContent = description;
         tooltip.style.cssText = `
           position: absolute;
-          background: #363636;
+          background: var(--color-text);
           font-family: 'ivystyle-sans', sans-serif;
           color: white;
           padding: 8px 12px;
@@ -201,7 +201,7 @@ class SkillsInitializer {
         for (let i = 0; i < 10; i++) {
           const dot = document.createElement("span");
           if (i < activeDots) {
-            dot.style.background = "#f26b38"; // Primary color
+            dot.style.background = "var(--color-primary)";
           } else {
             dot.style.background = "transparent";
           }
