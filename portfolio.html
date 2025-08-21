@@ -198,9 +198,9 @@
                         <source src="go-modern.webm" type="video/webm" />
                       </video>
                     </div>
-                    <!-- <span class="info">
+                    <span class="info">
                       <i class="ri-multi-image-line"></i>
-                    </span> -->
+                    </span>
                   </a>
                 </div>
                 <div class="desc">
@@ -254,7 +254,7 @@
                   <a
                     href="#gallery--ae-experiments"
                     class="name has-popup-gallery"
-                    >Bouncing Ball with RGB Shift</a
+                    >After Effects Experiments</a
                   >
                 </div>
               </div>
@@ -321,7 +321,7 @@
                   <a
                     href="#content--fah-toptencards"
                     class="name has-popup-content"
-                    >Adaptable Card & Title Animations (FAH)</a
+                    >Customisable Card & Titles (FAH)</a
                   >
                 </div>
               </div>
@@ -407,23 +407,42 @@
               </div>
 
               <!-- Image Item -->
-              <div class="box-item f-image" data-date="2025-07-17">
+              <div class="box-item f-image" data-date="2023-06-13">
                 <div class="image">
-                  <a href="/assets/img/works/work7.jpg" class="has-popup-image">
-                    <img
-                      src="/assets/img/works/work7.jpg"
-                      alt="Minimal Poster Frame"
-                    />
+                  <a
+                    href="/assets/img/works/optimized/graphics/ballroom-planets-1200.jpg"
+                    class="has-popup-image"
+                  >
+                    <picture>
+                      <source
+                        srcset="
+                          /assets/img/works/optimized/graphics/ballroom-planets-600.webp 600w
+                        "
+                        sizes="(max-width: 600px) 600px"
+                        type="image/webp"
+                      />
+                      <source
+                        srcset="
+                          /assets/img/works/optimized/graphics/ballroom-planets-600.jpg 600w
+                        "
+                        sizes="(max-width: 600px) 600px"
+                        type="image/jpeg"
+                      />
+                      <img
+                        src="/assets/img/works/optimized/graphics/ballroom-planets-600.jpg"
+                        alt="Reimagining a Sketch from Foil Arms & Hog with Gen-AI (Photoshop)"
+                      />
+                    </picture>
                     <span class="info"><i class="ri-image-line"></i></span>
                   </a>
                 </div>
                 <div class="desc">
                   <div class="category">Image</div>
                   <a
-                    href="/assets/img/works/work7.jpg"
+                    href="/assets/img/works/optimized/graphics/ballroom-planets-1200.jpg"
                     class="name has-popup-image"
                   >
-                    Minimal Poster Frame
+                    Gen-AI (PSD) Experiment
                   </a>
                 </div>
               </div>
@@ -454,7 +473,12 @@
       <div id="popup-pagination"></div>
     </div>
 
-    <!-- GALLERY CONTENT -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+
+    <!-- GALLERIES -->
+
+    <!-- Good Omens Animations -->
     <div
       id="gallery--go-animations"
       class="popup-gallery-source"
@@ -475,6 +499,7 @@
       <a href="/assets/img/works/motion/go-end.webm" title="End Card"></a>
     </div>
 
+    <!-- Foil Arms & Hog Endcards -->
     <div
       id="gallery--fah-endcards"
       class="popup-gallery-source"
@@ -486,7 +511,23 @@
       ></a>
     </div>
 
-    <!-- Content -->
+    <!-- After Effects Experiments -->
+    <div
+      id="gallery--ae-experiments"
+      class="popup-gallery-source"
+      style="display: none"
+    >
+      <a
+        href="/assets/img/works/motion/ae-experiments-rgbounce.webm"
+        title="Bouncing Ball with RGB Shift. Quick classroom project."
+      ></a>
+    </div>
+
+    <!-- ============================================================== -->
+
+    <!-- CONTENT -->
+
+    <!-- PXL Esports Project -->
     <div id="content--pxl-esports" style="display: none">
       <div class="popup-box">
         <!-- <button class="popup-close-inner" type="button" title="Close">

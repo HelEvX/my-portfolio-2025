@@ -88,7 +88,29 @@
                   <a
                     href="https://heleenevers.be/blog/2025/08/15/introduction/"
                   >
-                    <img src="/assets/img/works/work1.jpg" alt="First Work" />
+                    <picture>
+                      <source
+                        srcset="
+                          assets/img/blog/optimized/general/example-600.webp   600w,
+                          assets/img/blog/optimized/general/example-1200.webp 1200w
+                        "
+                        sizes="(max-width: 600px) 600px, 1200px"
+                        type="image/webp"
+                      />
+                      <source
+                        srcset="
+                          assets/img/blog/optimized/general/example-600.jpg   600w,
+                          assets/img/blog/optimized/general/example-1200.jpg 1200w
+                        "
+                        sizes="(max-width: 600px) 600px, 1200px"
+                        type="image/jpeg"
+                      />
+                      <img
+                        src="assets/img/blog/optimized/general/example-1200.jpg"
+                        alt="Descriptive text for responsive image"
+                      />
+                    </picture>
+
                     <span class="info">
                       <i class="ri-book-open-line"></i>
                     </span>

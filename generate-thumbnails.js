@@ -1,4 +1,4 @@
-// Run in Terminal: node generate-thumbnails.js
+// Run in Terminal (project root): node generate-thumbnails.js
 
 // Recursively processes images in assets/img/blog and assets/img/works
 // Generate multiple resized JPEG + WebP versions at 600px and 1200px widths from one master image
