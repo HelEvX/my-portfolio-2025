@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glitch/VHS Color System Replacements</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        
+        .palette-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .palette-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .palette-description {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        
+        .current-palette {
+            border: 2px solid #f26b38;
+        }
+        
+        .color-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .color-set {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .color-set-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .color-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .color-display-small {
+            width: 80px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .color-info-compact {
+            padding: 10px 15px;
+            flex: 1;
+        }
+        
+        .color-name-compact {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        
+        .color-code-compact {
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: #666;
+            font-size: 13px;
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        
+        .css-output {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        
+        .css-comment {
+            color: #888;
+        }
+        
+        .css-property {
+            color: #79dae8;
+        }
+        
+        .css-value {
+            color: #c3e88d;
+        }
+        
+        .theme-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Glitch/VHS Color System Replacements</h1>
+        
+        <div class="theme-note">
+            <strong>Theme Context:</strong> Glitch/VHS/90s retro with digital crispness - needs punchy colors that aren't pure/obvious but have character and energy.
+        </div>
+
+        <!-- Current vs Option 1 -->
+        <div class="palette-section">
+            <div class="palette-title">Option 1: Retro Digital Orange + Teal</div>
+            <div class="palette-description">Classic 90s digital aesthetic with orange-teal contrast. Punchy but not garish, with that slightly "off" analog feel.</div>
+            
+            <div class="color-comparison">
+                <div class="color-set">
+                    <div class="color-set-title">Current Colors</div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #f26b38;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Primary</div>
+                            <div class="color-code-compact">#f26b38</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ede574; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Secondary</div>
+                            <div class="color-code-compact">#ede574</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #141414;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Dark</div>
+                            <div class="color-code-compact">#141414</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #363636;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Text</div>
+                            <div class="color-code-compact">#363636</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #999999;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Light Text</div>
+                            <div class="color-code-compact">#999999</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ffffff; color: #333; border: 1px solid #ddd;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">White</div>
+                            <div class="color-code-compact">#ffffff</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #dddddd; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Border</div>
+                            <div class="color-code-compact">#dddddd</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #f6f6f6; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">BG Light</div>
+                            <div class="color-code-compact">#f6f6f6</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="color-set">
+                    <div class="color-set-title">New Colors</div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ff6b35;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Retro Orange</div>
+                            <div class="color-code-compact">#ff6b35</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #4ecdc4;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Analog Teal</div>
+                            <div class="color-code-compact">#4ecdc4</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #0f0f23;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">VHS Black</div>
+                            <div class="color-code-compact">#0f0f23</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #2a2d3a;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Screen Text</div>
+                            <div class="color-code-compact">#2a2d3a</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #7c7f93;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Static Grey</div>
+                            <div class="color-code-compact">#7c7f93</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ffffff; color: #333; border: 1px solid #ddd;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Pure White</div>
+                            <div class="color-code-compact">#ffffff</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #c8cdd4; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Scan Line</div>
+                            <div class="color-code-compact">#c8cdd4</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #f0f2f5; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Screen Glow</div>
+                            <div class="color-code-compact">#f0f2f5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="css-output">
+<span class="css-comment">/* Retro Digital Orange + Teal Theme */</span>
+<span class="css-property">--color-primary:</span> <span class="css-value">#ff6b35</span>; <span class="css-comment">/* Retro orange, punchy but not neon */</span>
+<span class="css-property">--color-secondary:</span> <span class="css-value">#4ecdc4</span>; <span class="css-comment">/* Analog teal, classic 90s complement */</span>
+<span class="css-property">--color-dark:</span> <span class="css-value">#0f0f23</span>; <span class="css-comment">/* VHS black with subtle blue undertone */</span>
+<span class="css-property">--color-text:</span> <span class="css-value">#2a2d3a</span>; <span class="css-comment">/* Screen text, softer than pure black */</span>
+<span class="css-property">--color-light-text:</span> <span class="css-value">#64748b</span>; <span class="css-comment">/* Interface grey with blue undertone */</span>
+<span class="css-property">--color-white:</span> <span class="css-value">#ffffff</span>; <span class="css-comment">/* Keep pure white */</span>
+<span class="css-property">--color-border:</span> <span class="css-value">#cbd5e1</span>; <span class="css-comment">/* Data line grey */</span>
+<span class="css-property">--color-bg-light:</span> <span class="css-value">#f1f5f9</span>; <span class="css-comment">/* Screen light background */</span>
+            </div>
+        </div>
+
+        <!-- Recommendation Section -->
+        <div class="palette-section">
+            <div class="palette-title">Recommendation</div>
+            <div class="palette-description">
+                <strong>Option 1 (Retro Digital Orange + Teal)</strong> is my top pick for your glitch/VHS theme. Here's why:
+                <br><br>
+                ✓ Maintains your orange preference but with more retro character<br>
+                ✓ Teal secondary is quintessential 90s digital aesthetic<br>
+                ✓ The "VHS black" (#0f0f23) has that slight blue undertone that prevents it from being flat<br>
+                ✓ All colors have the right "analog imperfection" - punchy but not pure<br>
+                ✓ Perfect contrast ratios for accessibility<br>
+                ✓ Avoids obvious brand associations (not Fanta orange, not Instagram teal)<br>
+                <br>
+                <strong>Option 3 (VHS Orange + Synthwave Blue)</strong> is great if you want more of that classic synthwave aesthetic - closer to your original orange but with that iconic 80s-90s blue complement.
+            </div>
+            
+            <div class="css-output">
+<span class="css-comment">/* READY TO USE - Just replace your current CSS variables */</span>
+<span class="css-comment">/* Recommended: Retro Digital Orange + Teal */</span>
+
+:root {
+  <span class="css-property">--color-primary:</span> <span class="css-value">#ff6b35</span>;
+  <span class="css-property">--color-secondary:</span> <span class="css-value">#4ecdc4</span>;
+  <span class="css-property">--color-dark:</span> <span class="css-value">#0f0f23</span>;
+  <span class="css-property">--color-text:</span> <span class="css-value">#2a2d3a</span>;
+  <span class="css-property">--color-light-text:</span> <span class="css-value">#7c7f93</span>;
+  <span class="css-property">--color-white:</span> <span class="css-value">#ffffff</span>;
+  <span class="css-property">--color-border:</span> <span class="css-value">#c8cdd4</span>;
+  <span class="css-property">--color-bg-light:</span> <span class="css-value">#f0f2f5</span>;
+}:</span> <span class="css-value">#7c7f93</span>; <span class="css-comment">/* Static grey with digital feel */</span>
+<span class="css-property">--color-white:</span> <span class="css-value">#ffffff</span>; <span class="css-comment">/* Keep pure white */</span>
+<span class="css-property">--color-border:</span> <span class="css-value">#c8cdd4</span>; <span class="css-comment">/* Scan line grey */</span>
+<span class="css-property">--color-bg-light:</span> <span class="css-value">#f0f2f5</span>; <span class="css-comment">/* Screen glow effect */</span>
+            </div>
+        </div>
+
+        <!-- Option 2 -->
+        <div class="palette-section">
+            <div class="palette-title">Option 2: Neon Coral + Electric Green</div>
+            <div class="palette-description">More aggressive 80s-90s vibe with coral-green contrast. Energetic without being pure neon.</div>
+            
+            <div class="color-comparison">
+                <div class="color-set">
+                    <div class="color-set-title">Current Colors</div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #f26b38;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Primary</div>
+                            <div class="color-code-compact">#f26b38</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ede574; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Secondary</div>
+                            <div class="color-code-compact">#ede574</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #141414;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Dark</div>
+                            <div class="color-code-compact">#141414</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #363636;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Text</div>
+                            <div class="color-code-compact">#363636</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #999999;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Light Text</div>
+                            <div class="color-code-compact">#999999</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ffffff; color: #333; border: 1px solid #ddd;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">White</div>
+                            <div class="color-code-compact">#ffffff</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #dddddd; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Border</div>
+                            <div class="color-code-compact">#dddddd</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #f6f6f6; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">BG Light</div>
+                            <div class="color-code-compact">#f6f6f6</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="color-set">
+                    <div class="color-set-title">New Colors</div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #fc4f47;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Neon Coral</div>
+                            <div class="color-code-compact">#fc4f47</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #45b7a8;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Electric Mint</div>
+                            <div class="color-code-compact">#45b7a8</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #1a0d1f;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Void Purple</div>
+                            <div class="color-code-compact">#1a0d1f</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #2d1b33;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Cyber Text</div>
+                            <div class="color-code-compact">#2d1b33</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #7d6d8b;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Digital Haze</div>
+                            <div class="color-code-compact">#7d6d8b</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ffffff; color: #333; border: 1px solid #ddd;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Pure White</div>
+                            <div class="color-code-compact">#ffffff</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #c5b8d1; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Ghost Line</div>
+                            <div class="color-code-compact">#c5b8d1</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #f2f0f5; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Pixel Glow</div>
+                            <div class="color-code-compact">#f2f0f5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="css-output">
+<span class="css-comment">/* Neon Coral + Electric Green Theme */</span>
+<span class="css-property">--color-primary:</span> <span class="css-value">#fc4f47</span>; <span class="css-comment">/* Neon coral, energetic but not pure red */</span>
+<span class="css-property">--color-secondary:</span> <span class="css-value">#45b7a8</span>; <span class="css-comment">/* Electric mint, vintage terminal feel */</span>
+<span class="css-property">--color-dark:</span> <span class="css-value">#1a0d1f</span>; <span class="css-comment">/* Void purple, deep but not flat black */</span>
+<span class="css-property">--color-text:</span> <span class="css-value">#2d1b33</span>; <span class="css-comment">/* Cyber text with purple undertone */</span>
+<span class="css-property">--color-light-text:</span> <span class="css-value">#7d6d8b</span>; <span class="css-comment">/* Digital haze grey */</span>
+<span class="css-property">--color-white:</span> <span class="css-value">#ffffff</span>; <span class="css-comment">/* Keep pure white */</span>
+<span class="css-property">--color-border:</span> <span class="css-value">#c5b8d1</span>; <span class="css-comment">/* Ghost line with purple tint */</span>
+<span class="css-property">--color-bg-light:</span> <span class="css-value">#f2f0f5</span>; <span class="css-comment">/* Pixel glow background */</span>
+            </div>
+        </div>
+
+        <!-- Option 3 -->
+        <div class="palette-section">
+            <div class="palette-title">Option 3: VHS Orange + Synthwave Blue</div>
+            <div class="palette-description">Your orange preference meets classic synthwave blue. Perfect for the VHS aesthetic with digital crispness.</div>
+            
+            <div class="color-comparison">
+                <div class="color-set">
+                    <div class="color-set-title">Current Colors</div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #f26b38;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Primary</div>
+                            <div class="color-code-compact">#f26b38</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ede574; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Secondary</div>
+                            <div class="color-code-compact">#ede574</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #141414;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Dark</div>
+                            <div class="color-code-compact">#141414</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #363636;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Text</div>
+                            <div class="color-code-compact">#363636</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #999999;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Light Text</div>
+                            <div class="color-code-compact">#999999</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ffffff; color: #333; border: 1px solid #ddd;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">White</div>
+                            <div class="color-code-compact">#ffffff</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #dddddd; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Border</div>
+                            <div class="color-code-compact">#dddddd</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #f6f6f6; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">BG Light</div>
+                            <div class="color-code-compact">#f6f6f6</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="color-set">
+                    <div class="color-set-title">New Colors</div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ff7539;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">VHS Orange</div>
+                            <div class="color-code-compact">#ff7539</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #3b82f6;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Synthwave Blue</div>
+                            <div class="color-code-compact">#3b82f6</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #0c1020;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Midnight Code</div>
+                            <div class="color-code-compact">#0c1020</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #1e293b;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Terminal Text</div>
+                            <div class="color-code-compact">#1e293b</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #64748b;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Interface Grey</div>
+                            <div class="color-code-compact">#64748b</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #ffffff; color: #333; border: 1px solid #ddd;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Pure White</div>
+                            <div class="color-code-compact">#ffffff</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #cbd5e1; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Data Line</div>
+                            <div class="color-code-compact">#cbd5e1</div>
+                        </div>
+                    </div>
+                    <div class="color-row">
+                        <div class="color-display-small" style="background-color: #f1f5f9; color: #333;"></div>
+                        <div class="color-info-compact">
+                            <div class="color-name-compact">Screen Light</div>
+                            <div class="color-code-compact">#f1f5f9</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="css-output">
+<span class="css-comment">/* VHS Orange + Synthwave Blue Theme */</span>
+<span class="css-property">--color-primary:</span> <span class="css-value">#ff7539</span>; <span class="css-comment">/* VHS orange, warm but punchy */</span>
+<span class="css-property">--color-secondary:</span> <span class="css-value">#3b82f6</span>; <span class="css-comment">/* Synthwave blue, classic retro-future */</span>
+<span class="css-property">--color-dark:</span> <span class="css-value">#0c1020</span>; <span class="css-comment">/* Midnight code, deep blue-black */</span>
+<span class="css-property">--color-text:</span> <span class="css-value">#1e293b</span>; <span class="css-comment">/* Terminal text, blue-grey */</span>
+<span class="css-property">--color-light-text
