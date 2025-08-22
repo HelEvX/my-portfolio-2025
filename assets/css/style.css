@@ -1455,6 +1455,10 @@ body:not(.homepage) footer {
   font-weight: var(--font-weight-light);
 }
 
+.footer-copy a {
+  color: var(--color-text);
+}
+
 .footer-social {
   display: flex;
   gap: 12px;
@@ -1644,9 +1648,9 @@ strong {
 }
 
 a {
-  color: var(--color-text);
+  color: var(--color-dark);
+  font-weight: var(--font-weight-medium);
   text-decoration: none;
-  letter-spacing: 0.1em;
   opacity: 1;
   outline: none;
 }
