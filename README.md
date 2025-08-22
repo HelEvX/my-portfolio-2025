@@ -14,9 +14,40 @@ Built as a static site with HTML, CSS, and JavaScript, deployed via Netlify.
 ## Tech stack
 
 - HTML5 / CSS3 / Vanilla JavaScript
+- Node.js (for build/helper scripts)
 - Netlify (hosting + forms)
 - Giscus (comments)
 - GitHub (version control)
+
+## Development
+
+This project uses Node.js libraries for build-time helper tasks such as:
+
+- Resizing/optimizing images automatically
+- Building blog posts into pretty URLs
+- Updating `search.json` with new content
+- Managing previous/next navigation for blog posts
+
+### Dependencies
+
+- [jsdom](https://github.com/jsdom/jsdom) – work with HTML/DOM in Node
+- [sharp](https://sharp.pixelplumbing.com/) – image processing (resize, optimize)
+
+See `package.json` for exact version details.
+
+### Setup
+
+Clone the repo, then install dependencies:
+
+npm install
+
+Run helper scripts as needed, for example:
+
+node build-blog-pages.js (Build blog post pages with 'pretty' links)
+node add-post.js (Append a blog post entry to search.json with optional auto-summary + auto URL)
+node add-prev-next-nav.js (Build navigation HTML with Prev/Next links)
+
+node generate-thumbnails.js (Generate multiple resized JPEG + WebP versions from one master image)
 
 ## Deployment
 

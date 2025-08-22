@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// add-post.js - Append a blog post entry to search.json with optional auto-summary + auto URL
+// Append a blog post entry to search.json with optional auto-summary + auto URL
 // run in terminal with `node add-post.js`
 
 const fs = require("fs");
