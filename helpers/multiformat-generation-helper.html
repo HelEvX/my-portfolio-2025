@@ -8,7 +8,7 @@
       body {
         font-family: Arial, sans-serif;
         padding: 2rem;
-        max-width: 700px;
+        max-width: 800px;
         margin: auto;
         background: #f8f8f8;
       }
@@ -56,108 +56,100 @@
     <section>
       <h2>Workflow Overview</h2>
       <div class="workflow-step">
-        <strong>Step 1:</strong> Manually add your high-resolution master images
-        (e.g., 4K JPEG or PNG) into your project folders such as:<br />
-        <code>/assets/img/blog/</code> or
-        <code>/assets/img/works/</code> (including any subfolders).
+        <strong>Step 1:</strong> Place your high-resolution master images into
+        your project folders:
+        <br />
+        <code>/assets/img/blog/</code> (and subfolders like
+        <code>general</code>, <code>pxl</code>)
+        <br />
+        <code>/assets/img/works/</code> (and subfolders)
       </div>
 
       <div class="workflow-step">
-        <strong>Step 2:</strong> Run your Node.js Sharp image processing script
-        to generate optimized images:<br />
-        <code>node generate-thumbnails.js</code><br />
-        This script will:<br />
-        &nbsp;&nbsp;- Process all JPG, JPEG, and PNG images recursively in
-        <code>blog</code> and <code>works</code> folders.<br />
-        &nbsp;&nbsp;- Create resized JPEG and WebP images at set widths (e.g.,
-        600px and 1200px).<br />
-        &nbsp;&nbsp;- Save optimized images inside
-        <code>optimized</code> subfolders corresponding to each location.<br />
-        For example:<br />
-        <code>/assets/img/blog/optimized/</code> and
-        <code>/assets/img/works/motion/optimized/</code>.
+        <strong>Step 2:</strong> Run the Node.js Sharp script to generate
+        optimized images. <br /><br />
+        Use the **npm command**:
+        <pre>npm run images</pre>
+        Options:
+        <ul>
+          <li>Process everything: <code>npm run images</code></li>
+          <li>
+            Process only a specific folder:
+            <code>npm run images -- blog/general</code>
+          </li>
+          <li>
+            Process only a single image:
+            <code>npm run images -- blog/general/introduction-cover.jpg</code>
+          </li>
+        </ul>
+        The script will:
+        <ul>
+          <li>Process JPG, JPEG, and PNG images recursively.</li>
+          <li>Skip existing optimized images unless deleted manually.</li>
+          <li>
+            Save results inside <code>assets/img/optimized/</code>, maintaining
+            subfolders:
+          </li>
+          <ul>
+            <li>Blog: <code>assets/img/optimized/blog/general/</code></li>
+            <li>Works: <code>assets/img/optimized/works/graphics/</code></li>
+          </ul>
+        </ul>
       </div>
 
       <div class="workflow-step">
-        <strong>Step 3:</strong> Update your website’s HTML image markup to use
-        the optimized images by referencing the <code>optimized</code> folder
-        paths.<br />
-        See example markup below.
+        <strong>Step 3:</strong> Update your HTML to use the optimized images.
+        For **blog cover images**, only the 600px versions are needed, since
+        your max width is under 550px.
       </div>
     </section>
 
     <section>
-      <h2>Example HTML Markup for Basic Images (WebP + JPEG fallback)</h2>
+      <h2>Example HTML Markup for a Blog Cover Image</h2>
       <pre>
 &lt;picture&gt;
-  &lt;source srcset="assets/img/blog/optimized/example-image.webp" type="image/webp" /&gt;
-  &lt;source srcset="assets/img/blog/optimized/example-image.jpg" type="image/jpeg" /&gt;
-  &lt;img src="assets/img/blog/optimized/example-image.jpg" alt="Descriptive text here" /&gt;
+  &lt;source srcset="assets/img/optimized/blog/general/introduction-cover-600.webp" type="image/webp" /&gt;
+  &lt;source srcset="assets/img/optimized/blog/general/introduction-cover-600.jpg" type="image/jpeg" /&gt;
+  &lt;img src="assets/img/optimized/blog/general/introduction-cover-600.jpg" alt="Descriptive text for post" /&gt;
 &lt;/picture&gt;
       </pre>
-      <p><strong>Explanation:</strong></p>
       <ul>
-        <li>
-          Browser tries to load WebP first, falls back to JPEG if unsupported.
-        </li>
-        <li>
-          <code>&lt;img&gt;</code> fallback ensures image displays in browsers
-          without <code>&lt;picture&gt;</code> support.
-        </li>
+        <li>Browser tries WebP first, falls back to JPEG if unsupported.</li>
         <li>Include descriptive <code>alt</code> text for accessibility.</li>
+        <li>No need for 1200px images for blog tiles, only 600px.</li>
       </ul>
     </section>
 
     <section>
-      <h2>Example Responsive Image Markup with Multiple Sizes</h2>
+      <h2>Example HTML Markup for Other Images (Works or Full-Width)</h2>
       <pre>
 &lt;picture&gt;
   &lt;source
-    srcset="assets/img/blog/optimized/example-600.webp 600w, assets/img/blog/optimized/example-1200.webp 1200w"
+    srcset="assets/img/optimized/works/graphics/photo-600.webp 600w, assets/img/optimized/works/graphics/photo-1200.webp 1200w"
     sizes="(max-width: 600px) 600px, 1200px"
     type="image/webp"
   /&gt;
   &lt;source
-    srcset="assets/img/blog/optimized/example-600.jpg 600w, assets/img/blog/optimized/example-1200.jpg 1200w"
+    srcset="assets/img/optimized/works/graphics/photo-600.jpg 600w, assets/img/optimized/works/graphics/photo-1200.jpg 1200w"
     sizes="(max-width: 600px) 600px, 1200px"
     type="image/jpeg"
   /&gt;
-  &lt;img src="assets/img/blog/optimized/example-1200.jpg" alt="Descriptive text for responsive image" /&gt;
+  &lt;img src="assets/img/optimized/works/graphics/photo-1200.jpg" alt="Descriptive text" /&gt;
 &lt;/picture&gt;
       </pre>
-      <p><strong>Explanation:</strong></p>
-      <ul>
-        <li>
-          Use <code>srcset</code> with width descriptors to provide multiple
-          resolutions.
-        </li>
-        <li>
-          <code>sizes</code> guides browsers to select appropriately sized
-          images based on viewport.
-        </li>
-        <li>Improves load times and image clarity on different devices.</li>
-      </ul>
     </section>
 
     <section>
       <h2>Additional Tips</h2>
       <ul>
         <li>
-          Keep your master images well organized inside
-          <code>/assets/img/blog</code> and
-          <code>/assets/img/works</code> folders and subfolders.
+          Keep master images organized in <code>/assets/img/blog</code> and
+          <code>/assets/img/works</code> only.
         </li>
+        <li>Run the script whenever you add or update master images.</li>
+        <li>Delete optimized images if you want to regenerate them.</li>
         <li>
-          Run the image processing script whenever you add or update high-res
-          images to keep optimized assets fresh.
-        </li>
-        <li>
-          Use consistent naming conventions so optimized images are easily
-          referenced within the <code>optimized</code> folder.
-        </li>
-        <li>
-          Do not serve master images directly on the website; always use the
-          optimized JPEG or WebP versions.
+          Always reference optimized images in HTML, not the master images.
         </li>
       </ul>
     </section>

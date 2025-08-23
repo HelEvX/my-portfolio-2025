@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Scripts Workflow Helper</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: auto;
+        padding: 2rem;
+        background: #f8f8f8;
+      }
+      h1 {
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+      h2 {
+        margin-top: 2rem;
+        font-weight: bold;
+      }
+      pre {
+        background: #272822;
+        color: #f8f8f2;
+        padding: 1rem;
+        border-radius: 5px;
+        overflow-x: auto;
+        font-size: 0.9rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .workflow-step {
+        background: #fff;
+        border-left: 5px solid #007acc;
+        margin: 1rem 0;
+        padding: 1rem 1.5rem;
+        border-radius: 4px;
+      }
+      ul {
+        margin-top: 0;
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Blog Scripts Workflow Helper</h1>
+
+    <section>
+      <h2>Overview</h2>
+      <p>
+        These scripts manage your blog posts, from adding new posts to
+        generating pages and navigation links. Key folders:
+      </p>
+      <ul>
+        <li><code>/posts/</code> - blog post HTML/Markdown files</li>
+        <li><code>/assets/img/blog/</code> - source images</li>
+        <li>
+          <code>/assets/img/optimized/blog/</code> - automatically generated
+          optimized images (used by blog pages)
+        </li>
+        <li><code>search.json</code> - metadata about all posts</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>1. Add a new blog post</h2>
+      <div class="workflow-step">
+        <strong>Script:</strong> <code>add-post.js</code><br />
+        <strong>Purpose:</strong> Add a new post entry to
+        <code>search.json</code> with:
+        <ul>
+          <li>
+            Summary (choose to auto-generate from HTML/Markdown or enter
+            manually)
+          </li>
+          <li>Pretty URL based on category and filename</li>
+          <li>Category and tags</li>
+          <li>
+            Date (use today's date, file modification date, or enter manually)
+          </li>
+        </ul>
+        <strong>How to run:</strong>
+        <pre>
+# Interactive mode
+node add-post.js
+    </pre
+        >
+        <strong>Notes:</strong>
+        <ul>
+          <li>
+            If a blog post file is available in <code>/posts/</code>, the script
+            can auto-detect it.
+          </li>
+          <li>
+            You will be prompted whether to auto-generate a summary or write one
+            manually.
+          </li>
+          <li>
+            You can also choose to backdate the post by entering a custom date.
+          </li>
+          <li>
+            Tags are optional but recommended for filtering or search purposes.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Optimize images</h2>
+      <div class="workflow-step">
+        <strong>Script:</strong> <code>npm run images</code><br />
+        <strong>Purpose:</strong> Generate WebP and JPEG optimized images for
+        all posts. Subfolders inside <code>/assets/img/blog/</code> (e.g.,
+        <code>general</code>, <code>pxl</code>) are supported.<br />
+        <strong>How to run:</strong>
+        <pre>
+# Process all images
+npm run images
+
+# Process only a specific folder
+npm run images -- blog/general
+
+# Process only a single image
+npm run images -- blog/general/post-cover.jpg
+        </pre>
+        <strong>Notes:</strong>
+        <ul>
+          <li>Generates 600px, 1200px, and WebP versions for each image</li>
+          <li>
+            Blog tiles use only 600px images, full post pages can use 1200px
+          </li>
+          <li>
+            Optimized images are saved in
+            <code>/assets/img/optimized/blog/{subfolder}/{slug}/</code>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Build blog pages</h2>
+      <div class="workflow-step">
+        <strong>Script:</strong> <code>build-blog-pages.js</code><br />
+        <strong>Purpose:</strong> Generate paginated HTML pages using
+        <code>search.json</code>. It automatically finds each post's cover image
+        inside <code>/assets/img/optimized/blog/</code> (subfolders supported)
+        and builds responsive WebP/JPEG markup using only 600px images for
+        tiles.<br />
+        <strong>How to run:</strong>
+        <pre>
+# Generate all pages
+npm run build-blog
+        </pre>
+        <strong>Notes:</strong>
+        <ul>
+          <li>Warns if no cover image is found</li>
+          <li>
+            Pages created under <code>/blog/page/1/index.html</code>,
+            <code>/blog/page/2/index.html</code>, etc.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Update Prev/Next navigation</h2>
+      <div class="workflow-step">
+        <strong>Script:</strong> <code>add-prev-next-nav.js</code><br />
+        <strong>Purpose:</strong> Adds or updates previous/next navigation links
+        for all posts based on <code>search.json</code>.<br />
+        <strong>How to run:</strong>
+        <pre>
+# Update navigation for all posts
+npm run update-nav
+
+# Update navigation for a specific post
+npm run update-nav -- posts/my-post.html
+
+# Update navigation for a folder of posts
+npm run update-nav -- posts/subfolder/
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>Recommended Workflow</h2>
+      <ol>
+        <li><strong>Add new post</strong> → run <code>add-post.js</code></li>
+        <li>
+          <strong>Optimize images</strong> → run <code>npm run images</code>
+        </li>
+        <li>
+          <strong>Build blog pages</strong> → run
+          <code>build-blog-pages.js</code>
+        </li>
+        <li>
+          <strong>Update navigation links</strong> → run
+          <code>add-prev-next-nav.js</code>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Tips</h2>
+      <ul>
+        <li>
+          Keep <code>search.json</code> consistent; do not edit manually unless
+          necessary.
+        </li>
+        <li>
+          Cover images should include the post slug in the filename for
+          auto-detection.
+        </li>
+        <li>
+          Subfolders (like <code>general</code> and <code>pxl</code>) help
+          organize posts.
+        </li>
+        <li>
+          Always add new posts before rebuilding pages or updating navigation.
+        </li>
+        <li>
+          Tile images use only 600px, but full posts can still use 1200px
+          images.
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

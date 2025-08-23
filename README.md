@@ -43,11 +43,11 @@ npm install
 
 Run helper scripts as needed, for example:
 
-node build-blog-pages.js (Build blog post pages with 'pretty' links)
 node add-post.js (Append a blog post entry to search.json with optional auto-summary + auto URL)
-node add-prev-next-nav.js (Build navigation HTML with Prev/Next links)
+npm run build-blog (Build blog listing pages with 6 posts per page)
+npm run update-nav (Update Prev/Next navigation)
 
-node generate-thumbnails.js (Generate multiple resized JPEG + WebP versions from one master image)
+npm run images (Generate multiple resized JPEG + WebP versions from one master image)
 
 ## Deployment
 

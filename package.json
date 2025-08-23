@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "add-post.js",
   "scripts": {
+    "images": "node generate-multiformat.js",
+    "build-blog": "node build-blog-pages.js",
+    "update-nav": "node add-prev-next-nav.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

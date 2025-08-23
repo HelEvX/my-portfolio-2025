@@ -5,7 +5,6 @@
 const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
-
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
@@ -31,15 +30,6 @@ function stripHtml(html) {
     .trim();
 }
 
-// Basic Markdown strip (optional, quick cleanup)
-function stripMarkdown(md) {
-  return md
-    .replace(/[#*_`>~\-]+/g, "")
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
 // Extract first N sentences from text
 function getFirstSentences(text, count = 3) {
   const sentences = text.split(/(?<=[.!?])\s+/);
@@ -47,13 +37,13 @@ function getFirstSentences(text, count = 3) {
 }
 
 // Generate pretty URL like /category/yyyy/mm/dd/slug/
-function createPrettyUrl(category, filePath) {
+function createPrettyUrl(category, dateStr, filePath) {
   const slug = path
     .basename(filePath, path.extname(filePath))
     .replace(/\s+/g, "-")
     .toLowerCase();
 
-  const date = new Date(fs.statSync(filePath).mtime);
+  const date = new Date(dateStr);
   const yyyy = date.getFullYear();
   const mm = String(date.getMonth() + 1).padStart(2, "0");
   const dd = String(date.getDate()).padStart(2, "0");
@@ -81,7 +71,7 @@ function createPrettyUrl(category, filePath) {
 
     const title = await ask("Post title: ");
 
-    // Try to auto-detect newest post file
+    // Auto-detect newest file
     let postFilePath = null;
     if (fs.existsSync(blogFolder)) {
       const files = fs
@@ -107,24 +97,35 @@ function createPrettyUrl(category, filePath) {
         postFilePath = manualPath ? path.resolve(manualPath) : null;
       }
     } else {
-      console.log("⚠ No post files found in 'posts' folder.");
       const manualPath = await ask(
         "Path to HTML or Markdown file (leave blank to type summary manually): "
       );
       postFilePath = manualPath ? path.resolve(manualPath) : null;
     }
 
+    // Ask category first
+    const catInput = await ask(
+      "Category (single word, e.g. general, hobby, work, school): "
+    );
+    const categories = catInput ? [catInput.toLowerCase()] : ["blog"];
+
+    // Ask date next
+    const dateInput = await ask(
+      "Enter date (YYYY-MM-DD) or leave blank for today: "
+    );
+    const dateStr = dateInput || new Date().toISOString().split("T")[0];
+
+    // Ask if summary should be auto-generated
     let content = "";
-    let url = "";
-    let categories = [];
-    let tags = [];
-    let dateStr = "";
-
-    if (postFilePath && fs.existsSync(postFilePath)) {
-      // Read raw content
-      let raw = fs.readFileSync(postFilePath, "utf8");
-
-      // Extract summary
+    const autoSummary = await ask(
+      "Auto-generate summary from post-summary? (Y/n): "
+    );
+    if (
+      autoSummary.toLowerCase() === "y" &&
+      postFilePath &&
+      fs.existsSync(postFilePath)
+    ) {
+      const raw = fs.readFileSync(postFilePath, "utf8");
       if (postFilePath.endsWith(".html")) {
         const dom = new JSDOM(raw);
         const summaryElem = dom.window.document.querySelector("#post-summary");
@@ -135,55 +136,32 @@ function createPrettyUrl(category, filePath) {
           content = getFirstSentences(content, 3);
         }
       } else if (postFilePath.endsWith(".md")) {
-        content = stripMarkdown(raw);
-        content = getFirstSentences(content, 3);
+        content = getFirstSentences(
+          stripHtml(fs.readFileSync(postFilePath, "utf8")),
+          3
+        );
       }
-
       console.log(`📄 Auto-generated summary: ${content}`);
-
-      // Ask category if you want (simple approach)
-      const catInput = await ask(
-        "Category (single word, e.g. design, music, blog): "
-      );
-      categories = catInput ? [catInput.toLowerCase()] : ["blog"];
-
-      // Generate URL from category and filename
-      url = createPrettyUrl(categories[0], postFilePath);
-      console.log(`🔗 Auto-generated pretty URL: ${url}`);
-
-      // Extract date from file modification time
-      const fileDate = new Date(fs.statSync(postFilePath).mtime);
-      dateStr = fileDate.toISOString().split("T")[0];
     } else {
-      // Manual input
       content = await ask("Short summary (1–3 sentences): ");
-      const catInput = await ask(
-        "Category (single word, e.g. design, music, blog): "
-      );
-      categories = catInput ? [catInput.toLowerCase()] : ["blog"];
-      url = await ask("URL (relative, e.g. /design/2025/08/12/my-post/): ");
-      const tagsInput = await ask("Tags (comma-separated, optional): ");
-      tags = tagsInput
-        ? tagsInput
-            .split(",")
-            .map((t) => t.trim().toLowerCase())
-            .filter(Boolean)
-        : [];
-      dateStr = new Date().toISOString().split("T")[0]; // use today
     }
+
+    // Generate URL automatically
+    let url = postFilePath
+      ? createPrettyUrl(categories[0], dateStr, postFilePath)
+      : "";
+    console.log(`🔗 Auto-generated pretty URL: ${url}`);
 
     // Ask tags
-    if (tags.length === 0) {
-      const tagsInput = await ask("Tags (comma-separated, optional): ");
-      tags = tagsInput
-        ? tagsInput
-            .split(",")
-            .map((t) => t.trim().toLowerCase())
-            .filter(Boolean)
-        : [];
-    }
+    const tagsInput = await ask("Tags (comma-separated, optional): ");
+    const tags = tagsInput
+      ? tagsInput
+          .split(",")
+          .map((t) => t.trim().toLowerCase())
+          .filter(Boolean)
+      : [];
 
-    // Assemble the post object
+    // Assemble post object
     const newPost = {
       title,
       content,
@@ -193,9 +171,8 @@ function createPrettyUrl(category, filePath) {
       date: dateStr,
     };
 
-    // Check for existing post by URL and update or add
+    // Update or add
     const existingIndex = data.findIndex((item) => item.url === newPost.url);
-
     if (existingIndex !== -1) {
       data[existingIndex] = newPost;
       console.log(`🔄 Updated existing post: "${title}"`);
@@ -204,7 +181,7 @@ function createPrettyUrl(category, filePath) {
       console.log(`✅ Added new post: "${title}"`);
     }
 
-    // Write updated array back to search.json
+    // Write updated JSON
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
   } catch (err) {
     console.error("❌ Error:", err.message);

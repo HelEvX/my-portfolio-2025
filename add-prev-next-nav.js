@@ -1,4 +1,4 @@
-// Run the script after your posts are ready and search.json is updated: node add-prev-next-nav.js
+// Run the script after your posts are ready and search.json is updated: npm run update-nav
 
 const fs = require("fs");
 const path = require("path");
