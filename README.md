@@ -27,6 +27,7 @@ This project uses Node.js libraries for build-time helper tasks such as:
 - Building blog posts into pretty URLs
 - Updating `search.json` with new content
 - Managing previous/next navigation for blog posts
+- Creating paginated blog listings
 
 ### Dependencies
 
@@ -35,19 +36,32 @@ This project uses Node.js libraries for build-time helper tasks such as:
 
 See `package.json` for exact version details.
 
-### Setup
+### Scripts
 
-Clone the repo, then install dependencies:
+- npm run images
+- nmp run build-blog
+- npm run update-nav
 
-npm install
+## Build Workflow
 
-Run helper scripts as needed, for example:
-
-node add-post.js (Append a blog post entry to search.json with optional auto-summary + auto URL)
-npm run build-blog (Build blog listing pages with 6 posts per page)
-npm run update-nav (Update Prev/Next navigation)
-
-npm run images (Generate multiple resized JPEG + WebP versions from one master image)
+ Raw images     Raw blog posts (HTML/Markdown)
+     │                   │
+     │                   │
+     ▼                   ▼
+ [ sharp ]         [ jsdom scripts ]
+ (resize/optimize) (generate pretty URLs,
+                    update search.json,
+                    create paginated blog,
+                    add prev/next links)
+     │                   │
+     └───────────┬───────┘
+                 ▼
+        Final static site
+ (HTML + CSS + JS + assets)
+                 │
+                 ▼
+              Netlify
+   (hosting, HTTPS, contact forms)
 
 ## Deployment
 
