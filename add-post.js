@@ -91,15 +91,11 @@ function createPrettyUrl(category, dateStr, filePath) {
         `Use newest file "${path.basename(postFilePath)}"? (Y/n): `
       );
       if (confirm.toLowerCase() === "n") {
-        const manualPath = await ask(
-          "Path to HTML or Markdown file (leave blank to type summary manually): "
-        );
+        const manualPath = await ask("Path to HTML or Markdown file: ");
         postFilePath = manualPath ? path.resolve(manualPath) : null;
       }
     } else {
-      const manualPath = await ask(
-        "Path to HTML or Markdown file (leave blank to type summary manually): "
-      );
+      const manualPath = await ask("Path to HTML or Markdown file: ");
       postFilePath = manualPath ? path.resolve(manualPath) : null;
     }
 
@@ -143,7 +139,7 @@ function createPrettyUrl(category, dateStr, filePath) {
       }
       console.log(`📄 Auto-generated summary: ${content}`);
     } else {
-      content = await ask("Short summary (1–3 sentences): ");
+      content = await ask("Short summary (1-3 sentences): ");
     }
 
     // Generate URL automatically

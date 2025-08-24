@@ -1,7 +1,7 @@
-// Run in Terminal (project root):
-//   npm run images → everything (except optimized)
-//   npm run images -- assets/img/blog → just that folder
-//   npm run images -- assets/img/works/blog/image.jpg → just that one image
+// Run in Terminal:
+//   npm run images → everything in assets/img/ (except optimized)
+//   npm run images -- blog → just that folder
+//   npm run images -- blog/image.jpg → just that one image
 
 // Recursively processes images in assets/img/blog and assets/img/works
 // Generate multiple resized JPEG + WebP versions at 600px and 1200px widths from one master image

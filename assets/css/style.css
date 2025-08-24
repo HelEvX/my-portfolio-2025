@@ -217,20 +217,23 @@ body:not(.homepage) .container {
   bottom: 0;
   width: 100%;
   height: var(--border-width-desktop);
+  background: var(--color-border);
 }
 
 .line.left {
   left: 0;
   top: 0;
   width: var(--border-width-desktop);
-  height: 100%;
+  height: calc(100% - var(--border-width-desktop));
+  background: var(--color-secondary);
 }
 
 .line.right {
   right: 0;
-  top: 0;
+  top: var(--border-width-desktop);
   width: var(--border-width-desktop);
-  height: 100%;
+  height: calc(100% - var(--border-width-desktop));
+  background: var(--color-dark);
 }
 
 @media (max-width: 840px) {
@@ -242,6 +245,11 @@ body:not(.homepage) .container {
   .line.left,
   .line.right {
     width: var(--border-width-mobile);
+    height: calc(100% - var(--border-width-mobile));
+  }
+
+  .line.right {
+    top: var(--border-width-mobile);
   }
 }
 
@@ -1369,7 +1377,7 @@ body:not(.homepage) .section.started {
   background: #000;
   color: #fff;
   font-size: 28px;
-  padding: 4px;
+  padding: 5px 4px 4px 5px;
   border-radius: 50%;
   transition: var(--transition-slow);
 }

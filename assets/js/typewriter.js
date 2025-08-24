@@ -14,9 +14,12 @@ function startTypedAnimations() {
   // ---------- SUBTITLE ----------
   const subtitleStrings = [
     "for Web &amp; Video Projects.",
-    "putting your ideas in motion.",
+    "expressing ideas in motion.",
+    "always naming all her layers.",
+    "looking for that perfect blend.",
+    "taking her laptop on city-trips.",
     "working internationally.",
-    "based in Belgium.",
+    "based in Hasselt, Belgium.",
   ];
 
   const subtitleEl = document.querySelector(".typed-subtitle");

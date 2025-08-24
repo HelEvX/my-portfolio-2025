@@ -3,56 +3,71 @@
     "title": "Welcome to my blog",
     "content": "Just a short about-me post",
     "url": "/blog/2025/08/15/introduction/",
-    "categories": ["general"],
-    "tags": ["introduction"],
+    "categories": [
+      "general"
+    ],
+    "tags": [
+      "introduction"
+    ],
     "date": "2025-08-15"
   },
   {
     "title": "PXL Esports Project",
-    "content": "Dit project is een rebranding van PXL Esports. We creëren een brand\n      identity, website & app design, en een social media campagne. De website\n      zal dienen als switchboard naar de PXL Esports socials, maar dat is niet\n      het enige doel. Bezoekers zullen er allerlei informatie terugvinden over\n      de verschillende teams en spelers die deel uitmaken van het merk PXL\n      Esports. Daarnaast vinden ze er informatie over allerlei evenementen en\n      toernooien.",
+    "content": "Dit project is een rebranding van PXL Esports. Ons team creëerde een opgefriste brand identity, website & app designs, en een social media campagne. De website zal dienen als switchboard naar de PXL Esports socials en info bevatten over de teams en spelers, evenementen en toernooien.",
     "url": "/school/2024/05/23/pxl-esports-project/",
-    "categories": ["school"],
-    "tags": ["group assignment", "workplace learning"],
+    "categories": [
+      "school"
+    ],
+    "tags": [
+      "group assignment",
+      "workplace learning",
+      "webdesign",
+      "figma",
+      "branding"
+    ],
     "date": "2024-05-23"
   },
   {
     "title": "Title Sequence Squatters",
     "content": "I pitched and created an animated title sequence and interstitial graphics for Foil Arms & Hog's first feature-length sitcom episode on YouTube. I completed this project in 5 days, based on the soundtrack they sent to me and a handful behind-the-scenes photos they posted on their Patreon page for fans. Because I didn't know the episode title I created the sequence as a .mogrt so they could adapt it themselves in Premiere Pro.",
     "url": "/work/2021/03/11/title-sequence-squatters/",
-    "categories": ["work"],
-    "tags": ["foil arms & hog", "fanart", "mograph"],
+    "categories": [
+      "work"
+    ],
+    "tags": [
+      "foil arms & hog",
+      "fanart",
+      "mograph"
+    ],
     "date": "2021-03-11"
   },
   {
-    "title": "Dummy Post 4",
-    "content": "This is a dummy post.",
-    "url": "/general/2025/08/20/dummy-post-4/",
-    "categories": ["general"],
-    "tags": ["test"],
-    "date": "2025-08-20"
+    "title": "Top Ten Review Card and Lower Thirds Motion Graphics Template",
+    "content": "Following a minimal lower thirds motion graphic template I had created in 2020, I pitched this revision in a more punchy visual style and more customisation options for Foil Arms & Hog's annual sketch review episode in 2021. They've been using these ever since!",
+    "url": "/work/2021/12/30/fah-topten-mogrts/",
+    "categories": [
+      "work"
+    ],
+    "tags": [
+      "foil arms & hog",
+      "fanart",
+      "mograph",
+      "motion graphics template"
+    ],
+    "date": "2021-12-30"
   },
   {
-    "title": "Dummy Post 5",
-    "content": "This is a dummy post.",
-    "url": "/general/2025/08/21/dummy-post-5/",
-    "categories": ["general"],
-    "tags": ["test"],
-    "date": "2025-08-21"
-  },
-  {
-    "title": "Dummy Post 6",
-    "content": "This is a dummy post.",
-    "url": "/general/2025/08/22/dummy-post-6/",
-    "categories": ["general"],
-    "tags": ["test"],
-    "date": "2025-08-22"
-  },
-  {
-    "title": "Dummy Post 7",
-    "content": "This is a dummy post.",
-    "url": "/general/2025/08/23/dummy-post-7/",
-    "categories": ["general"],
-    "tags": ["test"],
+    "title": "My Personal Branding Journey - An Ongoing Story",
+    "content": "It's been quite a journey to get my personal branding to look exactly the way I wanted. For a long time it felt completely stuck in a Work-In-Progress state, but while building this website I think I found a way out. Or at least, I think I landed on a visual that can speak for me well enough. I don't see much harm in your personal brand to remain an ongoing process. But let me take you along, see what you think!",
+    "url": "/personal/2025/08/23/personal-branding-journey/",
+    "categories": [
+      "personal"
+    ],
+    "tags": [
+      "branding",
+      "logo design",
+      "visual design"
+    ],
     "date": "2025-08-23"
   }
 ]
