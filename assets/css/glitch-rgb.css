@@ -1,13 +1,10 @@
 /* RGB Channel Separation */
-.glitch-rgb,
-.glitch-rgb-white {
+.glitch-rgb {
   position: relative;
 }
 
 .glitch-rgb::before,
-.glitch-rgb::after,
-.glitch-rgb-white::before,
-.glitch-rgb-white::after {
+.glitch-rgb::after {
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -17,22 +14,15 @@
   clip: rect(0, 0, 0, 0);
 }
 
-.glitch-rgb-white::before,
-.glitch-rgb-white::after {
-  background: var(--color-dark);
-}
-
 /* Red channel (using orange) shifted right */
-.glitch-rgb::after,
-.glitch-rgb-white::after {
+.glitch-rgb::after {
   left: 3px;
   text-shadow: -2px 0 var(--color-primary);
   animation: glitch-rgb-red 2s infinite linear alternate-reverse;
 }
 
 /* Cyan channel (using teal) shifted left */
-.glitch-rgb::before,
-.glitch-rgb-white::before {
+.glitch-rgb::before {
   left: -3px;
   text-shadow: 3px 0 var(--color-secondary);
   animation: glitch-rgb-cyan 2s infinite linear alternate-reverse;

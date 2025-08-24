@@ -30,14 +30,24 @@
     />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico" />
+    <link
+      rel="icon"
+      href="/assets/images/favicons/favicon-light.ico"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      href="/assets/images/favicons/favicon-dark.ico"
+      media="(prefers-color-scheme: dark)"
+    />
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="/assets/css/single-post.css" />
 
     <!-- Glitch Effect -->
-    <link rel="stylesheet" href="/assets/css/glitch-simple.css" />
+    <link rel="stylesheet" href="/assets/css/glitch.css" />
+    <link rel="stylesheet" href="/assets/css/glitch-rgb.css" />
   </head>
 
   <body>
@@ -61,7 +71,7 @@
         <!-- Started Section -->
         <div class="section started">
           <div class="started-content">
-            <div class="h-title glitch-effect" data-text="Blog">Blog</div>
+            <div class="h-title glitch-rgb" data-text="Blog">Blog</div>
 
             <!-- Hidden source text for typing -->
             <div class="h-subtitle typing-bread" style="display: none">
@@ -86,96 +96,189 @@
               <div class="title_inner">Latest Posts</div>
             </div>
             <!-- BLOG_POSTS_START -->
-<div class="box-items post-items">
+            <div class="box-items post-items">
+              <div class="box-item post-item">
+                <div class="image">
+                  <a
+                    href="https://heleenevers.be/personal/2025/08/23/personal-branding-journey/"
+                  >
+                    <picture>
+                      <source
+                        srcset="
+                          assets/img/optimized/blog/personal/personal-branding-journey-cover-600.webp
+                        "
+                        type="image/webp"
+                      />
+                      <source
+                        srcset="
+                          assets/img/optimized/blog/personal/personal-branding-journey-cover-600.jpg
+                        "
+                        type="image/jpeg"
+                      />
+                      <img
+                        src="assets/img/optimized/blog/personal/personal-branding-journey-cover-600.jpg"
+                        alt="My Personal Branding Journey - An Ongoing Story"
+                      />
+                    </picture>
+                    <span class="info"><i class="ri-book-open-line"></i></span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="date">23 August 2025</div>
+                  <a
+                    href="https://heleenevers.be/personal/2025/08/23/personal-branding-journey/"
+                    class="name"
+                    >My Personal Branding Journey - An Ongoing Story</a
+                  >
+                </div>
+              </div>
 
-      <div class="box-item post-item">
-        <div class="image">
-          <a href="https://heleenevers.be/personal/2025/08/23/personal-branding-journey/">
-            <picture>
-              <source srcset="assets/img/optimized/blog/personal/personal-branding-journey-cover-600.webp" type="image/webp" />
-              <source srcset="assets/img/optimized/blog/personal/personal-branding-journey-cover-600.jpg" type="image/jpeg" />
-              <img src="assets/img/optimized/blog/personal/personal-branding-journey-cover-600.jpg" alt="My Personal Branding Journey - An Ongoing Story" />
-            </picture>
-            <span class="info"><i class="ri-book-open-line"></i></span>
-          </a>
-        </div>
-        <div class="desc">
-          <div class="date">23 August 2025</div>
-          <a href="https://heleenevers.be/personal/2025/08/23/personal-branding-journey/" class="name">My Personal Branding Journey - An Ongoing Story</a>
-        </div>
-      </div>
-    
-      <div class="box-item post-item">
-        <div class="image">
-          <a href="https://heleenevers.be/blog/2025/08/15/introduction/">
-            <picture>
-              <source srcset="assets/img/optimized/blog/general/introduction-cover-600.webp" type="image/webp" />
-              <source srcset="assets/img/optimized/blog/general/introduction-cover-600.jpg" type="image/jpeg" />
-              <img src="assets/img/optimized/blog/general/introduction-cover-600.jpg" alt="Welcome to my blog" />
-            </picture>
-            <span class="info"><i class="ri-book-open-line"></i></span>
-          </a>
-        </div>
-        <div class="desc">
-          <div class="date">15 August 2025</div>
-          <a href="https://heleenevers.be/blog/2025/08/15/introduction/" class="name">Welcome to my blog</a>
-        </div>
-      </div>
-    
-      <div class="box-item post-item">
-        <div class="image">
-          <a href="https://heleenevers.be/school/2024/05/23/pxl-esports-project/">
-            <picture>
-              <source srcset="assets/img/optimized/blog/school/pxl-esports-project-cover-600.webp" type="image/webp" />
-              <source srcset="assets/img/optimized/blog/school/pxl-esports-project-cover-600.jpg" type="image/jpeg" />
-              <img src="assets/img/optimized/blog/school/pxl-esports-project-cover-600.jpg" alt="PXL Esports Project" />
-            </picture>
-            <span class="info"><i class="ri-book-open-line"></i></span>
-          </a>
-        </div>
-        <div class="desc">
-          <div class="date">23 May 2024</div>
-          <a href="https://heleenevers.be/school/2024/05/23/pxl-esports-project/" class="name">PXL Esports Project</a>
-        </div>
-      </div>
-    
-      <div class="box-item post-item">
-        <div class="image">
-          <a href="https://heleenevers.be/work/2021/12/30/fah-topten-mogrts/">
-            <picture>
-              <source srcset="assets/img/optimized/blog/work/fah-topten-mogrts-cover-600.webp" type="image/webp" />
-              <source srcset="assets/img/optimized/blog/work/fah-topten-mogrts-cover-600.jpg" type="image/jpeg" />
-              <img src="assets/img/optimized/blog/work/fah-topten-mogrts-cover-600.jpg" alt="Top Ten Review Card and Lower Thirds Motion Graphics Template" />
-            </picture>
-            <span class="info"><i class="ri-book-open-line"></i></span>
-          </a>
-        </div>
-        <div class="desc">
-          <div class="date">30 December 2021</div>
-          <a href="https://heleenevers.be/work/2021/12/30/fah-topten-mogrts/" class="name">Top Ten Review Card and Lower Thirds Motion Graphics Template</a>
-        </div>
-      </div>
-    
-      <div class="box-item post-item">
-        <div class="image">
-          <a href="https://heleenevers.be/work/2021/03/11/title-sequence-squatters/">
-            <picture>
-              <source srcset="assets/img/optimized/blog/work/title-sequence-squatters-cover-600.webp" type="image/webp" />
-              <source srcset="assets/img/optimized/blog/work/title-sequence-squatters-cover-600.jpg" type="image/jpeg" />
-              <img src="assets/img/optimized/blog/work/title-sequence-squatters-cover-600.jpg" alt="Title Sequence Squatters" />
-            </picture>
-            <span class="info"><i class="ri-book-open-line"></i></span>
-          </a>
-        </div>
-        <div class="desc">
-          <div class="date">11 March 2021</div>
-          <a href="https://heleenevers.be/work/2021/03/11/title-sequence-squatters/" class="name">Title Sequence Squatters</a>
-        </div>
-      </div>
-    
+              <div class="box-item post-item">
+                <div class="image">
+                  <a
+                    href="https://heleenevers.be/blog/2025/08/15/introduction/"
+                  >
+                    <picture>
+                      <source
+                        srcset="
+                          assets/img/optimized/blog/general/introduction-cover-600.webp
+                        "
+                        type="image/webp"
+                      />
+                      <source
+                        srcset="
+                          assets/img/optimized/blog/general/introduction-cover-600.jpg
+                        "
+                        type="image/jpeg"
+                      />
+                      <img
+                        src="assets/img/optimized/blog/general/introduction-cover-600.jpg"
+                        alt="Welcome to my blog"
+                      />
+                    </picture>
+                    <span class="info"><i class="ri-book-open-line"></i></span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="date">15 August 2025</div>
+                  <a
+                    href="https://heleenevers.be/blog/2025/08/15/introduction/"
+                    class="name"
+                    >Welcome to my blog</a
+                  >
+                </div>
+              </div>
 
-</div>
-<!-- BLOG_POSTS_END -->
+              <div class="box-item post-item">
+                <div class="image">
+                  <a
+                    href="https://heleenevers.be/school/2024/05/23/pxl-esports-project/"
+                  >
+                    <picture>
+                      <source
+                        srcset="
+                          assets/img/optimized/blog/school/pxl-esports-project-cover-600.webp
+                        "
+                        type="image/webp"
+                      />
+                      <source
+                        srcset="
+                          assets/img/optimized/blog/school/pxl-esports-project-cover-600.jpg
+                        "
+                        type="image/jpeg"
+                      />
+                      <img
+                        src="assets/img/optimized/blog/school/pxl-esports-project-cover-600.jpg"
+                        alt="PXL Esports Project"
+                      />
+                    </picture>
+                    <span class="info"><i class="ri-book-open-line"></i></span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="date">23 May 2024</div>
+                  <a
+                    href="https://heleenevers.be/school/2024/05/23/pxl-esports-project/"
+                    class="name"
+                    >PXL Esports Project</a
+                  >
+                </div>
+              </div>
+
+              <div class="box-item post-item">
+                <div class="image">
+                  <a
+                    href="https://heleenevers.be/work/2021/12/30/fah-topten-mogrts/"
+                  >
+                    <picture>
+                      <source
+                        srcset="
+                          assets/img/optimized/blog/work/fah-topten-mogrts-cover-600.webp
+                        "
+                        type="image/webp"
+                      />
+                      <source
+                        srcset="
+                          assets/img/optimized/blog/work/fah-topten-mogrts-cover-600.jpg
+                        "
+                        type="image/jpeg"
+                      />
+                      <img
+                        src="assets/img/optimized/blog/work/fah-topten-mogrts-cover-600.jpg"
+                        alt="Top Ten Review Card and Lower Thirds Motion Graphics Template"
+                      />
+                    </picture>
+                    <span class="info"><i class="ri-book-open-line"></i></span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="date">30 December 2021</div>
+                  <a
+                    href="https://heleenevers.be/work/2021/12/30/fah-topten-mogrts/"
+                    class="name"
+                    >Top Ten Review Card and Lower Thirds Motion Graphics
+                    Template</a
+                  >
+                </div>
+              </div>
+
+              <div class="box-item post-item">
+                <div class="image">
+                  <a
+                    href="https://heleenevers.be/work/2021/03/11/title-sequence-squatters/"
+                  >
+                    <picture>
+                      <source
+                        srcset="
+                          assets/img/optimized/blog/work/title-sequence-squatters-cover-600.webp
+                        "
+                        type="image/webp"
+                      />
+                      <source
+                        srcset="
+                          assets/img/optimized/blog/work/title-sequence-squatters-cover-600.jpg
+                        "
+                        type="image/jpeg"
+                      />
+                      <img
+                        src="assets/img/optimized/blog/work/title-sequence-squatters-cover-600.jpg"
+                        alt="Title Sequence Squatters"
+                      />
+                    </picture>
+                    <span class="info"><i class="ri-book-open-line"></i></span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="date">11 March 2021</div>
+                  <a
+                    href="https://heleenevers.be/work/2021/03/11/title-sequence-squatters/"
+                    class="name"
+                    >Title Sequence Squatters</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- BLOG_POSTS_END -->
           </div>
         </div>
       </div>
@@ -184,10 +287,10 @@
       <div id="footer-container"></div>
 
       <!-- Border Lines -->
-      <div class="line top"></div>
-      <div class="line bottom"></div>
       <div class="line left"></div>
       <div class="line right"></div>
+      <div class="line top"></div>
+      <div class="line bottom"></div>
     </div>
 
     <!-- Sidebar placeholder -->
