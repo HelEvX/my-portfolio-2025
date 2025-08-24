@@ -1002,7 +1002,7 @@ body:not(.homepage) .section.started {
 .mouse_btn .moving-mouse {
   position: relative;
   top: 0px;
-  left: 1.2px;
+  /* left: 1.2px; */
   animation: mouse-anim 1s ease-out 0s infinite;
 }
 

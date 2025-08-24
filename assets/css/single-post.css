@@ -84,12 +84,9 @@
   /* opacity: 0.85; */
   padding: 20px 60px;
   border-radius: 8px;
-  border-bottom: solid 3px var(--color-primary);
-  border-left: solid 2px var(--color-primary);
-  box-shadow: inset -1px 2px 0 var(--color-dark);
-  -moz-box-shadow: inset -1px 2px 0 var(--color-dark);
-  -webkit-box-shadow: inset -1px 2px 0 var(--color-dark);
-  -khtml-box-shadow: inset -1px 2px 0 var(--color-dark);
+  border: 4px inset var(--color-border);
+  border-bottom: solid var(--color-bg-light);
+  border-top: solid var(--color-text);
 }
 
 @media (max-width: 840px) {
