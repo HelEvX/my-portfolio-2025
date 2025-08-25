@@ -15,22 +15,22 @@ function initTetris() {
     if (window.innerWidth >= 1170) {
       COLS = 26; // 1040 / 40
       // fill the vertical space dynamically
-      ROWS = Math.floor((window.innerHeight - 320) / CELL); // for top/bottom UI
+      ROWS = Math.floor((window.innerHeight - 320) / CELL);
     } else if (window.innerWidth >= 841) {
-      // fit as many full 40px cells as possible within width - 130px
+      // fit as many full 40px cells as possible within width
       COLS = Math.floor((window.innerWidth - 130) / CELL);
-      ROWS = Math.floor((window.innerHeight - 390) / CELL); // for top/bottom UI
+      ROWS = Math.floor((window.innerHeight - 360) / CELL);
     } else {
-      // later: touch layout
-      COLS = 0;
-      ROWS = 0;
+      // mobile
+      COLS = Math.floor((window.innerWidth - 30) / CELL);
+      ROWS = Math.floor((window.innerHeight - 360) / CELL);
     }
   }
 
   function resizeTetris() {
     getGridSize();
 
-    if (COLS === 0 || ROWS === 0) return; // skip for now on mobile
+    if (COLS < 5 || ROWS < 10) return; // don't render if grid too small
 
     const width = CELL * COLS;
     const height = CELL * ROWS;
@@ -47,14 +47,14 @@ function initTetris() {
   resizeTetris();
   window.addEventListener("resize", () => {
     resizeTetris();
-    restart(); // optional: reset pieces on resize
   });
 
   const TICK_BASE_MS = 800; // base gravity (level 1)
 
   // --- Tetromino setup ---
   const COLORS = {
-    I: "#ff6b35",
+    H: "#ff6b35",
+    I: "#c8cdd4",
     J: "#4ecdc4",
     L: "#7c7f93",
     O: "#2a2d3a",
@@ -66,6 +66,11 @@ function initTetris() {
 
   // Tetromino shapes: matrices of 1s
   const SHAPES = {
+    H: [
+      [1, 0, 1],
+      [1, 1, 1],
+      [1, 0, 1],
+    ],
     I: [
       [0, 0, 0, 0],
       [1, 1, 1, 1],
@@ -150,7 +155,7 @@ function initTetris() {
   }
 
   function getRandomBag() {
-    const bag = ["I", "J", "L", "O", "S", "T", "Z"];
+    const bag = ["H", "I", "J", "L", "O", "S", "T", "Z"];
     for (let i = bag.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [bag[i], bag[j]] = [bag[j], bag[i]];
@@ -430,6 +435,41 @@ function initTetris() {
     lastDrop = performance.now();
     spawnPiece();
   }
+
+  // ================== MOBILE CONTROLS ==================
+  function setupMobileControls() {
+    const controls = document.getElementById("mobile-controls");
+    if (!controls) return;
+
+    controls.querySelectorAll("button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        handleAction(btn.dataset.action);
+      });
+    });
+  }
+
+  function handleAction(action) {
+    switch (action) {
+      case "left":
+        tryMove(-1, 0);
+        break;
+      case "right":
+        tryMove(1, 0);
+        break;
+      case "rotate":
+        rotateCW();
+        break;
+      case "drop": // matches your HTML button
+        hardDrop();
+        break;
+      case "pause":
+        paused = !paused;
+        pauseBtn.textContent = paused ? "▶ Resume" : "⏯︎ Pause";
+        break;
+    }
+  }
+
+  setupMobileControls();
 
   // --- Init ---
   spawnPiece();

@@ -35,7 +35,7 @@ canvas {
 }
 
 .hud {
-  margin: 30px 48px 0;
+  margin: 20px 48px 0;
   display: flex;
   gap: 20px;
   justify-content: space-around;
@@ -46,11 +46,19 @@ canvas {
 }
 .hud .stats {
   display: flex;
+  flex-wrap: nowrap;
   gap: 10px;
+}
+@media (max-width: 600px) {
+  .hud .stats {
+    flex-wrap: wrap;
+    flex: 1;
+  }
 }
 .pill {
   background: var(--color-bg-light);
   padding: 8px 12px;
+  min-width: 80px;
   border-radius: 999px;
   border: 1px solid var(--color-border);
   font-family: var(--font-sans);
@@ -61,6 +69,16 @@ canvas {
   line-height: initial;
   height: initial;
   width: 90px;
+}
+@media (max-width: 840px) {
+  .hud {
+    margin: 20px;
+  }
+  .hud .pill {
+    flex: 1;
+    border-radius: 8px;
+    padding: 8px 0;
+  }
 }
 .pill.btn:hover {
   background: var(--color-text);
@@ -74,6 +92,41 @@ kbd {
 }
 .legend {
   opacity: 0.85;
+}
+@media (max-width: 840px) {
+  .legend {
+    display: none;
+  }
+}
+
+/* Mobile HUD */
+
+#mobile-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 20px;
+}
+
+#mobile-controls button {
+  font-size: 1rem;
+  height: 50px;
+  max-width: 100px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-dark);
+  color: #fff;
+  margin: 0;
+}
+
+#mobile-controls button:hover {
+  background: var(--color-text);
+}
+
+@media (min-width: 841px) {
+  #mobile-controls {
+    display: none;
+  }
 }
 
 /* Tetris Icon */

@@ -101,14 +101,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const tetrisBlock = document.querySelector(".tetris-block");
   const tetrisSection = document.getElementById("tetris-section");
   const closeBtn = document.getElementById("closeBtn");
+  const startedContent = document.querySelector(".started-content"); // NEW
 
   // Only attach listeners if we're on the homepage (all elems exist).
-  if (tetrisBtn && tetrisSection && tetrisBlock && closeBtn) {
+  if (tetrisBtn && tetrisSection && tetrisBlock && closeBtn && startedContent) {
     tetrisBtn.addEventListener("click", function (e) {
       e.preventDefault();
       // Use the same hidden-class toggle you’re using in HTML/CSS
       tetrisSection.classList.remove("hidden");
       tetrisBlock.classList.add("hidden");
+      startedContent.classList.add("hidden"); // hide started-content
 
       if (!window.tetrisInitialized) {
         window.tetrisInitialized = true;
@@ -125,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
     closeBtn.addEventListener("click", function () {
       tetrisSection.classList.add("hidden");
       tetrisBlock.classList.remove("hidden");
+      startedContent.classList.remove("hidden");
     });
   }
 
