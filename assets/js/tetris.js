@@ -6,25 +6,46 @@ function initTetris() {
   const ctx = canvas.getContext("2d");
 
   // --- Config ---
-  const CELL = 40; // px per square - fixed
+  let CELL = 40; // px per square - responsive on mobile
   let COLS, ROWS; // global within this function
-  //const COLS = 1040 / CELL;
-  //const ROWS = 560 / CELL;
 
   function getGridSize() {
-    if (window.innerWidth >= 1170) {
-      COLS = 26; // 1040 / 40
-      // fill the vertical space dynamically
-      ROWS = Math.floor((window.innerHeight - 320) / CELL);
-    } else if (window.innerWidth >= 841) {
-      // fit as many full 40px cells as possible within width
-      COLS = Math.floor((window.innerWidth - 130) / CELL);
-      ROWS = Math.floor((window.innerHeight - 360) / CELL);
+    // Use document.documentElement for more reliable mobile dimensions
+    const vw = document.documentElement.clientWidth;
+    const vh = document.documentElement.clientHeight;
+
+    if (vw >= 1170) {
+      CELL = 30; // Large for desktop
+      COLS = 35;
+      ROWS = Math.floor((vh - 280) / CELL);
+    } else if (vw >= 481) {
+      CELL = 22; // Bit smaller for tablets
+      COLS = Math.floor((vw - 130) / CELL);
+      ROWS = Math.floor((vh - 360) / CELL);
     } else {
-      // mobile
-      COLS = Math.floor((window.innerWidth - 30) / CELL);
-      ROWS = Math.floor((window.innerHeight - 360) / CELL);
+      // Mobile: calculate cell size to fit screen
+      const availableWidth = vw - 30;
+      const availableHeight = vh - 340;
+
+      // Target grid size (minimum playable)
+      const targetCols = 10;
+      const targetRows = 20;
+
+      // Calculate cell size that fits both dimensions
+      const cellFromWidth = Math.floor(availableWidth / targetCols);
+      const cellFromHeight = Math.floor(availableHeight / targetRows);
+
+      // Use width-based cell size, but cap it if too big
+      CELL = Math.min(cellFromWidth, 15); // Max 35px on mobile
+
+      // Now calculate actual grid size
+      COLS = Math.floor(availableWidth / CELL);
+      ROWS = Math.floor(availableHeight / CELL);
     }
+
+    // Ensure minimum playable size
+    COLS = Math.max(COLS, 10);
+    ROWS = Math.max(ROWS, 15);
   }
 
   function resizeTetris() {
@@ -334,7 +355,7 @@ function initTetris() {
     // draw outline
     const { matrix, x: px, y: py } = test;
     ctx.globalAlpha = 0.15;
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = "#000";
     for (let y = 0; y < matrix.length; y++)
       for (let x = 0; x < matrix[y].length; x++)
         if (matrix[y][x]) {
