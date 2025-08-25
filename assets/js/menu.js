@@ -95,6 +95,40 @@ document.addEventListener("DOMContentLoaded", function () {
   loadComponent("#footer-container", "/components/footer.html");
 
   // -------------------------------
+  // Load / Toggle Tetris
+  // -------------------------------
+  const tetrisBtn = document.getElementById("tetris-btn");
+  const tetrisBlock = document.querySelector(".tetris-block");
+  const tetrisSection = document.getElementById("tetris-section");
+  const closeBtn = document.getElementById("closeBtn");
+
+  // Only attach listeners if we're on the homepage (all elems exist).
+  if (tetrisBtn && tetrisSection && tetrisBlock && closeBtn) {
+    tetrisBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      // Use the same hidden-class toggle you’re using in HTML/CSS
+      tetrisSection.classList.remove("hidden");
+      tetrisBlock.classList.add("hidden");
+
+      if (!window.tetrisInitialized) {
+        window.tetrisInitialized = true;
+        if (typeof initTetris === "function") {
+          initTetris(); // from tetris.js
+        } else {
+          console.error(
+            "initTetris() not found. Make sure /assets/js/tetris.js is loaded."
+          );
+        }
+      }
+    });
+
+    closeBtn.addEventListener("click", function () {
+      tetrisSection.classList.add("hidden");
+      tetrisBlock.classList.remove("hidden");
+    });
+  }
+
+  // -------------------------------
   // Preloader functionality
   // -------------------------------
   const preloader = document.getElementById("preloader");

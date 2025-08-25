@@ -13,7 +13,6 @@
 
 /* Inner popup content box */
 #popup-content {
-  /* max-width: 620px;  */
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -30,7 +29,7 @@
 
 #popup-content figcaption {
   margin-top: 0.5em;
-  max-width: 60%;
+  max-width: 80%;
   display: inline-block;
   padding: 0 20px;
   /* font-family: var(--font-sans); */
@@ -40,13 +39,20 @@
   text-align: center;
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 1440px) {
   #popup-content figcaption {
-    max-width: 80%;
+    max-width: 60%;
   }
 }
 
 @media (max-width: 840px) {
+  #popup-content img,
+  #popup-content iframe {
+    max-height: 80vh;
+  }
+  .popup-nav {
+    font-size: 32px;
+  }
   #popup-content figcaption {
     max-width: 100%;
   }
@@ -79,7 +85,7 @@
   background: #000;
 }
 
-@media (min-width: 1399px) {
+@media (min-width: 1440px) {
   .popup-video-container {
     width: 80%;
   }
@@ -421,16 +427,5 @@
   }
   to {
     opacity: 1;
-  }
-}
-
-/* Responsive tweaks */
-@media (max-width: 768px) {
-  #popup-content img,
-  #popup-content iframe {
-    max-height: 80vh;
-  }
-  .popup-nav {
-    font-size: 32px;
   }
 }

@@ -15,9 +15,9 @@ function startTypedAnimations() {
   const subtitleStrings = [
     "for Web &amp; Video Projects.",
     "expressing ideas in motion.",
-    "always naming all her layers.",
+    "who always names her layers.",
     "looking for that perfect blend.",
-    "taking her laptop on city-trips.",
+    "taking her laptop on city trips.",
     "working internationally.",
     "based in Hasselt, Belgium.",
   ];

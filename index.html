@@ -47,6 +47,9 @@
     <!-- Glitch Effect -->
     <link rel="stylesheet" href="/assets/css/glitch.css" />
     <link rel="stylesheet" href="/assets/css/glitch-rgb.css" />
+
+    <!-- Tetris -->
+    <link rel="stylesheet" href="/assets/css/tetris.css" />
   </head>
 
   <body class="homepage">
@@ -80,6 +83,45 @@
               <span class="typed-subtitle"></span>
             </div>
           </div>
+
+          <!-- Tetris Game -->
+          <div class="section tetris hidden" id="tetris-section">
+            <div
+              class="frame"
+              id="game-frame"
+              aria-label="Tetris game container responsive"
+            >
+              <canvas id="game" width="1280" height="720"></canvas>
+            </div>
+            <div class="hud">
+              <div class="stats">
+                <div class="pill">Score: <strong id="score">0</strong></div>
+                <div class="pill">Lines: <strong id="lines">0</strong></div>
+                <div class="pill">Level: <strong id="level">1</strong></div>
+                <div class="pill btn" id="pauseBtn" title="Pause/Resume (P)">
+                  ⏯︎ Pause
+                </div>
+                <div class="pill btn" id="closeBtn" title="Close Game">
+                  ✖ Close
+                </div>
+              </div>
+
+              <div class="pill legend">
+                Controls:
+                <kbd>←</kbd>&nbsp;/&nbsp;<kbd>→</kbd> move · <kbd>↓</kbd> soft
+                drop · <kbd>↑</kbd> rotate · <kbd>Space</kbd> hard drop ·
+                <kbd>P</kbd> pause
+              </div>
+            </div>
+          </div>
+
+          <!-- Tetris Button -->
+          <div class="tetris-block" id="tetris-button-block">
+            <a href="#" class="btn" id="tetris-btn" data-text="&#9622;&#9624;">
+              <div>&#9631;&#9629;</div>
+            </a>
+          </div>
+
           <a href="#" class="mouse_btn"><i class="ri-mouse-line"></i></a>
         </div>
       </div>
@@ -96,6 +138,9 @@
 
     <!-- Sidebar placeholder -->
     <div id="sidebar-container"></div>
+
+    <!-- Tetris -->
+    <script src="/assets/js/tetris.js"></script>
 
     <!-- Load Components -->
     <script src="/assets/js/menu.js"></script>
