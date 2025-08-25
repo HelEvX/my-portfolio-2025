@@ -116,10 +116,6 @@ kbd {
 }
 
 @media (max-width: 840px) {
-  .section.tetris {
-    bottom: 80px;
-  }
-
   .hud .pill {
     flex: 1;
     border-radius: 8px;
@@ -142,7 +138,7 @@ kbd {
 
 .tetris-block {
   position: absolute;
-  bottom: 10%;
+  bottom: var(--footer-height);
   width: 60px;
   height: 60px;
 }

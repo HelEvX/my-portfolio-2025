@@ -60,7 +60,7 @@ body {
   background: var(--color-white);
   letter-spacing: 0;
   font-weight: var(--font-weight-regular);
-  height: 100vh;
+  height: 100dvh;
   opacity: 0;
   transition: var(--transition-slow);
 }
@@ -79,7 +79,7 @@ body.homepage {
 body:not(.homepage) {
   overflow-y: auto;
   height: auto;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 body header,
@@ -166,32 +166,32 @@ body.loaded .section {
   margin: var(--border-width-desktop);
   overflow: hidden;
   background: var(--color-white);
-  height: calc(100vh - (var(--border-width-desktop) * 2));
+  height: calc(100dvh - (var(--border-width-desktop) * 2));
 }
 
 /* Homepage container - fixed height */
 body.homepage .container {
-  height: calc(100vh - (var(--border-width-desktop) * 2));
+  height: calc(100dvh - (var(--border-width-desktop) * 2));
 }
 
 /* Other pages container - allow content to expand */
 body:not(.homepage) .container {
-  min-height: calc(100vh - (var(--border-width-desktop) * 2));
+  min-height: calc(100dvh - (var(--border-width-desktop) * 2));
   overflow: visible;
 }
 
 @media (max-width: 840px) {
   .container {
     margin: var(--border-width-mobile);
-    height: calc(100vh - (var(--border-width-mobile) * 2));
+    height: calc(100dvh - (var(--border-width-mobile) * 2));
   }
 
   body.homepage .container {
-    height: calc(100vh - (var(--border-width-mobile) * 2));
+    height: calc(100dvh - (var(--border-width-mobile) * 2));
   }
 
   body:not(.homepage) .container {
-    min-height: calc(100vh - (var(--border-width-mobile) * 2));
+    min-height: calc(100dvh - (var(--border-width-mobile) * 2));
     /* height: auto; */
     /* overflow: visible; */
   }
@@ -244,7 +244,7 @@ body:not(.homepage) .container {
   left: 0;
   top: 0;
   width: var(--border-width-desktop);
-  height: 100vh;
+  height: 100dvh;
   background: var(--color-secondary);
 }
 
@@ -252,7 +252,7 @@ body:not(.homepage) .container {
   right: 0;
   top: 0;
   width: var(--border-width-desktop);
-  height: 100vh;
+  height: 100dvh;
   background: var(--color-dark);
 }
 
@@ -283,7 +283,6 @@ body:not(.homepage) .container {
   .line.left,
   .line.right {
     width: var(--border-width-mobile);
-    height: 100vh;
   }
 }
 
@@ -619,7 +618,7 @@ a.btn:hover,
 .content-sidebar .widget-area {
   position: relative;
   overflow: auto;
-  height: 100vh;
+  height: 100dvh;
 }
 
 .content-sidebar .widget {
@@ -994,14 +993,14 @@ a.btn:hover,
 /* Homepage - section fills container height */
 body.homepage .section.started {
   height: calc(
-    100vh - var(--footer-height) - (var(--border-width-desktop) * 2)
+    100dvh - var(--footer-height) - (var(--border-width-desktop) * 2)
   );
-  /* height: 100vh; */
 }
+
 @media (max-width: 840px) {
   body.homepage .section.started {
     height: calc(
-      100vh - var(--footer-height-mobile) - (var(--border-width-mobile) * 2)
+      100dvh - var(--footer-height-mobile) - (var(--border-width-mobile) * 2)
     );
   }
 }
@@ -1009,15 +1008,15 @@ body.homepage .section.started {
 /* Non-homepage - section fills viewport height */
 body:not(.homepage) .section.started {
   height: calc(
-    100vh - var(--footer-height) - (var(--border-width-desktop) * 2)
+    100dvh - var(--footer-height) - (var(--border-width-desktop) * 2)
   );
   margin-bottom: var(--footer-height);
-  /* min-height: 100vh; */
 }
+
 @media (max-width: 840px) {
   body:not(.homepage) .section.started {
     height: calc(
-      100vh - var(--footer-height-mobile) - (var(--border-width-mobile) * 2)
+      100dvh - var(--footer-height-mobile) - (var(--border-width-mobile) * 2)
     );
     margin-bottom: var(--footer-height-mobile);
   }
@@ -1030,7 +1029,7 @@ body:not(.homepage) .section.started {
   text-align: center;
   position: absolute;
   z-index: var(--z-overlay);
-  bottom: calc(100vh * 0.1);
+  bottom: var(--footer-height);
 }
 
 .mouse_btn .moving-mouse {
@@ -1073,10 +1072,9 @@ body:not(.homepage) .section.started {
 @media (max-width: 840px) {
   .section.started .started-content .h-title {
     font-size: 52px;
-    padding: 0 20px;
   }
   .mouse_btn {
-    bottom: calc(100vh * 0.15);
+    bottom: calc(100dvh * 0.15);
   }
 }
 @media (max-width: 580px) {
@@ -1538,7 +1536,6 @@ body:not(.homepage) footer {
 @media (max-width: 840px) {
   .h-title {
     font-size: 52px;
-    padding: 0 20px;
   }
 
   .head-top {

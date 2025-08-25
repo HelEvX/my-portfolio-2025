@@ -12,7 +12,9 @@ function initTetris() {
   function getGridSize() {
     // Use document.documentElement for more reliable mobile dimensions
     const vw = document.documentElement.clientWidth;
-    const vh = document.documentElement.clientHeight;
+    const vh = window.visualViewport
+      ? window.visualViewport.height
+      : document.documentElement.clientHeight;
 
     if (vw >= 1170) {
       CELL = 30; // Large for desktop
@@ -69,6 +71,12 @@ function initTetris() {
   window.addEventListener("resize", () => {
     resizeTetris();
   });
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", () => {
+      resizeTetris();
+    });
+  }
 
   const TICK_BASE_MS = 800; // base gravity (level 1)
 
@@ -392,13 +400,46 @@ function initTetris() {
     ctx.textBaseline = "middle";
     ctx.font = "bold 48px ivystyle-tw, monospace";
     ctx.fillText("GAME OVER", (COLS * CELL) / 2, (ROWS * CELL) / 2 - 20);
+    // Different instructions based on device
     ctx.font = "24px ivystyle-sans, sans-serif";
-    ctx.fillText(
-      "Press Enter to restart",
-      (COLS * CELL) / 2,
-      (ROWS * CELL) / 2 + 24
-    );
+    const isMobile = window.innerWidth < 841;
+
+    if (isMobile) {
+      // Mobile: show tap instruction
+      ctx.fillText(
+        "Tap anywhere to restart",
+        (COLS * CELL) / 2,
+        (ROWS * CELL) / 2 + 20
+      );
+    } else {
+      // Desktop: show keyboard instruction
+      ctx.fillText(
+        "Press Enter to restart",
+        (COLS * CELL) / 2,
+        (ROWS * CELL) / 2 + 20
+      );
+    }
   }
+
+  // Add canvas click handler for mobile restart
+  function setupCanvasRestart() {
+    canvas.addEventListener("click", () => {
+      if (over) {
+        restart();
+      }
+    });
+
+    // Also handle touch events
+    canvas.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      if (over) {
+        restart();
+      }
+    });
+  }
+
+  // Call this in your initialization
+  setupCanvasRestart();
 
   function loop(now) {
     update(now);
@@ -458,15 +499,74 @@ function initTetris() {
   }
 
   // ================== MOBILE CONTROLS ==================
+  let holdInterval = null;
+  let holdTimeout = null;
+
   function setupMobileControls() {
     const controls = document.getElementById("mobile-controls");
     if (!controls) return;
 
     controls.querySelectorAll("button").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        handleAction(btn.dataset.action);
-      });
+      const action = btn.dataset.action;
+
+      // Actions that support hold-to-repeat
+      if (action === "left" || action === "right" || action === "rotate") {
+        btn.addEventListener("touchstart", (e) => {
+          e.preventDefault();
+          startHold(action);
+        });
+
+        btn.addEventListener("touchend", (e) => {
+          e.preventDefault();
+          stopHold();
+        });
+
+        btn.addEventListener("touchcancel", (e) => {
+          e.preventDefault();
+          stopHold();
+        });
+
+        btn.addEventListener("mousedown", (e) => {
+          e.preventDefault();
+          startHold(action);
+        });
+
+        btn.addEventListener("mouseup", (e) => {
+          e.preventDefault();
+          stopHold();
+        });
+
+        btn.addEventListener("mouseleave", () => {
+          stopHold();
+        });
+      } else {
+        // Drop and pause - single tap only
+        btn.addEventListener("click", () => {
+          handleAction(action);
+        });
+      }
     });
+  }
+
+  function startHold(action) {
+    stopHold();
+    handleAction(action);
+    holdTimeout = setTimeout(() => {
+      holdInterval = setInterval(() => {
+        handleAction(action);
+      }, 100);
+    }, 300);
+  }
+
+  function stopHold() {
+    if (holdTimeout) {
+      clearTimeout(holdTimeout);
+      holdTimeout = null;
+    }
+    if (holdInterval) {
+      clearInterval(holdInterval);
+      holdInterval = null;
+    }
   }
 
   function handleAction(action) {
@@ -480,7 +580,7 @@ function initTetris() {
       case "rotate":
         rotateCW();
         break;
-      case "drop": // matches your HTML button
+      case "drop":
         hardDrop();
         break;
       case "pause":

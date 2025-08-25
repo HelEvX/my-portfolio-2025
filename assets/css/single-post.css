@@ -1,6 +1,6 @@
 /* Mouse icon fix */
 .blogpage .mouse_btn {
-  top: calc(100vh * 0.78);
+  top: calc(100dvh * 0.78);
   left: 50%;
   height: 56px;
   border-radius: 12px;

@@ -12,6 +12,16 @@
   width: 100%;
   background: var(--color-white);
   clip: rect(0, 0, 0, 0);
+  /* Ensure identical text rendering */
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  white-space: inherit;
+  word-break: inherit;
+  overflow-wrap: inherit;
 }
 
 /* Red channel (using orange) shifted right */
