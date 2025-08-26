@@ -1073,9 +1073,6 @@ body:not(.homepage) .section.started {
   .section.started .started-content .h-title {
     font-size: 52px;
   }
-  .mouse_btn {
-    bottom: calc(100dvh * 0.15);
-  }
 }
 @media (max-width: 580px) {
   .section.started .started-content .h-title span {

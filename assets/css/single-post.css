@@ -1,9 +1,10 @@
 /* Mouse icon fix */
 .blogpage .mouse_btn {
-  top: calc(100dvh * 0.78);
   left: 50%;
+  top: calc(100dvh - var(--footer-height) - 150px);
   height: 56px;
   border-radius: 12px;
+  border: 2px inset var(--color-border);
   transform: translateX(-50%);
   background: var(--color-white);
 }
@@ -35,28 +36,27 @@
     linear-gradient(90deg, var(--color-bg-light) 1px, transparent 1px),
     linear-gradient(0deg, var(--color-bg-light) 1px, transparent 1px);
   background-color: var(--color-primary);
-  background-size: 95% auto, 28px 28px, 28px 28px; /*grid spacing*/
+  background-size: 93% auto, 28px 28px, 28px 28px; /*grid spacing*/
 
   /* Blend mode for paper texture effect */
   background-blend-mode: hard-light, normal, normal;
 
   /* PNG mask: */
   mask-image: url("/assets/images/Texturelabs_Paper_187M.jpg");
-  mask-size: 95% auto;
+  mask-size: 93% auto;
   mask-repeat: no-repeat;
   mask-position: center 86px;
   -webkit-mask-position: center 86px;
 
   /* For Safari/Chrome */
   -webkit-mask-image: url("/assets/images/Texturelabs_Paper_187M.jpg");
-  -webkit-mask-size: 95% auto;
+  -webkit-mask-size: 93% auto;
   -webkit-mask-repeat: no-repeat;
 }
 
-@media (min-width: 1440px) {
+@media (max-width: 1200px) {
   .section.started.blog-cover {
-    background-size: 95% auto, 35px 35px, 35px 35px;
-
+    /* Change to cover for all background layers */
     background-image: url("/assets/images/Texturelabs_Paper_187M_rotated90.jpg"),
       linear-gradient(90deg, var(--color-bg-light) 1px, transparent 1px),
       linear-gradient(0deg, var(--color-bg-light) 1px, transparent 1px);
@@ -70,7 +70,7 @@
 @media (max-width: 840px) {
   .section.started.blog-cover {
     margin: 0 35px;
-    /* Change to cover for all background layers */
+
     background-position: top;
     mask-position: top;
     -webkit-mask-position: top;
