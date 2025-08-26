@@ -7,13 +7,39 @@ const { JSDOM } = jsdom;
 
 // Paths - adjust if needed
 const searchJsonPath = path.join(__dirname, "search.json");
-const postsDir = path.join(__dirname, "posts"); // Folder containing your blog post HTML files
+const postsDir = path.join(__dirname, "posts"); // Folder containing blog post HTML files
 
 // Helper function: Extract filename from URL slug
 function extractFilenameFromUrl(url) {
   if (url.endsWith("/")) url = url.slice(0, -1);
   const slug = url.substring(url.lastIndexOf("/") + 1);
   return slug + ".html"; // Adjust extension if needed
+}
+
+// Utility: escape HTML special characters in titles
+function escapeHtml(text) {
+  return text.replace(/[&<>"']/g, (match) => {
+    const escapeMap = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    };
+    return escapeMap[match];
+  });
+}
+
+// Utility: slugify categories/tags for URLs
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-") // spaces → dash
+    .replace(/[^\w-]+/g, "") // remove non-word chars
+    .replace(/--+/g, "-") // collapse multiple dashes
+    .replace(/^-+/, "") // trim start
+    .replace(/-+$/, ""); // trim end
 }
 
 async function main() {
@@ -47,6 +73,8 @@ async function main() {
     const html = fs.readFileSync(postPath, "utf8");
     const dom = new JSDOM(html);
     const document = dom.window.document;
+
+    // === PREV/NEXT NAVIGATION ===
 
     // Find or create navigation container
     let nav = document.querySelector("#post-navigation-placeholder");
@@ -96,24 +124,62 @@ async function main() {
         </div>
         `;
 
+    // === CATEGORIES / TAGS / BYLINE ===
+
+    // Build categories HTML
+    let catHtml = "";
+    if (post.categories && post.categories.length > 0) {
+      catHtml = `
+        <div class="cat-links">
+          <span>Posted in</span>
+          ${post.categories
+            .map(
+              (cat) =>
+                `<a href="/categories/${slugify(cat)}">${escapeHtml(cat)}</a>`
+            )
+            .join(" ")}
+        </div>`;
+    }
+
+    // Build tags HTML
+    let tagsHtml = "";
+    if (post.tags && post.tags.length > 0) {
+      tagsHtml = `
+        <div class="tags-links">
+          <span>Tags:</span>
+          ${post.tags
+            .map(
+              (tag) =>
+                `<a href="/tags/${slugify(tag)}" rel="tag">${escapeHtml(
+                  tag
+                )}</a>`
+            )
+            .join(" ")}
+        </div>`;
+    }
+
+    // Author (static)
+    const bylineHtml = `
+      <div class="byline">
+        by <span class="author">Heleen Evers</span>
+      </div>
+    `;
+
+    // Insert into DOM
+    let metaContainer = document.querySelector(".post-meta");
+    if (!metaContainer) {
+      // if you don’t have a wrapper, you can append after the post content
+      metaContainer = document.createElement("div");
+      metaContainer.className = "post-meta";
+      document.body.appendChild(metaContainer);
+    }
+
+    metaContainer.innerHTML = `${catHtml}${bylineHtml}${tagsHtml}`;
+
     // Write updated HTML back to file
     fs.writeFileSync(postPath, dom.serialize(), "utf8");
     console.log(`Updated navigation for: ${filename}`);
   }
-}
-
-// Utility to escape HTML special characters in titles
-function escapeHtml(text) {
-  return text.replace(/[&<>"']/g, (match) => {
-    const escapeMap = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;",
-    };
-    return escapeMap[match];
-  });
 }
 
 main().catch((err) => {
