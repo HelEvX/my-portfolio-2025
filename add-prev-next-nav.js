@@ -1,4 +1,6 @@
-// Run the script after your posts are ready and search.json is updated: npm run update-nav
+// Enhanced navigation builder - updates prev/next nav AND post metadata
+// Handles: date, title, page title, breadcrumbs in blog post files
+// Run the script after posts are ready and search.json is updated: npm run update-nav
 
 const fs = require("fs");
 const path = require("path");
@@ -14,6 +16,21 @@ function extractFilenameFromUrl(url) {
   if (url.endsWith("/")) url = url.slice(0, -1);
   const slug = url.substring(url.lastIndexOf("/") + 1);
   return slug + ".html"; // Adjust extension if needed
+}
+
+// Helper: format date for display
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+// Helper: get category display name (capitalize first letter)
+function getCategoryDisplayName(category) {
+  return category.charAt(0).toUpperCase() + category.slice(1);
 }
 
 // Utility: escape HTML special characters in titles
@@ -123,6 +140,48 @@ async function main() {
             </div>
         </div>
         `;
+
+    // === METADATA UPDATES ===
+
+    // 1. UPDATE PAGE TITLE
+    const titleElement = document.querySelector("title");
+    if (titleElement) {
+      titleElement.textContent = `Heleen Evers | ${post.title}`;
+    }
+
+    // 2. UPDATE DATE IN STARTED SECTION
+    const dateElement = document.querySelector(".started-content .date");
+    if (dateElement) {
+      dateElement.textContent = formatDate(post.date);
+    }
+
+    // 3. UPDATE BLOG TITLE AND DATA-TEXT ATTRIBUTE
+    const titleElements = document.querySelectorAll(".h-title.blog_title");
+    titleElements.forEach((el) => {
+      el.textContent = post.title;
+      el.setAttribute("data-text", post.title);
+    });
+
+    // 4. UPDATE BREADCRUMBS (with category if available)
+    const breadcrumbElement = document.querySelector(
+      ".h-subtitle.typing-bread p"
+    );
+    if (breadcrumbElement && post.categories && post.categories.length > 0) {
+      const categoryName = getCategoryDisplayName(post.categories[0]);
+      breadcrumbElement.innerHTML = `
+        <a href="../index.html">Home</a> /
+        <a href="../blog.html">Blog</a> /
+        <a href="../categories/${slugify(
+          post.categories[0]
+        )}/">${categoryName}</a>
+      `;
+    } else if (breadcrumbElement) {
+      // Fallback to basic breadcrumb if no categories
+      breadcrumbElement.innerHTML = `
+        <a href="../index.html">Home</a> /
+        <a href="../blog.html">Blog</a>
+      `;
+    }
 
     // === CATEGORIES / TAGS / BYLINE ===
 
