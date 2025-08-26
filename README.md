@@ -6,12 +6,14 @@ Built as a static site with HTML, CSS, and JavaScript, deployed via Netlify.
 ## Features
 
 - Minimal, responsive design
+- Blog with tags, categories, and archive pages
+- Paginated blog listings and archive pages
 - Contact form (via Netlify Forms)
 - Blog comments (via Giscus + GitHub Discussions)
 - Privacy notice page (GDPR-compliant)
 - HTTPS provided by Netlify
 
-## Tech stack
+## Tech Stack
 
 - HTML5 / CSS3 / Vanilla JavaScript
 - Node.js (for build/helper scripts)
@@ -25,9 +27,10 @@ This project uses Node.js libraries for build-time helper tasks such as:
 
 - Resizing/optimizing images automatically
 - Building blog posts into pretty URLs
+- Creating paginated blog listings
+- Generating tag and category archive pages
 - Updating `search.json` with new content
 - Managing previous/next navigation for blog posts
-- Creating paginated blog listings
 
 ### Dependencies
 
@@ -38,30 +41,69 @@ See `package.json` for exact version details.
 
 ### Scripts
 
-- npm run images
-- nmp run build-blog
-- npm run update-nav
+- `npm run images` – Process and optimize images
+- `npm run build-blog` – Generate paginated blog pages
+- `npm run build-archives` – Generate tag/category archive pages
+- `npm run build-all` – Build blog pages and archives together
+- `npm run update-nav` – Update blog post navigation
 
 ## Build Workflow
 
- Raw images     Raw blog posts (HTML/Markdown)
-     │                   │
-     │                   │
-     ▼                   ▼
- [ sharp ]         [ jsdom scripts ]
- (resize/optimize) (generate pretty URLs,
-                    update search.json,
-                    create paginated blog,
-                    add prev/next links)
-     │                   │
-     └───────────┬───────┘
-                 ▼
-        Final static site
- (HTML + CSS + JS + assets)
-                 │
-                 ▼
-              Netlify
-   (hosting, HTTPS, contact forms)
+```
+┌─────────────────┐    ┌──────────────────────────────┐
+│   Raw images    │    │   Raw blog posts             │
+│                 │    │   (HTML/Markdown)            │
+└─────────┬───────┘    └─────────────┬────────────────┘
+          │                          │
+          ▼                          ▼
+    ┌──────────┐            ┌─────────────────┐
+    │  sharp   │            │  jsdom scripts  │
+    │ (resize/ │            │ • pretty URLs   │
+    │ optimize)│            │ • search.json   │
+    └─────┬────┘            │ • paginated     │
+          │                 │   blog pages    │
+          │                 │ • archive pages │
+          │                 │ • prev/next nav │
+          │                 └─────────┬───────┘
+          │                           │
+          └───────────┬─────────────────┘
+                      ▼
+            ┌──────────────────┐
+            │ Final static site│
+            │(HTML + CSS + JS  │
+            │    + assets)     │
+            └─────────┬────────┘
+                      │
+                      ▼
+                ┌──────────┐
+                │ Netlify  │
+                │(hosting, │
+                │ HTTPS,   │
+                │ forms)   │
+                └──────────┘
+```
+
+### Site Structure
+
+```
+/
+├── index.html              # Homepage
+├── blog.html               # Blog overview (page 1)
+├── blog/page/2/            # Additional blog pages
+├── categories/
+│   ├── work/               # Category archive pages
+│   ├── personal/
+│   └── school/
+├── tags/
+│   ├── design/             # Tag archive pages
+│   ├── motion-graphics/
+│   └── [other-tags]/
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── img/
+└── [individual blog posts with pretty URLs]
+```
 
 ## Deployment
 

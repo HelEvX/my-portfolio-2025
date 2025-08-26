@@ -160,6 +160,16 @@ section a:hover {
   text-decoration: underline;
 }
 
+.content-sidebar section a {
+  color: var(--color-dark);
+  letter-spacing: normal;
+}
+
+.content-sidebar section a:hover {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
 /* Table */
 .table-responsive {
   width: 100%;
