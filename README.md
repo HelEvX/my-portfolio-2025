@@ -29,6 +29,7 @@ This project uses Node.js libraries for build-time helper tasks such as:
 - Building blog posts into pretty URLs
 - Creating paginated blog listings
 - Generating tag and category archive pages
+- Updating blog post metadata (titles, dates, breadcrumbs)
 - Updating `search.json` with new content
 - Managing previous/next navigation for blog posts
 
@@ -45,7 +46,7 @@ See `package.json` for exact version details.
 - `npm run build-blog` – Generate paginated blog pages
 - `npm run build-archives` – Generate tag/category archive pages
 - `npm run build-all` – Build blog pages and archives together
-- `npm run update-nav` – Update blog post navigation
+- `npm run update-nav` – Update blog post navigation and metadata
 
 ## Build Workflow
 
@@ -101,8 +102,9 @@ See `package.json` for exact version details.
 ├── assets/
 │   ├── css/
 │   ├── js/
-│   └── img/
-└── [individual blog posts with pretty URLs]
+│   ├── img/
+│   └── pdfs/
+└── posts/                  # Individual blog posts
 ```
 
 ## Deployment

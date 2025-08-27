@@ -6,6 +6,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  gap: 30px;
 }
 
 .section.about .content .title {
@@ -15,24 +16,30 @@
 .section.about .about-content {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
   gap: 40px;
 }
 
-.section.about .image {
+.section.about .profilepic {
   flex: 0 0 auto;
-  margin-top: 28px;
-}
-
-.section.about .image img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  height: auto;
+  width: 281px;
+  aspect-ratio: 9 / 16;
+  background-image: url("/assets/images/glitch_profilepic500.webp");
   object-fit: cover;
+  background-repeat: no-repeat;
 }
 
 .section.about .desc {
   flex: 1;
   min-width: 300px;
+}
+
+@media (min-width: 1440px) {
+  .section.about .profilepic {
+    width: 177px;
+    background-position: 20% 6%;
+  }
 }
 
 @media (max-width: 840px) {
@@ -50,24 +57,16 @@
     text-align: center;
   }
 
-  .section.about .image img {
-    width: 200px;
-    height: 200px;
+  .section.about .profilepic {
+    width: 281px;
+    aspect-ratio: 1 / 1;
+    background-position: center 20%;
   }
 }
 
 @media (max-width: 480px) {
   .section.about .content {
     justify-content: center;
-  }
-
-  .section.about .image {
-    margin-top: 30px;
-  }
-
-  .section.about .image img {
-    width: 150px;
-    height: 150px;
   }
 }
 
