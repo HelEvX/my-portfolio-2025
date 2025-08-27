@@ -132,3 +132,502 @@
     transform: skew(0deg);
   }
 }
+
+/* =============================================== */
+/* =============================================== */
+/* =============================================== */
+
+/* SVG VERSION */
+
+.he-logo {
+  margin-bottom: 30px;
+  width: 150px;
+  display: none;
+}
+@media (max-width: 480px) {
+  .he-logo {
+    display: inline-block;
+  }
+  body.homepage .h-title {
+    display: none;
+  }
+}
+
+/* SVG colors */
+.he-logo [class^="base-slice"] {
+  fill: var(--color-dark);
+}
+.he-logo [class^="orange"] {
+  fill: var(--color-primary);
+}
+.he-logo [class^="teal"] {
+  fill: var(--color-secondary);
+}
+
+/* Optional: different flicker durations for realism */
+.he-logo [class^="orange-slice"] {
+  animation-duration: 0.12s;
+}
+.he-logo [class^="teal-slice"] {
+  animation-duration: 0.18s;
+}
+.he-logo [class^="base-slice"] {
+  animation-duration: 0.14s;
+}
+
+/* Base / Black slices */
+.base-slice1 {
+  animation: flicker 0.15s infinite alternate;
+}
+.base-slice2 {
+  animation: glitch-slide2 2s infinite linear alternate-reverse,
+    flicker 0.14s infinite alternate;
+}
+.base-slice3 {
+  animation: glitch-slide3 2s infinite linear alternate-reverse,
+    flicker 0.16s infinite alternate;
+}
+.base-slice4 {
+  animation: flicker 0.13s infinite alternate;
+}
+.base-slice5 {
+  animation: flicker 0.15s infinite alternate;
+}
+.base-slice6 {
+  animation: flicker 0.14s infinite alternate;
+}
+.base-slice7 {
+  animation: glitch-slide7 2s infinite linear alternate-reverse,
+    flicker 0.16s infinite alternate;
+}
+.base-slice8 {
+  animation: flicker 0.13s infinite alternate;
+}
+.base-slice9 {
+  animation: glitch-slide9 2s infinite linear alternate-reverse,
+    flicker 0.15s infinite alternate;
+}
+.base-slice10 {
+  animation: flicker 0.14s infinite alternate;
+}
+.base-slice11 {
+  animation: flicker 0.16s infinite alternate;
+}
+.base-slice12 {
+  animation: glitch-slide12 2s infinite linear alternate-reverse,
+    flicker 0.13s infinite alternate;
+}
+.base-slice13 {
+  animation: flicker 0.15s infinite alternate;
+}
+
+/* Orange / Red slices */
+.orange-slice1 {
+  animation: flicker 0.12s infinite alternate;
+}
+.orange-slice2 {
+  animation: glitch-slide3 2s infinite linear alternate-reverse,
+    flicker 0.13s infinite alternate;
+}
+.orange-slice3 {
+  animation: glitch-slide4 2s infinite linear alternate-reverse,
+    flicker 0.14s infinite alternate;
+}
+.orange-slice4 {
+  animation: flicker 0.12s infinite alternate;
+}
+.orange-slice5 {
+  animation: flicker 0.15s infinite alternate;
+}
+.orange-slice6 {
+  animation: flicker 0.13s infinite alternate;
+}
+.orange-slice7 {
+  animation: glitch-slide8 2s infinite linear alternate-reverse,
+    flicker 0.14s infinite alternate;
+}
+.orange-slice8 {
+  animation: flicker 0.12s infinite alternate;
+}
+.orange-slice9 {
+  animation: glitch-slide10 2s infinite linear alternate-reverse,
+    flicker 0.15s infinite alternate;
+}
+.orange-slice10 {
+  animation: flicker 0.13s infinite alternate;
+}
+.orange-slice11 {
+  animation: flicker 0.14s infinite alternate;
+}
+.orange-slice12 {
+  animation: glitch-slide13 2s infinite linear alternate-reverse,
+    flicker 0.12s infinite alternate;
+}
+.orange-slice13 {
+  animation: flicker 0.15s infinite alternate;
+}
+
+/* Cyan / Teal slices */
+.teal-slice1 {
+  animation: flicker 0.18s infinite alternate;
+}
+.teal-slice2 {
+  animation: glitch-slide4 2s infinite linear alternate-reverse,
+    flicker 0.16s infinite alternate;
+}
+.teal-slice3 {
+  animation: glitch-slide5 2s infinite linear alternate-reverse,
+    flicker 0.17s infinite alternate;
+}
+.teal-slice4 {
+  animation: flicker 0.15s infinite alternate;
+}
+.teal-slice5 {
+  animation: flicker 0.18s infinite alternate;
+}
+.teal-slice6 {
+  animation: flicker 0.16s infinite alternate;
+}
+.teal-slice7 {
+  animation: glitch-slide9 2s infinite linear alternate-reverse,
+    flicker 0.17s infinite alternate;
+}
+.teal-slice8 {
+  animation: flicker 0.15s infinite alternate;
+}
+.teal-slice9 {
+  animation: glitch-slide11 2s infinite linear alternate-reverse,
+    flicker 0.18s infinite alternate;
+}
+.teal-slice10 {
+  animation: flicker 0.16s infinite alternate;
+}
+.teal-slice11 {
+  animation: flicker 0.17s infinite alternate;
+}
+.teal-slice12 {
+  animation: glitch-slide1 2s infinite linear alternate-reverse,
+    flicker 0.15s infinite alternate;
+}
+.teal-slice13 {
+  animation: flicker 0.18s infinite alternate;
+}
+
+.glitch-paused {
+  animation: none !important; /* stop existing animations */
+  transform: translateX(0) !important; /* reset to neutral */
+  opacity: 1 !important; /* optional: reset flicker */
+}
+
+/* Keyframes for 13 jerky horizontal glitch slides */
+@keyframes glitch-slide1 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(12px);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  30% {
+    transform: translateX(15px);
+  }
+  40% {
+    transform: translateX(-10px);
+  }
+}
+@keyframes glitch-slide2 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-10px);
+  }
+  20% {
+    transform: translateX(14px);
+  }
+  30% {
+    transform: translateX(-12px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+}
+@keyframes glitch-slide3 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(8px);
+  }
+  20% {
+    transform: translateX(-15px);
+  }
+  30% {
+    transform: translateX(10px);
+  }
+  40% {
+    transform: translateX(-8px);
+  }
+}
+@keyframes glitch-slide4 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-12px);
+  }
+  20% {
+    transform: translateX(10px);
+  }
+  30% {
+    transform: translateX(-15px);
+  }
+  40% {
+    transform: translateX(12px);
+  }
+}
+@keyframes glitch-slide5 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(14px);
+  }
+  20% {
+    transform: translateX(-10px);
+  }
+  30% {
+    transform: translateX(12px);
+  }
+  40% {
+    transform: translateX(-14px);
+  }
+}
+@keyframes glitch-slide6 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-8px);
+  }
+  20% {
+    transform: translateX(12px);
+  }
+  30% {
+    transform: translateX(-10px);
+  }
+  40% {
+    transform: translateX(7px);
+  }
+}
+@keyframes glitch-slide7 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(10px);
+  }
+  20% {
+    transform: translateX(-12px);
+  }
+  30% {
+    transform: translateX(14px);
+  }
+  40% {
+    transform: translateX(-11px);
+  }
+}
+@keyframes glitch-slide8 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-15px);
+  }
+  20% {
+    transform: translateX(8px);
+  }
+  30% {
+    transform: translateX(-12px);
+  }
+  40% {
+    transform: translateX(13px);
+  }
+}
+@keyframes glitch-slide9 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(12px);
+  }
+  20% {
+    transform: translateX(-9px);
+  }
+  30% {
+    transform: translateX(11px);
+  }
+  40% {
+    transform: translateX(-13px);
+  }
+}
+@keyframes glitch-slide10 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-11px);
+  }
+  20% {
+    transform: translateX(14px);
+  }
+  30% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(10px);
+  }
+}
+@keyframes glitch-slide11 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(9px);
+  }
+  20% {
+    transform: translateX(-12px);
+  }
+  30% {
+    transform: translateX(14px);
+  }
+  40% {
+    transform: translateX(-7px);
+  }
+}
+@keyframes glitch-slide12 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-13px);
+  }
+  20% {
+    transform: translateX(10px);
+  }
+  30% {
+    transform: translateX(-14px);
+  }
+  40% {
+    transform: translateX(12px);
+  }
+}
+@keyframes glitch-slide13 {
+  0%,
+  5%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(15px);
+  }
+  20% {
+    transform: translateX(-11px);
+  }
+  30% {
+    transform: translateX(13px);
+  }
+  40% {
+    transform: translateX(-9px);
+  }
+}
+
+/* Flicker keyframes (shared by all slices) */
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0.7;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  60% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Pauses the slice outside the 2s glitch window */
+@keyframes glitch-burst {
+  0%,
+  16.66% {
+    /* first 2s of 12s */
+    animation-play-state: running;
+  }
+  16.67%,
+  100% {
+    /* remaining 10s */
+    animation-play-state: paused;
+  }
+}

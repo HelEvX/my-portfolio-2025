@@ -354,3 +354,32 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") closePopup();
   });
 });
+
+// SVG logo glitch burst effect
+
+const slices = document.querySelectorAll(
+  ".orange-slice1, .orange-slice2, .orange-slice3, .orange-slice4, .orange-slice5, .orange-slice6, .orange-slice7, .orange-slice8, .orange-slice9, .orange-slice10, .orange-slice11, .orange-slice12, .orange-slice13, .teal-slice1, .teal-slice2, .teal-slice3, .teal-slice4, .teal-slice5, .teal-slice6, .teal-slice7, .teal-slice8, .teal-slice9, .teal-slice10, .teal-slice11, .teal-slice12, .teal-slice13, .base-slice1, .base-slice2, .base-slice3, .base-slice4, .base-slice5, .base-slice6, .base-slice7, .base-slice8, .base-slice9, .base-slice10, .base-slice11, .base-slice12, .base-slice13"
+);
+
+// Enable glitch
+function startGlitch() {
+  slices.forEach((slice) => {
+    slice.classList.remove("glitch-paused");
+  });
+}
+
+// Pause glitch in neutral state
+function stopGlitch() {
+  slices.forEach((slice) => {
+    slice.classList.add("glitch-paused");
+  });
+}
+
+// Initial state: paused
+stopGlitch();
+
+// Repeat bursts every 6s
+setInterval(() => {
+  startGlitch();
+  setTimeout(stopGlitch, 2000);
+}, 6000);
