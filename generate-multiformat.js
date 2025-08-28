@@ -13,7 +13,7 @@ const path = require("path");
 
 const baseFolder = path.join(__dirname, "assets/img");
 const folders = ["blog", "works"];
-const optimizedFolderName = "optimized";
+const optimizedRoot = path.join(baseFolder, "optimized");
 
 // Target widths for output
 const sizes = [600, 1200];
@@ -66,17 +66,15 @@ async function processFolder(folderPath, relativePath = "") {
 
   for (const entry of entries) {
     if (entry.isDirectory()) {
-      if (entry.name === optimizedFolderName) continue; // skip optimized folders
+      if (entry.name === "optimized") continue; // skip optimized folders
       await processFolder(folderPath, path.join(relativePath, entry.name));
     } else {
       const ext = path.extname(entry.name).toLowerCase();
       if ([".jpg", ".jpeg", ".png"].includes(ext)) {
         const inputPath = path.join(folderPath, relativePath, entry.name);
-        const destFolder = path.join(
-          folderPath,
-          optimizedFolderName,
-          relativePath
-        );
+
+        // 🚀 Destination always inside assets/img/optimized + same relative structure
+        const destFolder = path.join(optimizedRoot, relativePath);
         ensureFolderExists(destFolder);
 
         const baseName = path.parse(entry.name).name;
@@ -110,11 +108,9 @@ async function processFolder(folderPath, relativePath = "") {
       await processFolder(baseFolder, targetArg);
     } else {
       const relativePath = path.dirname(targetArg);
-      const destFolder = path.join(
-        baseFolder,
-        optimizedFolderName,
-        relativePath
-      );
+
+      // 🚀 Output path always under optimized root
+      const destFolder = path.join(optimizedRoot, relativePath);
       ensureFolderExists(destFolder);
 
       const baseName = path.parse(fullTargetPath).name;
@@ -124,7 +120,7 @@ async function processFolder(folderPath, relativePath = "") {
   } else {
     // No argument: process all "blog" and "works" folders
     for (const folder of folders) {
-      await processFolder(path.join(baseFolder, folder));
+      await processFolder(baseFolder, folder);
     }
   }
 

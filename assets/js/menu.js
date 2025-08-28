@@ -224,6 +224,16 @@ document.addEventListener("DOMContentLoaded", function () {
     '.sort-menu input[name="sort_radio"]'
   );
 
+  // Create the "no items" message element once
+  const noItemsMsg = document.createElement("p");
+  noItemsMsg.textContent = "No items in this category added yet – stay tuned!";
+  noItemsMsg.classList.add("no-items-message"); // optional class for styling
+  noItemsMsg.style.opacity = "0";
+  noItemsMsg.style.transform = "scale(0.8)";
+  noItemsMsg.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+  noItemsMsg.style.display = "none"; // hidden by default
+  container.appendChild(noItemsMsg);
+
   let currentFilter = ".box-item"; // default: show all
   let currentSort = "date"; // default: newest first
 
@@ -282,6 +292,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Phase 2: after fade-out duration, show/hide and fade in matches
     setTimeout(() => {
+      let anyVisible = false;
+
       itemsArray.forEach((item) => {
         const matches =
           filterValue === ".box-item" ||
@@ -289,6 +301,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (matches) {
           item.style.display = "block";
+          anyVisible = true; // ✅ important: mark that something is visible
 
           // Trigger fade-in transition
           requestAnimationFrame(() => {
@@ -300,8 +313,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // After filtering is applied, also sort the visible set
-      sortItems(currentSort);
+      if (anyVisible) {
+        // Hide message with fade-out
+        noItemsMsg.style.opacity = "0";
+        noItemsMsg.style.transform = "scale(0.8)";
+        setTimeout(() => (noItemsMsg.style.display = "none"), 400);
+        sortItems(currentSort);
+      } else {
+        // Show message with fade-in
+        noItemsMsg.style.display = "block";
+        requestAnimationFrame(() => {
+          noItemsMsg.style.opacity = "1";
+          noItemsMsg.style.transform = "scale(1)";
+        });
+      }
     }, 400); // duration = match CSS transition duration
   }
 
