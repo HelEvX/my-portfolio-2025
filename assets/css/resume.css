@@ -488,6 +488,14 @@
     break-after: page;
   }
 
+  .pagetop {
+    margin: 60px 0 5px;
+  }
+
+  .cols {
+    gap: 20px;
+  }
+
   /* Hide elements only during printing */
   .noprint {
     display: none !important;
