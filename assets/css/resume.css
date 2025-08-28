@@ -419,7 +419,11 @@
 .service-items .service-item {
   flex: 0 1 calc(48% - 0%);
   min-width: 250px;
-  display: flex;
+  /* display: flex; */
+}
+
+.service-items .service-item.offer {
+  flex: 1;
 }
 
 @media (max-width: 840px) {
@@ -430,11 +434,14 @@
 
 .service-items .service-item .icon {
   float: left;
-  width: 36px;
   text-align: center;
-  font-size: 30px;
+  font-size: 24px;
   color: var(--color-primary);
   margin-right: 15px;
+}
+
+.service-items .service-item .icon.offer {
+  color: var(--color-secondary);
 }
 
 @media (max-width: 480px) {
@@ -451,6 +458,12 @@
   margin: 6px 0 10px 0;
 }
 
+.service-items .service-item .name.offer {
+  background: rgba(78, 205, 196, 0.45);
+  display: inline-block;
+  padding: 0 10px;
+}
+
 @media (max-width: 480px) {
   .service-items .service-item .name {
     margin: 0 0 10px 0;
@@ -458,10 +471,7 @@
 }
 
 .service-items .service-item p {
-  margin: 0;
-  color: var(--color-text);
-  line-height: 1.6;
-  font-size: 13px;
+  color: var(--color-light-text);
 }
 
 @media (max-width: 480px) {
@@ -473,6 +483,11 @@
 /* PRINT VERSION */
 
 @media print {
+  .page,
+  .page-break {
+    break-after: page;
+  }
+
   /* Hide elements only during printing */
   .noprint {
     display: none !important;

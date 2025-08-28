@@ -52,7 +52,7 @@ class SkillsInitializer {
     dottedSkills.forEach((container) => {
       if (!container.querySelector(".skill-instruction")) {
         const instruction = document.createElement("div");
-        instruction.className = "skill-instruction";
+        instruction.className = "skill-instruction noprint";
         instruction.style.cssText =
           "font-size: 12px; color: var(--color-light-text);; margin-bottom: 10px; margin-top: -20px; font-family: ivystyle-sans; font-style: italic; text-align: right;";
         instruction.textContent = "Hover over skills for detailed explanations";
@@ -94,7 +94,7 @@ class SkillsInitializer {
         progress.addEventListener("mouseenter", () => {
           tooltip.style.opacity = "1";
           tooltip.style.visibility = "visible";
-          tooltip.style.bottom = "75%";
+          tooltip.style.top = "0";
           tooltip.style.left = "50%";
         });
 
