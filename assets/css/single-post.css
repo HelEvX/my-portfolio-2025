@@ -211,7 +211,7 @@ section a:hover {
   display: none;
 }
 
-@media (max-width: 840px) {
+@media screen and (max-width: 840px) {
   table.project-table {
     display: none;
   }
