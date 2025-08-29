@@ -163,6 +163,18 @@
   border-radius: 4px;
 }
 
+#popup-content .popup-figure .video-wrap video {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 840px) {
+  #popup-content .popup-figure .video-wrap video {
+    width: auto;
+    height: 60vh;
+  }
+}
+
 /* Shadows */
 #popup-content iframe,
 .popup-video-frame,
@@ -211,13 +223,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 3em;
-  background: rgba(0, 0, 0, 0.6);
+  font-size: 4em;
   color: #fff;
   border-radius: 50%;
-  padding: 0.18em 0.42em;
-  pointer-events: none; /* Ensures clicks pass through to .video-thumb */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
 }
 
 /* Text / Content popup style */

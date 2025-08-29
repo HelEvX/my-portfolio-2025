@@ -194,23 +194,13 @@
 
             <div class="box-items portfolio-items">
               <!-- Gallery Item -->
-              <!-- CONVERSION WEBM to WEBP: see helper html -->
               <div class="box-item f-gallery" data-date="2023-07-31">
                 <div class="image">
                   <a href="#gallery--go-animations" class="has-popup-gallery">
-                    <div>
-                      <video
-                        preload="auto"
-                        autoplay
-                        loop
-                        muted
-                        playsinline
-                        poster="/assets/img/works/motion/go-modern.webp"
-                        aria-label="Good Omens Fanvideo Interstitial Card for the Modern Era"
-                      >
-                        <source src="go-modern.webm" type="video/webm" />
-                      </video>
-                    </div>
+                    <img
+                      src="/assets/img/works/motion/go-modern.webp"
+                      alt="Good Omens Fanvideo Interstitial Card for the Modern Era"
+                    />
                     <span class="info">
                       <i class="ri-multi-image-line"></i>
                     </span>
@@ -272,12 +262,38 @@
                 </div>
               </div>
 
+              <!-- Gallery Item -->
+              <div class="box-item f-gallery" data-date="2024-04-06">
+                <div class="image">
+                  <a
+                    href="#gallery--logo-animations-various"
+                    class="has-popup-gallery"
+                  >
+                    <img
+                      src="/assets/img/works/motion/bah-logoanimation.webp"
+                      alt="Logo Bumper for BIL Academy Hasselt"
+                    />
+                    <span class="info">
+                      <i class="ri-multi-image-line"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="category">Gallery</div>
+                  <a
+                    href="#gallery--logo-animations-various"
+                    class="name has-popup-gallery"
+                    >A Collection of Logo Animations</a
+                  >
+                </div>
+              </div>
+
               <!-- Content Item -->
               <div class="box-item f-content" data-date="2024-05-11">
                 <div class="image">
                   <a href="#content--ixd-efteling" class="has-popup-content">
                     <img
-                      src="/assets/img/works/motion/idx-efteling.webp"
+                      src="/assets/img/works/motion/ixd-efteling-wolf.webp"
                       alt="Interactive Titles in the 'Efteling' Mockup (Interaction Design)"
                     />
                     <span class="info">
@@ -590,6 +606,22 @@
       ></a>
     </div>
 
+    <!-- Various Logo Animations -->
+    <div
+      id="gallery--logo-animations-various"
+      class="popup-gallery-source"
+      style="display: none"
+    >
+      <a
+        href="/assets/img/works/motion/bah-logoanimation.webm"
+        title="Bumper animation for BIL Academy Hasselt (unofficial)"
+      ></a>
+      <a
+        href="/assets/img/works/motion/kayscreations-logoanimation.webm"
+        title="Animation of a rasterised handdrawn brand illustration by Kay's Creations."
+      ></a>
+    </div>
+
     <!-- ============================================================== -->
 
     <!-- CONTENT -->
@@ -600,8 +632,8 @@
         <span class="popup-close-inner close"></span>
         <div class="image">
           <img
-            src="/assets/img/works/motion/pxl-esports-heroanimation.webm"
-            alt="PXL Esports hero animation"
+            src="/assets/img/optimized/works/uidesign/pxl-esports-prototypes-600.webp"
+            alt="PXL Esports Prototype Slide from Pitch Deck"
           />
         </div>
         <div class="desc">
@@ -631,11 +663,24 @@
       <div class="popup-box">
         <span class="popup-close-top close"></span>
         <span class="popup-close-inner close"></span>
-        <div class="image">
-          <img
-            src="/assets/img/works/motion/idx-efteling.webp"
-            alt="PXL Esports hero animation"
-          />
+        <div
+          class="image video-preview"
+          data-video-id="1111081826"
+          data-video-provider="vimeo"
+          data-start-time="0"
+        >
+          <div
+            class="video-thumb"
+            style="
+              background-image: url('https://vumbnail.com/1111081826.jpg');
+              cursor: pointer;
+              position: relative;
+            "
+          >
+            <span class="play-btn" aria-label="Play Video"
+              ><i class="ri-play-circle-fill"></i
+            ></span>
+          </div>
         </div>
         <div class="desc">
           <div class="category">Content</div>
@@ -678,7 +723,9 @@
               position: relative;
             "
           >
-            <span class="play-btn" aria-label="Play Video">▶</span>
+            <span class="play-btn" aria-label="Play Video"
+              ><i class="ri-play-circle-fill"></i
+            ></span>
           </div>
         </div>
         <div class="desc">
@@ -725,7 +772,9 @@
               position: relative;
             "
           >
-            <span class="play-btn" aria-label="Play Video">▶</span>
+            <span class="play-btn" aria-label="Play Video"
+              ><i class="ri-play-circle-fill"></i
+            ></span>
           </div>
         </div>
         <div class="desc">

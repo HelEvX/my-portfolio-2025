@@ -37,7 +37,7 @@
     <section>
       <h2>1. Best settings for full clips (no trimming)</h2>
       <pre>
-ffmpeg -i input.webm -vcodec libwebp -filter:v "fps=15,scale='if(gt(iw\,ih)\,-1\,459)':'if(gt(iw\,ih)\,459\,-1)':flags=lanczos" -loop 0 -preset default -an -vsync 0 -qscale 50 output.webp
+  ffmpeg -i image.webm -vcodec libwebp -filter:v "fps=15,scale='if(gt(iw,ih),-1,459)':'if(gt(iw,ih),459,-1)':flags=lanczos" -loop 0 -preset default -an -fps_mode passthrough -q:v 50 image.webp
       </pre>
       <p><strong>What it does:</strong></p>
       <ul>

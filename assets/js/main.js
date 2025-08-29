@@ -80,8 +80,19 @@ document.addEventListener("DOMContentLoaded", () => {
     pagination.textContent = `${currentIndex + 1} of ${galleryItems.length}`;
   }
 
+  // Utility: stop all <video> elements inside the popup before rendering a new one
+  function stopPopupVideos() {
+    const videos = document.querySelectorAll(".popup video");
+    videos.forEach((vid) => {
+      vid.pause();
+      vid.currentTime = 0;
+    });
+  }
+
   // Unified gallery item renderer supporting images and videos
   function renderGalleryItem(index) {
+    stopPopupVideos(); // stop any currently playing video
+
     const item = galleryItems[index];
     if (!item) return;
 
@@ -91,30 +102,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let popupContent = "";
 
-    if (ext === "webm") {
+    if (["webm", "mp4", "ogg"].includes(ext)) {
       const baseName = src.substring(0, src.lastIndexOf("."));
       const posterSrc = baseName + ".webp";
 
       popupContent = `
-        <figure>
-          <video autoplay loop muted playsinline poster="${posterSrc}" aria-label="${caption}">
-            <source src="${src}" type="video/webm" />
+      <figure class="popup-figure">
+        <div class="video-wrap">
+          <video autoplay loop muted playsinline controls poster="${posterSrc}" aria-label="${caption}">
+            <source src="${src}" type="video/${ext}" />
             Your browser does not support the video tag.
           </video>
-          <figcaption>${caption}</figcaption>
-        </figure>
-      `;
+        </div>
+        <figcaption>${caption}</figcaption>
+      </figure>
+    `;
     } else {
       popupContent = `
-        <figure>
-          <img src="${src}" alt="${caption}">
-          <figcaption>${caption}</figcaption>
-        </figure>
-      `;
+      <figure class="popup-figure">
+        <img src="${src}" alt="${caption}">
+        <figcaption>${caption}</figcaption>
+      </figure>
+    `;
     }
 
     openPopup(popupContent, { gallery: true });
     updatePagination();
+
+    // After popup is opened, wire up mute/unmute
+    requestAnimationFrame(() => {
+      const video = document.querySelector(".popup-figure video");
+      const btn = document.querySelector(".video-unmute-btn");
+
+      if (btn && video) {
+        btn.addEventListener("click", () => {
+          video.muted = !video.muted;
+          btn.setAttribute("aria-pressed", String(!video.muted));
+          btn.title = video.muted ? "Unmute" : "Mute";
+          btn.textContent = video.muted ? "🔊" : "🔇";
+
+          if (!video.muted) {
+            video.play().catch(() => {});
+          }
+        });
+      }
+
+      // Ensure video is stopped when popup closes
+      document.addEventListener(
+        "click",
+        (e) => {
+          if (e.target.closest(".popup-close")) {
+            stopPopupVideos();
+          }
+        },
+        { once: true }
+      );
+    });
   }
 
   // updateGalleryPopup just calls renderGalleryItem for current index
@@ -169,6 +212,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
       openPopup(popupContent, { gallery: false }); // no arrows
       return;
+    }
+
+    // -------------------------------
+    // Popup Gallery Helpers
+    // -------------------------------
+    function stopPopupVideos() {
+      document.querySelectorAll(".popup-figure video").forEach((video) => {
+        try {
+          video.pause();
+          video.removeAttribute("src");
+          video.load();
+        } catch (e) {
+          // ignore errors
+        }
+      });
     }
 
     // ---- Handle Gallery ----
