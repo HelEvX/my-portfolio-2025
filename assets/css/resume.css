@@ -509,3 +509,9 @@
     margin-top: 80px;
   }
 }
+
+@media screen {
+  .service-items .page-break {
+    display: none;
+  }
+}
